@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.test.automation.framework.util.datadrive.ClassParser.ClassParserException;
@@ -22,7 +23,8 @@ public class ClassParserTest {
 		List<String> data2 = Arrays.asList(new String[]{"101","102","103"});
 		List<String> data3 = Arrays.asList(new String[]{"10.201f","10.202f","10.203f"});
 		Map<String, List<String>> testData = new HashMap<String, List<String>>();
-		testData.put("integerValue", data1);
+		testData.put("stringValue", data1);
+		testData.put("integerValue", data2);
 		testData.put("byteValue", data2);
 		testData.put("floatValue", data3);
 		
@@ -37,6 +39,58 @@ public class ClassParserTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	public void csvDataTest(){
+		CsvDataDrive csD = new CsvDataDrive("H://opt//bitbucket//testautomationframework//src//test//resources//DataDriveTest.csv");
+		try {
+			System.out.println(csD.getClassObjectList(TestDataClass.class));
+		} catch (ClassParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataNotAvailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void excelDataTest(){
+		ExcelDataDrive esD = new ExcelDataDrive("H://opt//bitbucket//testautomationframework//src//test//resources//DataDriveTest.xls");
+		try {
+			System.out.println(esD.getClassObjectList(TestDataClass.class));
+		} catch (ClassParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DataNotAvailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@DataProvider(name="csvdata")
+	public Object[][] getCsvData() throws ClassParserException, DataNotAvailableException{
+		CsvDataDrive csD = new CsvDataDrive("H://opt//bitbucket//testautomationframework//src//test//resources//DataDriveTest.csv");
+		return csD.getTestngData(TestDataClass.class);
+		
+	}
+	
+	@DataProvider(name="exceldata")
+	public Object[][] getExcelData() throws ClassParserException, DataNotAvailableException{
+		ExcelDataDrive csD = new ExcelDataDrive("H://opt//bitbucket//testautomationframework//src//test//resources//DataDriveTest.xls");
+		return csD.getTestngData(TestDataClass.class);
+		
+	}
+	
+	@Test(dataProvider="csvdata")
+	public void csvdataDrivenTest(TestDataClass td){
+		System.out.println(td);
+	}
+	
+	@Test(dataProvider="exceldata")
+	public void exceldataDrivenTest(TestDataClass td){
+		System.out.println(td);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.test.automation.framework.util.readers;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +24,7 @@ public class CsvReader {
 	     * @param quotechar - Quote character for the data. Default value is '"'
 	     * @throws Exception
 	     */
-	    public CsvReader(String filePath, char separator, char quotechar) throws Exception{
+	    public CsvReader(String filePath, char separator, char quotechar) throws IOException{
 	        this(new FileReader(filePath),separator,quotechar);
 	    }
 
@@ -34,15 +35,15 @@ public class CsvReader {
 	     * @param quotechar - Quote character for the data. Default value is '"'
 	     * @throws Exception
 	     */
-	    public CsvReader(File inpFile , char separator, char quotechar) throws Exception{
+	    public CsvReader(File inpFile , char separator, char quotechar) throws IOException{
 	        this(new FileReader(inpFile),separator,quotechar);
 	    }
 	    
-	    public CsvReader(String filePath) throws Exception{
+	    public CsvReader(String filePath) throws IOException{
 	        this(new FileReader(filePath),',','"');
 	    }
 	    
-	    public CsvReader(File inpFile) throws Exception{
+	    public CsvReader(File inpFile) throws IOException{
 	        this(new FileReader(inpFile),',','"');
 	    }
 
@@ -51,9 +52,10 @@ public class CsvReader {
 	     * @param reader - Reader object of the file to be read
 	     * @param separator - Data separator to be used. Default value is ','
 	     * @param quotechar - Quote character for the data. Default value is '"'
+	     * @throws IOException 
 	     * @throws Exception
 	     */
-	    public CsvReader(Reader reader , char separator, char quotechar) throws Exception{
+	    public CsvReader(Reader reader , char separator, char quotechar) throws IOException {
 	        csvReader = new CSVReader(reader,separator,quotechar);
 	        List<String[]> rowsTemp = csvReader.readAll();
 	        rows = new ArrayList<List<String>>();
@@ -73,7 +75,7 @@ public class CsvReader {
 	     * @param row - row number
 	     * @return - the data at the said position. If the said row or column don't exists then return an empty string
 	     */
-	    public String getData(int column,int row){
+	    public String getData(int row, int column){
 	        String data=null;
 	        if(row < 0 && ((row + 1) > rows.size())){
 	            return "";

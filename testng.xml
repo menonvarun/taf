@@ -1,0 +1,7 @@
+<suite name="Test Automation Framework Suite" verbose="1">
+	<test name="Test Automation Framework Test">
+		<packages>
+			<package name="com.test.automation.framework.*" />		
+		</packages>
+	</test>
+</suite>

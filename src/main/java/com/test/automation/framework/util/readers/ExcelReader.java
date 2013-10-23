@@ -35,6 +35,22 @@ public class ExcelReader {
 		this.openFile(file, 0);
 	}
 	
+	public ExcelReader(String filePath, int sheetNo) throws IOException, FileNotFoundException {
+		this.openFile(filePath, sheetNo);
+	}
+	
+	public ExcelReader(String filePath, String sheetName) throws IOException, FileNotFoundException {
+		this.openFile(filePath, sheetName);
+	}
+	
+	public ExcelReader(File file, int sheetNo) throws IOException, FileNotFoundException {
+		this.openFile(file, sheetNo);
+	}
+	
+	public ExcelReader(File file, String sheetName) throws IOException, FileNotFoundException {
+		this.openFile(file, sheetName);
+	}
+	
 	public ExcelReader() {
 		
 	}
@@ -99,7 +115,7 @@ public class ExcelReader {
 		return openWorkbook;				
 	}
 
-	public String getData(int column, int row) {
+	public String getData(int row, int column) {
 		String data = "";
 		try {
 
