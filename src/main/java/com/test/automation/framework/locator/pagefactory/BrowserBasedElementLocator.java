@@ -10,17 +10,18 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.util.Browser;
 
-public class TafElementLocator implements ElementLocator {
-	private final SearchContext searchContext;
+public class BrowserBasedElementLocator implements ElementLocator {
+	private final Browser browser;
 	private final boolean shouldCache;
 	private final By by;
 	private WebElement cachedElement;
 	private List<WebElement> cachedElementList;
 
-	public TafElementLocator(LocatorFile locatorFile, SearchContext searchContext, Field field) {
-		this.searchContext = searchContext;
-		Annotations annotations = new TafAnnotations(locatorFile,field);
+	public BrowserBasedElementLocator(LocatorFile locatorFile, Browser browser, Field field) {
+		this.browser = browser;
+		Annotations annotations = new KeywordBasedAnnotations(locatorFile,field);
 		shouldCache = annotations.isLookupCached();
 		by = annotations.buildBy();
 	}
@@ -32,7 +33,7 @@ public class TafElementLocator implements ElementLocator {
 		if (cachedElement != null && shouldCache) {
 			return cachedElement;
 		}
-		
+		SearchContext searchContext = browser.getDriver();
 		WebElement element = searchContext.findElement(by);
 		if (shouldCache) {
 			cachedElement = element;
@@ -48,7 +49,8 @@ public class TafElementLocator implements ElementLocator {
 		if (cachedElementList != null && shouldCache) {
 			return cachedElementList;
 		}
-
+		
+		SearchContext searchContext = browser.getDriver();
 		List<WebElement> elements = searchContext.findElements(by);
 		if (shouldCache) {
 			cachedElementList = elements;

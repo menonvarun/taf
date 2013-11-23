@@ -6,10 +6,10 @@ import java.util.List;
 
 import com.test.automation.framework.locator.LocatorException;
 
-public class LocatorFactory {
+public class LocatorFileFactory {
 	List<LocatorFile> locators = new ArrayList<LocatorFile>();
 	
-	public LocatorFactory(){
+	public LocatorFileFactory(){
 		locators.add(new PropertiesLocatorFile());
 	}
 	

@@ -1,15 +1,24 @@
 package com.test.automation.framework.driver;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.test.automation.framework.config.DefaultConfig;
 
 public class CacheDriverFactory {
 	
-	private static DefaultConfig config = new DefaultConfig();
+	private static DefaultConfig config;
 	private boolean threadBasedDriver = true;
 	private static IDriverFactory driverFactory = null;
 	private static IDriverProvider driverProvider= null;
+	
+	public CacheDriverFactory(){
+		CacheDriverFactory.config  = DefaultConfig.getDefaultConfig();		
+	}
+	
+	public CacheDriverFactory(DefaultConfig config){
+		CacheDriverFactory.config = config;
+	}
 	
 	public boolean getThreadBasedDriver(){
 		return this.threadBasedDriver;
@@ -37,15 +46,15 @@ public class CacheDriverFactory {
 			String threadBasedDriverValue = config.getConfigValue("thread.based.driver");
 			if(Boolean.parseBoolean(threadBasedDriverValue)){
 				CacheDriverFactory.driverFactory = new ThreadedDriver();
-			}
-			CacheDriverFactory.driverFactory =  new SimpleDriver();
+			} else
+				CacheDriverFactory.driverFactory =  new SimpleDriver();
 		}
 		return CacheDriverFactory.driverFactory;
 		
 	}
 	
 	private static class ThreadedDriver implements IDriverFactory{
-		ThreadLocal<WebDriver> threadedDriver = new ThreadLocal<WebDriver>();
+		private static final ThreadLocal<WebDriver> threadedDriver = new ThreadLocal<WebDriver>();
 		
 		@Override
 		synchronized public WebDriver getCurrentDriver(IDriverProvider driverProvider) {
@@ -133,7 +142,11 @@ public class CacheDriverFactory {
 		}
 		@Override
 		public void run(){
-			driver.quit();
+			try{
+				driver.quit();
+			}catch(UnreachableBrowserException e){
+				
+			}
 		}
 		
 	}

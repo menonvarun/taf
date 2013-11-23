@@ -10,11 +10,11 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 
 import com.test.automation.framework.locator.locatorfiles.LocatorFile;
 
-public class TafAnnotations extends Annotations{
+public class KeywordBasedAnnotations extends Annotations{
 	LocatorFile locatorFile;
 	Field field;
 	
-	public TafAnnotations(LocatorFile locatorFile,Field field) {
+	public KeywordBasedAnnotations(LocatorFile locatorFile,Field field) {
 		super(field);
 		this.field = field;
 		this.locatorFile = locatorFile;

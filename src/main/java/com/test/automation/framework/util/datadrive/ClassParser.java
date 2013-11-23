@@ -18,6 +18,7 @@ public class ClassParser {
 		return testngData;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public <T> List<T> getClassObjectList(Class<?> type, Map<String, List<String>> dataMap) throws ClassParserException,DataNotAvailableException{
 		
 		boolean dataNotAvailable = false;

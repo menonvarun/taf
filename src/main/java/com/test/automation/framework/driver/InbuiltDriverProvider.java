@@ -8,8 +8,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
 
-public class InbuiltDriverProvider implements IDriverProvider{
-	DefaultConfig config = new DefaultConfig();
+class InbuiltDriverProvider implements IDriverProvider{
+	DefaultConfig config = DefaultConfig.getDefaultConfig();
 	
 	@Override
 	public WebDriver getDriver() {		

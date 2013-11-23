@@ -6,30 +6,50 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import com.test.automation.framework.locator.locatorfiles.LocatorFactory;
+import com.test.automation.framework.locator.locatorfiles.LocatorFileFactory;
 import com.test.automation.framework.locator.locatorfiles.LocatorFile;
-import com.test.automation.framework.locator.pagefactory.TafDriverLocatorFactory;
+import com.test.automation.framework.locator.pagefactory.KeywordBasedLocatorFactory;
+import com.test.automation.framework.util.Browser;
 
-public class Locator {
-	File fl;
-	WebDriver driver;
-	public Locator(WebDriver driver,File file){
-		this.driver = driver;
-		this.fl = file;		
+public abstract class Locator {
+	private File file;
+	
+	protected Locator(String filePath){
+		this.file = new File(filePath);
+	}
+	
+	protected Locator(File file){
+		this.file = file;
+	}
+	
+	public File getLocatorFile(){
+		return this.file;
+	}
+	
+	public void setLocatorFile(String filePath){
+		this.file = new File(filePath);		
+	}
+	
+	public void setLocatorFile(File file){
+		this.file = file;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T initialize(Class<?> locatorPage){
-		LocatorFile locatorFile = new LocatorFactory().getLocatorFile(this.fl);
-		ElementLocatorFactory locatorFactory = new TafDriverLocatorFactory(locatorFile, driver);
-		T page;
-		try {
-			page = (T) locatorPage.newInstance();
-		} catch (InstantiationException | IllegalAccessException e) {
-			throw new LocatorException(e);
-		}
-		PageFactory.initElements(locatorFactory, page);
-		return page;
+	public <T> T initialize(WebDriver driver){
+		if(driver == null)
+			throw new LocatorException("Driver passed for locator initialization is null. Make suee the driver is initialized");
+		LocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
+		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, driver);
+		PageFactory.initElements(locatorFactory, this);
+		return (T) this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T initialize(Browser browser){
+		LocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
+		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, browser);
+		PageFactory.initElements(locatorFactory, this);
+		return (T) this;
 	}
 
 }

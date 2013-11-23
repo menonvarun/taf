@@ -5,9 +5,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
 
-public class UserDefinedDriverProvider implements IDriverProvider{
+class UserDefinedDriverProvider implements IDriverProvider{
 	
-	DefaultConfig config = new DefaultConfig();
+	DefaultConfig config = DefaultConfig.getDefaultConfig();
 
 	@Override
 	public WebDriver getDriver() {

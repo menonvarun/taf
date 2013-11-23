@@ -21,12 +21,12 @@ public class GoogleSearchTest {
 	@Test
 	public void googleTest() throws InterruptedException{
 		GoogleLocator googleSearch = new GoogleLocator().initialize(driver);
-		Utilities util = new Utilities(driver);
+		Utilities util = new Utilities();
 		
 		driver.get("http://www.google.co.in");
 		googleSearch.searchField.sendKeys("Testing");
 		googleSearch.submitButton.click();
-		util.waitForElementPresent(googleSearch.searchResult);
+		util.waitForElementPresent(driver,googleSearch.searchResult);
 		String text = googleSearch.searchResult.get(0).getText();
 		System.out.println(text);		
 	}

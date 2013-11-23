@@ -1,4 +1,4 @@
-package com.test.automation.framework.util.locator;
+package com.test.automation.framework.pagemodel.locator;
 
 import java.io.File;
 import java.util.List;
@@ -11,20 +11,20 @@ import com.test.automation.framework.locator.Locator;
 
 public class GoogleLocator extends Locator{
 	
-	public GoogleLocator() {		
-		super(new File("src/test/resources/google.properties"));		
+	public GoogleLocator() {
+		super(new File("H:/opt/bitbucket/testautomationframework/src/test/resources/google.properties"));
 	}
-
+	
 	@FindBy(how=How.CSS,using="search_box")
-	public WebElement searchField;
+	WebElement searchField;
 	
 	@FindBy(how = How.CSS,using="submit_button")
-	public WebElement submitButton;
+	WebElement submitButton;
 	
 	@FindBy(how = How.CSS,using="search_result")
-	public List<WebElement> searchResult;
+	List<WebElement> searchResult;
 	
 	@FindBy(how = How.CSS,using="search_result_text")
-	public WebElement searchResultText;
+	WebElement searchResultText;
 
 }
