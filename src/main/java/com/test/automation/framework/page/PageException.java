@@ -2,6 +2,11 @@ package com.test.automation.framework.page;
 
 public class PageException extends RuntimeException{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2467276407146491151L;
+
 	public PageException(){
 		super();
 	}

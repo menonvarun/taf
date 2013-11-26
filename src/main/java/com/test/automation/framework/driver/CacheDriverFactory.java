@@ -5,6 +5,12 @@ import org.openqa.selenium.remote.UnreachableBrowserException;
 
 import com.test.automation.framework.config.DefaultConfig;
 
+/**
+ * <code>CacheDriverFactory</code> provides a utility of creating Selenium <code>WebDriver</code> instance.
+ * <p> The class provides two different implementation of driver factory 
+ * @author  Varun Menon
+ *
+ */
 public class CacheDriverFactory {
 	
 	private static DefaultConfig config;

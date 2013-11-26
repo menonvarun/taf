@@ -1,6 +1,7 @@
 package com.test.automation.framework.util;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterMethod;
 
 
 public class TestClass {
@@ -40,6 +41,11 @@ public class TestClass {
 	protected <T> T getPageObject(Class<?> pageClass){
 		T page = this.browser.getPageObject(pageClass);		
 		return page;		
+	}
+	
+	@AfterMethod
+	public void afterMethod(){
+		this.browser.getDriver().manage().deleteAllCookies();
 	}
 
 }
