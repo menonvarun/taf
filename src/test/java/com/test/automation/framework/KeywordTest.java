@@ -1,6 +1,6 @@
 package com.test.automation.framework;
 
-import com.test.automation.framework.keywordmodel.KeywordBase;
+import com.test.automation.framework.keywordmodel.keywords.KeywordBase;
 
 public class KeywordTest extends KeywordBase{
 	

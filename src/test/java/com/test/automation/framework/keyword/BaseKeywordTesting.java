@@ -1,11 +1,17 @@
 package com.test.automation.framework.keyword;
 
-import com.test.automation.framework.keywordmodel.KeywordBase;
+import org.openqa.selenium.WebDriver;
+
+import com.test.automation.framework.keywordmodel.keywords.KeywordBase;
 
 public class BaseKeywordTesting extends KeywordBase{
-	public void testing(String t){
-		System.out.println(t);
+	
+	public BaseKeywordTesting(WebDriver driver){
+		
 	}
+	/*public void testing(String t){
+		System.out.println(t);
+	}*/
 	
 	public void testing(String t, int i){
 		System.out.println(t+i);

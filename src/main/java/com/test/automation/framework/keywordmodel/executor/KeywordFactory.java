@@ -1,16 +1,24 @@
-package com.test.automation.framework.keywordmodel;
+package com.test.automation.framework.keywordmodel.executor;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
+
 import com.test.automation.framework.config.DefaultConfig;
+import com.test.automation.framework.keywordmodel.KeywordException;
+import com.test.automation.framework.keywordmodel.keywords.IKeyword;
 
 public class KeywordFactory {
 	
 	DefaultConfig config = DefaultConfig.getDefaultConfig();
 	List<IKeyword> keywordClassObjects;
+	WebDriver driver;
 	
-	public KeywordFactory(){
+	public KeywordFactory(WebDriver driver){
+		this.driver = driver;
 		this.keywordClassObjects = getKeywordImplementations(); 	
 	}
 	
@@ -27,21 +35,26 @@ public class KeywordFactory {
 				throw new KeywordException("Unable to find class with name as mentione in listner property: "+
 						keywordClass+" Make sure the class is present in the classpath.");				
 			}
-		}
-		
+		}		
 		
 		for (Class<?> cls : listenerClasses) {
 			if (IKeyword.class.isAssignableFrom(cls)) {
 				IKeyword obj = null;
 				try {
-					obj = (IKeyword) cls.newInstance();
-				} catch (InstantiationException | IllegalAccessException e) {
-					throw new KeywordException("Unable to find an empty argument constructor for the keyword class:"+cls.getName());
+					Constructor<?> constructor = cls
+							.getConstructor(WebDriver.class);
+					obj = (IKeyword) constructor.newInstance(this.driver);
+				} catch (IllegalAccessException | InstantiationException
+						| SecurityException | NoSuchMethodException
+						| IllegalArgumentException | InvocationTargetException e) {
+					throw new KeywordException(
+							"Unable to find a constructor that accepts the WebDriver object for the keyword class:"
+									+ cls.getName());
 				}
-				if(obj!=null){
+				if (obj != null) {
 					keywordClsObjs.add(obj);
 				}
-				
+
 			}
 		}
 		return keywordClsObjs;

@@ -1,4 +1,4 @@
-package com.test.automation.framework.keywordmodel;
+package com.test.automation.framework.keywordmodel.keywords;
 
 public interface IKeyword {
 	
