@@ -2,7 +2,6 @@ package com.test.automation.framework.keywordmodel.reader;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Base Interface for the keyword readers
@@ -22,10 +21,18 @@ public interface IKeywordReader {
 	public boolean isSupported(File file);
 	
 	/**
-	 * Parses the particular file and returns a Map containing the keywords and its respective Objects 	
+	 * Parses the particular file and returns a List containing the <code>IKeywordStore</code> object 	
 	 * @param file - That contains the keywords and respective arguments
-	 * @return Returns a Map containing the keywords and its respective Objects
+	 * @return Returns a <code>List</code> containing the <code>IKeywordStore</code> object.
 	 */
-	public Map<String, List<Object>> readFile(File file);
+	public List<IKeywordStore> readFile(File file);
+	
+	/**
+	 * Parses the particular file and returns a List containing the <code>IKeywordStore</code> object 	
+	 * @param file - That contains the keywords and respective arguments
+	 * @param args - Any extra arguments that may be passed as part of the reading task.
+	 * @return Returns a <code>List</code> containing the <code>IKeywordStore</code> object.
+	 */
+	public List<IKeywordStore> readFile(File file, String... args);
 
 }

@@ -6,22 +6,22 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
-import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 import com.test.automation.framework.util.Browser;
 
 public class KeywordBasedLocatorFactory implements ElementLocatorFactory{
 	
 	private final SearchContext searchContext;
-	private final LocatorFile locatorFile;
+	private final ILocatorFile locatorFile;
 	private final Browser browser;
 
-	public KeywordBasedLocatorFactory(LocatorFile locatorFile,SearchContext searchContext) {
+	public KeywordBasedLocatorFactory(ILocatorFile locatorFile,SearchContext searchContext) {
 		this.locatorFile = locatorFile;
 	    this.searchContext = searchContext;
 	    this.browser =null;
 	}
 	
-	public KeywordBasedLocatorFactory(LocatorFile locatorFile,Browser browser) {
+	public KeywordBasedLocatorFactory(ILocatorFile locatorFile,Browser browser) {
 		this.locatorFile = locatorFile;
 	    this.searchContext = null;
 	    this.browser = browser;

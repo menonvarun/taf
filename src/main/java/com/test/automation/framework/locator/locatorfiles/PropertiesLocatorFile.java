@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import com.test.automation.framework.locator.LocatorException;
 
-public class PropertiesLocatorFile implements LocatorFile{
+public class PropertiesLocatorFile implements ILocatorFile{
 	
 	Properties prop;	
 	

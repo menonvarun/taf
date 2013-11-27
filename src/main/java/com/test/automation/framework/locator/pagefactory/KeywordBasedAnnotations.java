@@ -8,13 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.pagefactory.Annotations;
 
-import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 
 public class KeywordBasedAnnotations extends Annotations{
-	LocatorFile locatorFile;
+	ILocatorFile locatorFile;
 	Field field;
 	
-	public KeywordBasedAnnotations(LocatorFile locatorFile,Field field) {
+	public KeywordBasedAnnotations(ILocatorFile locatorFile,Field field) {
 		super(field);
 		this.field = field;
 		this.locatorFile = locatorFile;

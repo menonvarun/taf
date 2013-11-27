@@ -7,15 +7,15 @@ import java.util.List;
 import com.test.automation.framework.locator.LocatorException;
 
 public class LocatorFileFactory {
-	List<LocatorFile> locators = new ArrayList<LocatorFile>();
+	List<ILocatorFile> locators = new ArrayList<ILocatorFile>();
 	
 	public LocatorFileFactory(){
 		locators.add(new PropertiesLocatorFile());
 	}
 	
-	public LocatorFile getLocatorFile(File file){
+	public ILocatorFile getLocatorFile(File file){
 		
-		for(LocatorFile lFile : locators){
+		for(ILocatorFile lFile : locators){
 			if(lFile.isSupported(file)){
 				lFile.loadFile(file);
 				return lFile;

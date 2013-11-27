@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.Annotations;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 
 public class DriverBasedElementLocator implements ElementLocator {
 	private final SearchContext searchContext;
@@ -18,7 +18,7 @@ public class DriverBasedElementLocator implements ElementLocator {
 	private WebElement cachedElement;
 	private List<WebElement> cachedElementList;
 
-	public DriverBasedElementLocator(LocatorFile locatorFile, SearchContext searchContext, Field field) {
+	public DriverBasedElementLocator(ILocatorFile locatorFile, SearchContext searchContext, Field field) {
 		this.searchContext = searchContext;
 		Annotations annotations = new KeywordBasedAnnotations(locatorFile,field);
 		shouldCache = annotations.isLookupCached();

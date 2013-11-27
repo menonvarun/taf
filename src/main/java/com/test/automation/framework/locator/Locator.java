@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.test.automation.framework.locator.locatorfiles.LocatorFileFactory;
-import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 import com.test.automation.framework.locator.pagefactory.KeywordBasedLocatorFactory;
 import com.test.automation.framework.util.Browser;
 
@@ -38,7 +38,7 @@ public abstract class Locator {
 	public <T> T initialize(WebDriver driver){
 		if(driver == null)
 			throw new LocatorException("Driver passed for locator initialization is null. Make suee the driver is initialized");
-		LocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
+		ILocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
 		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, driver);
 		PageFactory.initElements(locatorFactory, this);
 		return (T) this;
@@ -46,7 +46,7 @@ public abstract class Locator {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T initialize(Browser browser){
-		LocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
+		ILocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(this.file);
 		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, browser);
 		PageFactory.initElements(locatorFactory, this);
 		return (T) this;

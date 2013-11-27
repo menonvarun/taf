@@ -11,6 +11,11 @@ import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
 
+/**
+ * Util class to read csv files.
+ * @author  Varun Menon
+ *
+ */
 public class CsvReader {
 
 
@@ -22,7 +27,7 @@ public class CsvReader {
 	     * @param filePath - File path of the csv file to be read
 	     * @param separator - Data separator to be used. Default value is ','
 	     * @param quotechar - Quote character for the data. Default value is '"'
-	     * @throws Exception
+	     * @throws IOException
 	     */
 	    public CsvReader(String filePath, char separator, char quotechar) throws IOException{
 	        this(new FileReader(filePath),separator,quotechar);
@@ -33,7 +38,7 @@ public class CsvReader {
 	     * @param inpFile - Input csv file to be read
 	     * @param separator - Data separator to be used. Default value is ','
 	     * @param quotechar - Quote character for the data. Default value is '"'
-	     * @throws Exception
+	     * @throws IOException
 	     */
 	    public CsvReader(File inpFile , char separator, char quotechar) throws IOException{
 	        this(new FileReader(inpFile),separator,quotechar);
@@ -52,8 +57,7 @@ public class CsvReader {
 	     * @param reader - Reader object of the file to be read
 	     * @param separator - Data separator to be used. Default value is ','
 	     * @param quotechar - Quote character for the data. Default value is '"'
-	     * @throws IOException 
-	     * @throws Exception
+	     * @throws IOException
 	     */
 	    public CsvReader(Reader reader , char separator, char quotechar) throws IOException {
 	        csvReader = new CSVReader(reader,separator,quotechar);
@@ -71,9 +75,9 @@ public class CsvReader {
 
 	    /**
 	     * Gets the data from csv file based on column and row number
-	     * @param column - column number
-	     * @param row - row number
-	     * @return - the data at the said position. If the said row or column don't exists then return an empty string
+	     * @param column Column number
+	     * @param row Row number
+	     * @return The data at the said position. If the said row or column don't exists then return an empty string
 	     */
 	    public String getData(int row, int column){
 	        String data=null;
@@ -92,7 +96,7 @@ public class CsvReader {
 
 	    /**
 	     * Get the number of rows in the said csv file
-	     * @return
+	     * @return Return no of rows present in the said csv file
 	     */
 	    public int getNoOfRows(){
 	        return rows.size();
@@ -100,7 +104,7 @@ public class CsvReader {
 
 	    /**
 	     * Return the number of column in the first row of the csv file
-	     * @return
+	     * @return return the no. of column in the first row of the csv file
 	     */
 	    public int getNoOfColumn(){
 	        return rows.get(0).size();
@@ -109,7 +113,7 @@ public class CsvReader {
 	    /**
 	     * Returns the number of the column of the said row number passed
 	     * @param rowNo - row number for which the number columns needs to be returned.
-	     * @return
+	     * @return return the no. of column in the specified row of the csv file
 	     */
 	    public int getNoOfColumn(int rowNo){
 	        return rows.get(rowNo).size();

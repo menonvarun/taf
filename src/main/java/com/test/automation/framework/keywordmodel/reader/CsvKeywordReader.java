@@ -1,8 +1,10 @@
 package com.test.automation.framework.keywordmodel.reader;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import com.test.automation.framework.util.readers.CsvReader;
 /**
  * <code>CsvKeywordReader</code> supports reading CSV based keyword files.
  * @author  Varun Menon
@@ -19,9 +21,41 @@ public class CsvKeywordReader implements IKeywordReader{
 	}
 
 	@Override
-	public Map<String, List<Object>> readFile(File file) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IKeywordStore> readFile(File file) {
+		CsvReader csvReader = null;
+		try {
+			csvReader = new CsvReader(file);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return this.readData(csvReader);
+	}
+
+	@Override
+	public List<IKeywordStore> readFile(File file, String... args) {
+		return this.readFile(file);
+	}
+	
+	private List<IKeywordStore> readData(CsvReader csvReader) {
+		int noOfRows = csvReader.getNoOfRows();
+		List<IKeywordStore> keyStores = new ArrayList<IKeywordStore>();
+
+		for (int rowNo = 1; rowNo < noOfRows; rowNo++) {
+
+			String key = csvReader.getData(rowNo, 0);
+			List<Object> valueList = new ArrayList<Object>();
+
+			for (int columnNo = 1; columnNo <= csvReader.getNoOfColumn(rowNo); columnNo++) {
+				String data = csvReader.getData(rowNo, columnNo);
+				valueList.add(data);
+			}
+
+			IKeywordStore keyStore = new TafKeywordStore();
+			keyStore.setKeyword(key);
+			keyStore.setArguments(valueList);
+			keyStores.add(keyStore);
+		}
+		return keyStores;
 	}
 
 }

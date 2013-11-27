@@ -11,6 +11,12 @@ import com.test.automation.framework.config.DefaultConfig;
 import com.test.automation.framework.keywordmodel.KeywordException;
 import com.test.automation.framework.keywordmodel.keywords.IKeyword;
 
+/**
+ * Factory class to identify the Keyword implementation classes that implement the <code>IKeyword</code>
+ * interface and execute the keywords with respective arguments.
+ * @author  Varun Menon
+ *
+ */
 public class KeywordFactory {
 	
 	DefaultConfig config = DefaultConfig.getDefaultConfig();
@@ -60,6 +66,12 @@ public class KeywordFactory {
 		return keywordClsObjs;
 	}
 	
+	/**
+	 * Keyword executor method, finds the supporting keyword implementation class 
+	 * and execute the said keyword using the arguments passed.
+	 * @param keyword Keyword to be executed
+	 * @param args Arguments that needs to be used to execute the particular keyword
+	 */
 	public void executeKeyword(String keyword, Object[] args){
 		boolean executed = false;
 		for(IKeyword keywordCls : keywordClassObjects){
@@ -70,7 +82,8 @@ public class KeywordFactory {
 			}
 		}
 		if(!executed){
-			throw new KeywordException("Unable to find any keyword class that support keyword: \""+keyword+"\" and arguments: \""+args+"\".");			
+			throw new KeywordException("Unable to find any keyword class that support keyword: \""
+					+keyword+"\" and arguments: \""+args+"\".");			
 		}
 		
 	}

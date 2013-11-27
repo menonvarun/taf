@@ -2,7 +2,7 @@ package com.test.automation.framework.locator.locatorfiles;
 
 import java.io.File;
 
-public interface LocatorFile {
+public interface ILocatorFile {
 	
 	public String getLocatorFor(String keyword);
 	

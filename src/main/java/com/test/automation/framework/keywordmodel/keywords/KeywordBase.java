@@ -12,21 +12,33 @@ import java.util.Map;
 import com.test.automation.framework.keywordmodel.KeywordException;
 import com.test.automation.framework.keywordmodel.MethodInfo;
 
-
+/**
+ * Base keyword class that implements the <code>IKeyword</code> interface.
+ * This class provides utility to execute the keywords using the Java reflection api.
+ * <p> Extend this class if you want your methods to be used as keywords.
+ * 
+ * @author  Varun Menon
+ *
+ */
 public abstract class KeywordBase implements IKeyword{
 	
 	Map<String,Map<Integer,List<MethodInfo>>> methods = new HashMap<String, Map<Integer,List<MethodInfo>>>();
 	private Object executingObject=null;
+	
 	protected KeywordBase() {
 		intialize();
 	}
 	
 	private void intialize(){
 		executingObject = this;
-		//Class<?> cls = this.getClass();
 		initialize(executingObject);				
 	}
 	
+	/**
+	 * Initializes the class to collect the information of the methods avaialbel in the said class.
+	 * Use this method if you want to intialize methods from some other class object. 
+	 * @param obj Object of the class whose method you to use for keyword execution.
+	 */
 	protected void initialize(Object obj){
 		Class<?> cls = obj.getClass();
 		methods.clear();
@@ -59,6 +71,7 @@ public abstract class KeywordBase implements IKeyword{
 		}		
 	}
 	
+	@Override
 	public boolean isSupported(String methodName, Object[] args){
 		if(!methods.containsKey(methodName)){
 			return false;
@@ -73,8 +86,9 @@ public abstract class KeywordBase implements IKeyword{
 		return supported;				
 	}
 	
-	public void execute(String keyWord, Object[] args){
-		Map<Integer,List<MethodInfo>> paramMethodInfos = methods.get(keyWord);
+	@Override
+	public void execute(String keyword, Object[] args){
+		Map<Integer,List<MethodInfo>> paramMethodInfos = methods.get(keyword);
 		boolean executed = false;
 		boolean canBeExecuted = false;
 		if(paramMethodInfos.containsKey(args.length)){
@@ -102,13 +116,13 @@ public abstract class KeywordBase implements IKeyword{
 			}			
 		}
 		if(!executed){
-			throw new KeywordException("Unable to find any key word with name: \""+keyWord+
+			throw new KeywordException("Unable to find any key word with name: \""+keyword+
 					"\" and arguments: \""+args.toString()+" in class: \""+
 					this.getClass().getName()+"\".");
 		}
 	}
 	
-	public Object[] convertParamTypes(Class<?>[] methodParams, Object[] passedParams){
+	private Object[] convertParamTypes(Class<?>[] methodParams, Object[] passedParams){
 		List<Object> paramTypes = new ArrayList<Object>();
 		for(int itr = 0; itr < methodParams.length; itr++){
 			Class<?> paramType = methodParams[itr];

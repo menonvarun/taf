@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.Annotations;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import com.test.automation.framework.locator.locatorfiles.LocatorFile;
+import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 import com.test.automation.framework.util.Browser;
 
 public class BrowserBasedElementLocator implements ElementLocator {
@@ -19,7 +19,7 @@ public class BrowserBasedElementLocator implements ElementLocator {
 	private WebElement cachedElement;
 	private List<WebElement> cachedElementList;
 
-	public BrowserBasedElementLocator(LocatorFile locatorFile, Browser browser, Field field) {
+	public BrowserBasedElementLocator(ILocatorFile locatorFile, Browser browser, Field field) {
 		this.browser = browser;
 		Annotations annotations = new KeywordBasedAnnotations(locatorFile,field);
 		shouldCache = annotations.isLookupCached();
