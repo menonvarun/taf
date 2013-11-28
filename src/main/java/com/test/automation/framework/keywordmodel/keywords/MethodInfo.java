@@ -1,4 +1,4 @@
-package com.test.automation.framework.keywordmodel;
+package com.test.automation.framework.keywordmodel.keywords;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

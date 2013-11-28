@@ -44,6 +44,10 @@ public class CsvReader {
 	        this(new FileReader(inpFile),separator,quotechar);
 	    }
 	    
+	    public CsvReader(File inpFile , String separator, String quotechar) throws IOException{
+	        this(new FileReader(inpFile),separator.charAt(0),quotechar.charAt(0));
+	    }
+	    
 	    public CsvReader(String filePath) throws IOException{
 	        this(new FileReader(filePath),',','"');
 	    }
@@ -85,7 +89,7 @@ public class CsvReader {
 	            return "";
 	        }
 	        List<String> rowData= rows.get(row);
-	        if(column < 0 || ((column + 1) >= rowData.size())){
+	        if(column < 0 || (column >= rowData.size())){
 	            return "";
 	        }
 

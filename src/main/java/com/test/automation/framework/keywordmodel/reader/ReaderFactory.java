@@ -15,12 +15,22 @@ public class ReaderFactory {
 	String[] arguments;
 	List<IKeywordReader> keyReaders = new ArrayList<IKeywordReader>();
 	
+	/**
+	 * Creates {@link ReaderFactory} object by using the {@link File} object passed.
+	 * @param file {@link File} object of the keyword file 
+	 */
 	public ReaderFactory(File file){
 		this.file = file;
 		this.arguments = null;
 		initialize();
 	}
 	
+	/**
+	 * Creates {@link ReaderFactory} object by using the {@link File} object passed.
+	 * @param file {@link File} object of the keyword file 
+	 * @param arguments {@link Object Object[]} of any extra arguments that needs to be passed.
+	 * Ex. Sheet Name for excel or separator for the csv file.
+	 */
 	public ReaderFactory(File file, String... arguments){
 		this.file = file;
 		this.arguments = arguments;
@@ -32,6 +42,11 @@ public class ReaderFactory {
 		keyReaders.add(new CsvKeywordReader());		
 	}
 	
+	/**
+	 * Get the keyword test case data stored in the file. 
+	 * @return List of {@link com.test.automation.framework.keywordmodel.reader.IKeywordStore IKeywordStore} 
+	 * after parsing the file passed to the constructor <br/> {@link #ReaderFactory(File)} or {@link #ReaderFactory(File, String...)}
+	 */
 	public List<IKeywordStore> getKeywordTestData(){
 		boolean supported = false;
 		IKeywordReader supportedReader = null;

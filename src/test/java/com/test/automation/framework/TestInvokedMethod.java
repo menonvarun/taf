@@ -31,13 +31,13 @@ public class TestInvokedMethod implements IInvokedMethodListener{
 	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
 		ITestNGMethod cTest = testResult.getMethod().clone();
 		
-		Method m = testResult.getMethod().getConstructorOrMethod().getMethod();
-		testResult.getClass();
+		
 		Field f;
 		try {
-			f = m.getClass().getDeclaredField("name");
+			Class<?> cls = testResult.getMethod().getClass().getSuperclass();
+			f = cls.getDeclaredField("m_methodName");
 			f.setAccessible(true);
-			f.set(m, "No, you’re not!" + number++);
+			f.set(testResult, "No, you’re not!" + number++);
 		} catch (NoSuchFieldException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

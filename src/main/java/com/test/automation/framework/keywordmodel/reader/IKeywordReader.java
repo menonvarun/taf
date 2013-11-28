@@ -21,17 +21,17 @@ public interface IKeywordReader {
 	public boolean isSupported(File file);
 	
 	/**
-	 * Parses the particular file and returns a List containing the <code>IKeywordStore</code> object 	
+	 * Parses the particular file and returns a List containing the {@link IKeywordStore IKeywordStore} object 	
 	 * @param file - That contains the keywords and respective arguments
-	 * @return Returns a <code>List</code> containing the <code>IKeywordStore</code> object.
+	 * @return Returns a {@link List List} containing the <code>IKeywordStore</code> object.
 	 */
 	public List<IKeywordStore> readFile(File file);
 	
 	/**
-	 * Parses the particular file and returns a List containing the <code>IKeywordStore</code> object 	
+	 * Parses the particular file and returns a List containing the {@link IKeywordStore IKeywordStore} object 	
 	 * @param file - That contains the keywords and respective arguments
 	 * @param args - Any extra arguments that may be passed as part of the reading task.
-	 * @return Returns a <code>List</code> containing the <code>IKeywordStore</code> object.
+	 * @return Returns a {@link List List} containing the {@link IKeywordStore IKeywordStore} object.
 	 */
 	public List<IKeywordStore> readFile(File file, String... args);
 

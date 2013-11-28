@@ -23,12 +23,12 @@ public interface IKeywordStore {
 	
 	/**
 	 * Sets the keyword arguments
-	 * @param args - Keyword arguments as <code>List</code> of <code>Object</code>
+	 * @param args - Keyword arguments as {@link List List} of {@link Object Object}
 	 */
 	public void setArguments(List<Object> args);
 	
 	/**
-	 * Returns the stored list of arguments.
+	 * Returns the stored list of arguments as {@link List List} of {@link Object Object}.
 	 * @return The stored list of arguments or an empty list is no arguments is being stored.
 	 */
 	public List<Object> getArguments();	

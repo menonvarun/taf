@@ -21,9 +21,7 @@ public class Browser {
 			return new CacheDriverFactory(getConfig()).getDriver();
 		} else{
 			return driver;
-		}
-		
-		
+		}		
 	}
 	
 	public void setDriver(WebDriver driver) {

@@ -9,9 +9,9 @@ public class BaseKeywordTesting extends KeywordBase{
 	public BaseKeywordTesting(WebDriver driver){
 		
 	}
-	/*public void testing(String t){
+	public void testing(String t){
 		System.out.println(t);
-	}*/
+	}
 	
 	public void testing(String t, int i){
 		System.out.println(t+i);

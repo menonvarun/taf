@@ -33,7 +33,13 @@ public class CsvKeywordReader implements IKeywordReader{
 
 	@Override
 	public List<IKeywordStore> readFile(File file, String... args) {
-		return this.readFile(file);
+		CsvReader csvReader = null;
+		try {
+			csvReader = new CsvReader(file,args[0],args[1]);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return this.readData(csvReader);
 	}
 	
 	private List<IKeywordStore> readData(CsvReader csvReader) {
@@ -45,7 +51,7 @@ public class CsvKeywordReader implements IKeywordReader{
 			String key = csvReader.getData(rowNo, 0);
 			List<Object> valueList = new ArrayList<Object>();
 
-			for (int columnNo = 1; columnNo <= csvReader.getNoOfColumn(rowNo); columnNo++) {
+			for (int columnNo = 1; columnNo < csvReader.getNoOfColumn(rowNo); columnNo++) {
 				String data = csvReader.getData(rowNo, columnNo);
 				valueList.add(data);
 			}
