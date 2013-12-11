@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Testautomationframework || {{page.title}}</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="stylesheet" href="/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="/stylesheets/shCore.css">
+	<link rel="stylesheet" href="/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="/stylesheets/shThemeRDark.css">
+    <script src="/javascripts/respond.js"></script>
+	
+	<script src="/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="/javascripts/shCore.js"></script>
+	<script src="/javascripts/shAutoloader.js"></script>
+	<script src="/javascripts/shBrushGroovy.js"></script>
+	<script src="/javascripts/shBrushJava.js"></script>
+	<script src="/javascripts/shBrushJScript.js"></script>
+	<script src="/javascripts/shBrushPlain.js"></script>
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+      <!-- <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/menonvarun/TestAutomationFramework">View On GitHub</a></li>
+		  
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div>end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Test Automation Framework (TAF)</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+<h4>Home</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %}
+			{% if page.home %}	
+            <li><a href="{{ page.url' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %}
+			{% if page.basicnav %}	
+            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %} 
+			{% if page.advancednav %}
+            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
+<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %}          
+			{% if page.conceptnav %}
+            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        {{ content }}
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+</html>
