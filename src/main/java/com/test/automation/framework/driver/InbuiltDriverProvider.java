@@ -8,6 +8,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
 
+/**
+ * In-build driver provider class which creates and returns the driver object based on the property 
+ * <b><i>test.name</i></b> inside <b><i>taf.properties</i></b> file.
+ * @author  Varun Menon
+ *
+ */
 class InbuiltDriverProvider implements IDriverProvider{
 	DefaultConfig config = DefaultConfig.getDefaultConfig();
 	

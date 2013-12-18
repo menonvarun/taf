@@ -10,8 +10,14 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
-import com.test.automation.framework.util.Browser;
+import com.test.automation.framework.pagemodel.Browser;
 
+/**
+ * Page model based Element locator implementation uses the {@link Browser} bject to get the driver at runtime and get the element.
+ *
+ * @author  Varun Menon
+ *
+ */
 public class BrowserBasedElementLocator implements ElementLocator {
 	private final Browser browser;
 	private final boolean shouldCache;

@@ -11,6 +11,11 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 
+/**
+ * Simple driver baed elelment locator implementation for Page Factory
+ * @author  Varun Menon
+ *
+ */
 public class DriverBasedElementLocator implements ElementLocator {
 	private final SearchContext searchContext;
 	private final boolean shouldCache;

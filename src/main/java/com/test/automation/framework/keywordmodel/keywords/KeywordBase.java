@@ -23,19 +23,20 @@ public abstract class KeywordBase implements IKeyword{
 	
 	Map<String,Map<Integer,List<MethodInfo>>> methods = new HashMap<String, Map<Integer,List<MethodInfo>>>();
 	private Object executingObject=null;
+	private boolean initialized = false;
 	
 	protected KeywordBase() {
-		intialize();
+		initialize();
 	}
 	
-	private void intialize(){
+	private void initialize(){
 		executingObject = this;
 		initialize(executingObject);				
 	}
 	
 	/**
-	 * Initializes the class to collect the information of the methods avaialbel in the said class.
-	 * Use this method if you want to intialize methods from some other class object. 
+	 * Initializes the class to collect the information of the methods available in the said class.
+	 * Use this method if you want to initialize methods from some other class object. 
 	 * @param obj Object of the class whose method you to use for keyword execution.
 	 */
 	protected void initialize(Object obj){
@@ -67,11 +68,15 @@ public abstract class KeywordBase implements IKeyword{
 			}
 			
 			methods.put(methodName, paramMethodMap);
-		}		
+		}
+		this.initialized = true;
 	}
 	
 	@Override
 	public boolean isSupported(String methodName, Object[] args){
+		if(!initialized){
+			initialize();
+		}
 		if(!methods.containsKey(methodName)){
 			return false;
 		}
@@ -103,12 +108,13 @@ public abstract class KeywordBase implements IKeyword{
 						method.invoke(executingObject, convertedParams);
 						executed = true;
 						break;
-					} catch (IllegalAccessException | IllegalArgumentException
-							| InvocationTargetException e) {
+					} catch (IllegalAccessException | IllegalArgumentException escape){
 						/*
 						 * Intentionally escaping the exception so that we can continue with the execution
 						 * of any other supported method that is available. 
 						 */
+					}catch(InvocationTargetException e) {
+						throw new KeywordException(e);						
 					}
 				}
 								

@@ -15,8 +15,5 @@ class UserDefinedDriverProvider implements IDriverProvider{
 		driver.manage().window().maximize();
 		return driver;
 	}
-	
-	
-	
 
 }

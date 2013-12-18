@@ -1,11 +1,11 @@
 package com.test.automation.framework.pagemodel.pages;
 
-import com.test.automation.framework.page.PageClass;
+import com.test.automation.framework.pagemodel.PageClass;
 import com.test.automation.framework.util.locator.GoogleLocator;
 
 public class GoogleHomePage extends PageClass{
 	
-	GoogleLocator googleLocator;
+	public GoogleLocator googleLocator;
 
 	@Override
 	public String toUrl() {

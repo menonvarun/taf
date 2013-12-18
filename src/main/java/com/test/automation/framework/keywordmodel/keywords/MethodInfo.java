@@ -4,6 +4,12 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Stores method information of each of the method present inside 
+ * the keyword class.
+ * @author  Varun Menon
+ *
+ */
 public class MethodInfo {
 	
 	private String methodName;

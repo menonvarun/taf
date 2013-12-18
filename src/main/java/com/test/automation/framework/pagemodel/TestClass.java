@@ -1,7 +1,9 @@
-package com.test.automation.framework.util;
+package com.test.automation.framework.pagemodel;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+
+import com.test.automation.framework.util.Utilities;
 
 
 public class TestClass {

@@ -10,6 +10,11 @@ import org.openqa.selenium.support.pagefactory.Annotations;
 
 import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 
+/**
+ * Extension of the Page factory Annotation
+ * @author  Varun Menon
+ *
+ */
 public class KeywordBasedAnnotations extends Annotations{
 	ILocatorFile locatorFile;
 	Field field;

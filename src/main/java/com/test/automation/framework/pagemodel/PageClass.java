@@ -1,8 +1,7 @@
-package com.test.automation.framework.page;
+package com.test.automation.framework.pagemodel;
 
 import org.openqa.selenium.WebDriver;
 
-import com.test.automation.framework.util.Browser;
 import com.test.automation.framework.util.Utilities;
 
 public abstract class PageClass {

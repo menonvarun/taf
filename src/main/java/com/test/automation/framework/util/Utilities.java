@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.test.automation.framework.pagemodel.Browser;
+
 public class Utilities {
 	private static int DEFAULT_TIMEOUT =60;
 	
@@ -66,7 +68,7 @@ public class Utilities {
 			CommonMethods commonMethods = new CommonMethods();
 			@Override
 			public Boolean apply(WebDriver driver) {
-				return commonMethods.isAt(browser,pageClass);				
+				return (Boolean)commonMethods.isAt(browser,pageClass);				
 			}
 
 			@Override

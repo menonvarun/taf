@@ -54,7 +54,7 @@ public class ExcelKeywordReader implements IKeywordReader {
 			String key = excelReader.getData(rowNo, 0);
 			List<Object> valueList = new ArrayList<Object>();
 
-			for (int columnNo = 1; columnNo <= excelReader.getNoOfColumn(rowNo); columnNo++) {
+			for (int columnNo = 1; columnNo < excelReader.getNoOfColumn(rowNo); columnNo++) {
 				String data = excelReader.getData(rowNo, columnNo);
 				valueList.add(data);
 			}

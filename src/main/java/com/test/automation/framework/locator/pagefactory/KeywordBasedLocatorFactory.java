@@ -7,8 +7,13 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
-import com.test.automation.framework.util.Browser;
+import com.test.automation.framework.pagemodel.Browser;
 
+/**
+ * Factory to identify the respective Element locator based on whether the {@link Browser} object was set or not.
+ * @author  Varun Menon
+ *
+ */
 public class KeywordBasedLocatorFactory implements ElementLocatorFactory{
 	
 	private final SearchContext searchContext;

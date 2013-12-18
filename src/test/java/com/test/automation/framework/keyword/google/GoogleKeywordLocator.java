@@ -1,4 +1,4 @@
-package com.test.automation.framework.pagemodel.locator;
+package com.test.automation.framework.keyword.google;
 
 import java.io.File;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.openqa.selenium.support.How;
 
 import com.test.automation.framework.locator.Locator;
 
-public class GoogleLocator extends Locator{
+public class GoogleKeywordLocator extends Locator{
 	
-	public GoogleLocator() {
+	public GoogleKeywordLocator() {
 		super(new File("src/test/resources/google.properties"));
 	}
 	

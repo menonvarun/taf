@@ -9,7 +9,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import com.test.automation.framework.locator.locatorfiles.LocatorFileFactory;
 import com.test.automation.framework.locator.locatorfiles.ILocatorFile;
 import com.test.automation.framework.locator.pagefactory.KeywordBasedLocatorFactory;
-import com.test.automation.framework.util.Browser;
+import com.test.automation.framework.pagemodel.Browser;
 /**
  * Base locator class which provides the flexibility of defining your locators as WebElement variables.
  * 

@@ -1,4 +1,4 @@
-package com.test.automation.framework.page;
+package com.test.automation.framework.pagemodel;
 
 public class PageException extends RuntimeException{
 	

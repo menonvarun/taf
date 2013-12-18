@@ -1,6 +1,6 @@
 package com.test.automation.framework.pagemodel.pages;
 
-import com.test.automation.framework.page.PageClass;
+import com.test.automation.framework.pagemodel.PageClass;
 import com.test.automation.framework.util.locator.GoogleLocator;
 
 public class GoogleResultsPage extends PageClass{

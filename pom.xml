@@ -15,7 +15,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId> 
-			<version>6.8</version>
+			<version>6.8</version>			
 		</dependency>
 		
 		<dependency>
@@ -57,8 +57,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<encoding>utf-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -66,6 +66,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.9</version>
 				<configuration>
+				   
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -78,6 +79,79 @@
 					</properties>
 				</configuration>
 			</plugin>
+			<plugin>
+			    <groupId>com.github.wvengen</groupId>
+                <artifactId>proguard-maven-plugin</artifactId>
+                <version>2.0.6</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sf.proguard</groupId>
+                        <artifactId>proguard-base</artifactId>
+                        <version>4.9</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+                <executions>
+                   <execution>
+                       <phase>package</phase>
+                       <goals><goal>proguard</goal></goals>
+                   </execution>
+                </executions>
+                <configuration>
+                    <assembly>
+                        <inclusions>
+                            <inclusion>
+                                <groupId>net.sf.opencsv</groupId><artifactId>opencsv</artifactId><library>true</library>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>org.apache.poi</groupId><artifactId>poi-ooxml</artifactId>
+                                <library>true</library>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>log4j</groupId><artifactId>log4j</artifactId>
+                                <library>true</library>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>xml-apis</groupId><artifactId>xml-apis</artifactId>
+                                <library>true</library>
+                            </inclusion>
+                            <!-- <inclusion>
+                                <groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId>
+                                <library>true</library>
+                            </inclusion>
+                            <inclusion>
+                                <groupId>org.testng</groupId><artifactId>testng</artifactId>
+                                <library>true</library> 
+                            </inclusion>-->
+                        </inclusions>
+                    </assembly>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId>                            
+                        </exclusion>
+                        <exclusion>
+                            <groupId>org.testng</groupId><artifactId>testng</artifactId>                            
+                        </exclusion>
+                    </exclusions>
+                    <obfuscate>true</obfuscate>
+                    <injar>${project.build.finalName}.jar</injar>
+                    <outjar>${project.build.finalName}-small.jar</outjar>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <proguardInclude>${basedir}/proguard.conf</proguardInclude>
+                    <libs>
+                        <!-- <lib>${java.home}/lib/rt.jar</lib> -->
+                        <lib>${java.home}/lib/jsse.jar</lib>
+                    </libs>
+                    <options>
+                       <!--  <option>-keep public class TestClass*{*;}</option> -->
+                        <option>-keep public @interface org.testng.annotations.AfterMethod {*;}</option>
+                        <!-- <option>-keep public class com.test.automation.framework.keywordmodel.executor.KeywordFactory {*;}</option> -->
+                        <option>-libraryjars ${java.home}/lib/rt.jar(java/**,javax/**)</option>
+                        <option>-dontwarn javax.xml.*,com.test.**,org.testng.annotations.AfterMethod,org.openqa.selenium.WebDriver</option>
+                        
+                    </options>
+                </configuration>
+            </plugin>
 		</plugins>
 		<resources>
 			<resource>

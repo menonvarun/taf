@@ -1,13 +1,9 @@
-<suite name="Test Automation Framework Suite" verbose="1" parallel="methods" thread-count="2">
+<suite name="Test Automation Framework Suite" verbose="1" parallel="methods" thread-count="1">
+    
 	<test name="Test Automation Framework Test">
-		<!-- <packages>
+		<packages>
 			<package name="com.test.automation.framework.*" />		
-		</packages> -->
-		<classes>
-		    <class name="com.test.automation.framework.pagemodel.GoogleTest">
-		     
-		     </class>
-	 	 </classes>
+		</packages>
 		
 	</test>
 </suite>

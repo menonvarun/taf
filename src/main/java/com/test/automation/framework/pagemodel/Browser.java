@@ -1,9 +1,10 @@
-package com.test.automation.framework.util;
+package com.test.automation.framework.pagemodel;
 
 import org.openqa.selenium.WebDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
 import com.test.automation.framework.driver.CacheDriverFactory;
+import com.test.automation.framework.util.CommonMethods;
 
 public class Browser {
 	

@@ -6,8 +6,9 @@ import java.net.URISyntaxException;
 import org.openqa.selenium.WebDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
-import com.test.automation.framework.page.PageClass;
-import com.test.automation.framework.page.PageException;
+import com.test.automation.framework.pagemodel.Browser;
+import com.test.automation.framework.pagemodel.PageClass;
+import com.test.automation.framework.pagemodel.PageException;
 
 public class CommonMethods {
 	DefaultConfig config;
