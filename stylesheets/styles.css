@@ -816,6 +816,7 @@ dt {
 	padding:5px;
 	text-align:center;
 	background: #333333;
+	z-index: 100;
 }
 
 section {

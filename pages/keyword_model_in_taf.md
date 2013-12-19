@@ -97,7 +97,7 @@ listeners=com.test.automation.framework.keyword.google.GoogleKeyword
 
 Following is my keyword test which is written in excel sheet.
 
-<img src="/images/GoogleKeywordTest-xls.png"/>
+<img src="{{site.base_url}}/images/GoogleKeywordTest-xls.png"/>
 
 And finally following is my sample test which will make use of the said keyword file.
 
