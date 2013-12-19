@@ -62,7 +62,7 @@
   {% for page in site.html_pages %}
         {% if page.heading %}
 			{% if page.home %}	
-            <li><a href="{{ page.url' }}" >{{ page.heading }}</a></li>         
+            <li><a href="{{site.base_url}}{{ page.url' }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}
       {% endfor %}
@@ -73,7 +73,7 @@
   {% for page in site.html_pages %}
         {% if page.heading %}
 			{% if page.basicnav %}	
-            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+            <li><a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}
       {% endfor %}
@@ -84,7 +84,7 @@
   {% for page in site.html_pages %}
         {% if page.heading %} 
 			{% if page.advancednav %}
-            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+            <li><a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}
       {% endfor %}
@@ -95,7 +95,7 @@
   {% for page in site.html_pages %}
         {% if page.heading %}          
 			{% if page.conceptnav %}
-            <li><a href="{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+            <li><a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}
       {% endfor %}
