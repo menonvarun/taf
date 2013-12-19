@@ -23,9 +23,9 @@ public class Utilities {
 	 * Util method to wait for the element to be present on the page.
 	 * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
 	 * This method will wait for the default timeout of 60sec
-	 * @param driver - {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
+	 * @param driver {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
 	 * needs it, it have to be provided.
-	 * @param element - {@link WebElement} object of the element that we have to wait for to be present. 
+	 * @param element  {@link WebElement} object of the element that we have to wait for to be present. 
 	 */
 	public void waitForElementPresent(WebDriver driver, WebElement element){
 		this.waitForElementPresent(driver, element,DEFAULT_TIMEOUT);
@@ -34,10 +34,10 @@ public class Utilities {
 	/**
 	 * Util method to wait for the element to be present on the page.
 	 * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
-	 * @param driver - {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
+	 * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
 	 * needs it, it have to be provided.
-	 * @param element - {@link WebElement} object of the element that we have to wait for to be present. 
-	 * @param timeout - Time to wait for.
+	 * @param element  {@link WebElement} object of the element that we have to wait for to be present. 
+	 * @param timeout  Time to wait for.
 	 */
 	public void waitForElementPresent(WebDriver driver, WebElement element, long timeout){
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -48,9 +48,9 @@ public class Utilities {
 	 * Util method to wait for the List of elements to be present on the page.
 	 * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
 	 * This method will wait for the default timeout of 60sec
-	 * @param driver - {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
+	 * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
 	 * needs it, it have to be provided.
-	 * @param elements - {@link List} of {@link WebElement} object of elements that we have to wait for to be present. 
+	 * @param elements  {@link List} of {@link WebElement} object of elements that we have to wait for to be present. 
 	 */
 	public void waitForElementPresent(WebDriver driver, List<WebElement> elements){
 		this.waitForElementPresent(driver, elements,DEFAULT_TIMEOUT);
@@ -59,10 +59,10 @@ public class Utilities {
 	/**
 	 * Util method to wait for the List of elements to be present on the page.
 	 * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
-	 * @param driver - {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
+	 * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class 
 	 * needs it, it have to be provided.
-	 * @param elements - {@link List} of {@link WebElement} object of elements that we have to wait for to be present. 
-	 * @param timeout - Time to wait for.
+	 * @param elements  {@link List} of {@link WebElement} object of elements that we have to wait for to be present. 
+	 * @param timeout  Time to wait for.
 	 */
 	public void waitForElementPresent(WebDriver driver, List<WebElement> elements,long timeout){		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -72,9 +72,9 @@ public class Utilities {
 	/**
 	 * Util method for waiting for the page object model page to appear or displayed. 
 	 * This verification is done on the basis of the {@link PageClass#at()} method implemented by the implementing Page Object class.
-	 * @param browser - Browser object of the current page or test class from where this method is call'd
-	 * @param pageClass - Page class extending {@link PageClass} for which {@link WebDriver} should wait.
-	 * @param timeout - Time to wait for.
+	 * @param browser  Browser object of the current page or test class from where this method is call'd
+	 * @param pageClass  Page class extending {@link PageClass} for which {@link WebDriver} should wait.
+	 * @param timeout  Time to wait for.
 	 */
 	public void waitForPage(Browser browser, Class<?> pageClass, long timeout){
 		WebDriverWait wait = new WebDriverWait(browser.getDriver(), timeout);
@@ -85,8 +85,8 @@ public class Utilities {
 	 * Util method for waiting for the page object model page to appear or displayed. 
 	 * This verification is done on the basis of the {@link PageClass#at()} method implemented by the implementing Page Object class.
 	 * Uses default timeout of 60 sec.
-	 * @param browser - Browser object of the current page or test class from where this method is call'd
-	 * @param pageClass - Page class extending {@link PageClass} for which {@link WebDriver} should wait.
+	 * @param browser  Browser object of the current page or test class from where this method is call'd
+	 * @param pageClass  Page class extending {@link PageClass} for which {@link WebDriver} should wait.
 	 */	
 	public void waitForPage(Browser browser, Class<?> pageClass){
 		this.waitForPage(browser, pageClass, DEFAULT_TIMEOUT);

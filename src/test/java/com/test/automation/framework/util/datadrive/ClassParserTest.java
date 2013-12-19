@@ -10,8 +10,11 @@ import java.util.Map;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.test.automation.framework.util.datadrive.ClassParser.ClassParserException;
-import com.test.automation.framework.util.datadrive.ClassParser.DataNotAvailableException;
+import com.test.automation.framework.datadrive.ClassParser;
+import com.test.automation.framework.datadrive.CsvDataDrive;
+import com.test.automation.framework.datadrive.ExcelDataDrive;
+import com.test.automation.framework.datadrive.ClassParser.ClassParserException;
+import com.test.automation.framework.datadrive.ClassParser.DataNotAvailableException;
 
 public class ClassParserTest {
 	

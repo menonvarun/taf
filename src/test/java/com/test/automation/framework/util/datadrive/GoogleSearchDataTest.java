@@ -5,11 +5,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.test.automation.framework.datadrive.ExcelDataDrive;
+import com.test.automation.framework.datadrive.ClassParser.ClassParserException;
+import com.test.automation.framework.datadrive.ClassParser.DataNotAvailableException;
 import com.test.automation.framework.pagemodel.TestClass;
 import com.test.automation.framework.pagemodel.pages.GoogleHomePage;
 import com.test.automation.framework.pagemodel.pages.GoogleResultsPage;
-import com.test.automation.framework.util.datadrive.ClassParser.ClassParserException;
-import com.test.automation.framework.util.datadrive.ClassParser.DataNotAvailableException;
 
 public class GoogleSearchDataTest extends TestClass{
 	

@@ -1,4 +1,4 @@
-package com.test.automation.framework.util.datadrive;
+package com.test.automation.framework.datadrive;
 
 import java.io.File;
 import java.io.IOException;
