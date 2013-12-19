@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Testautomationframework || WebDriver in TAF</title>
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCore.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shThemeRDark.css">
+    <script src="http://menonvarun.github.io/TestAutomationFrameworkjavascripts/respond.js"></script>
+	
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shCore.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shAutoloader.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushGroovy.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJScript.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushPlain.js"></script>
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+      <!-- <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/menonvarun/TestAutomationFramework">View On GitHub</a></li>
+		  
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div>end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Test Automation Framework (TAF)</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+<h4>Home</h4>
+<hr></hr>
+<ul>
+  
+        
+				
+            <li><a href="/index.html" >Home</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+</ul>
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/data_driven_util_in_taf.html" >Data Driven Util</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/webdriver_in_taf.html" >WebDriver Creation/Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/keyword_model_in_taf.html" >Keyword Model</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/locator_in_taf.html" >Locator Management</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/page_object_model_in_taf.html" >Page Object Model</a></li>         
+			
+        
+      
+</ul>
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+</ul>
+<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/locator_concept.html" >Locators Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        <h1 id='webdriver_creationmanagement'>WebDriver Creation/Management</h1>
+
+<p>TAF have an inbuild driver creation and management system in place. Following are teh features available by the said API:</p>
+
+<ul>
+<li>Default driver creation based on the provided driver name ex. <em><strong>firefox</strong></em> , <em><strong>chrome</strong></em> , <em><strong>ie</strong></em> , etc.</li>
+
+<li>Flexibility to define custom driver creation and easy plugging in to the framework.</li>
+
+<li>Multi-threaded/Non-multithreaded driver management.</li>
+</ul>
+
+<h2 id='default_webdriver_creation'>Default WebDriver creation</h2>
+
+<p>As mentioned earlier in the features TAF provide a defaut implementation for driver creation. In case you need a particular driver for your tests you can use the existing API provided by TAF for it. Just mention the type of driver you need by providing a value to the property <em><strong>driver.name</strong></em> in side the TAF properties file.</p>
+
+<p>Look at the following example for better understanding.</p>
+
+<p>Configuration in the properties file: <pre class='brush: plain;'>
+driver.name = firefox
+</pre></p>
+
+<p>Following is the sample test where it uses the driver creation class <a href=''><em><strong>CacheDriverFactory</strong></em></a> for creation of driver.</p>
+<pre class='brush: java;'>
+	@Test
+	public void inbuildDriveCreationTest(){
+		DefaultConfig config = DefaultConfig.getDefaultConfig();
+		config.setConfigValue("driver.name", "firefox");
+		
+		CacheDriverFactory driverFactory = new CacheDriverFactory();
+		WebDriver driver = driverFactory.getDriver();
+		driver.get("http://www.google.com");		
+	}
+</pre>
+<h2 id='configuring_multithreaded_driver_management'>Configuring Multi-threaded driver management</h2>
+
+<p>TAF have an in-build driver management to allow users to manage there driver in a way that the same driver instance is available across all tests or each thread execution have its own instance of tests. object for there tests</p>
+
+<h2 id='user_defined_driver_instance'>User defined Driver instance</h2>
+
+<p>It also provides the flexibility to provide your own driver creation logic by writing a class that implments the <a href=''><em><strong>IDriverProvider</strong></em></a> interface. Once implemented jsut set the path of the class to the properperty <em><strong>userdefined.driverclass</strong></em> in the <em><strong>taf.properties</strong></em> file.</p>
+
+<p>Lets look at the following example:</p>
+
+<p>Following is the customized class:</p>
+<pre class='brush: java;'>
+class UserDefinedDriverProvider implements IDriverProvider{
+	
+	DefaultConfig config = DefaultConfig.getDefaultConfig();
+
+	@Override
+	public WebDriver getDriver() {
+		WebDriver driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+		return driver;
+	}
+}
+</pre>
+<p>Following is the property that is set inside the <strong>taf.properties</strong> file:</p>
+<pre class='brush: plain;'>
+userdefined.driverclass = com.test.automation.framework.driver.UserDefinedDriverProvider
+</pre>
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+</html>

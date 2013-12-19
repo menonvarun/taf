@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Testautomationframework || Page Object Model</title>
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCore.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shThemeRDark.css">
+    <script src="http://menonvarun.github.io/TestAutomationFrameworkjavascripts/respond.js"></script>
+	
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shCore.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shAutoloader.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushGroovy.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJScript.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushPlain.js"></script>
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+      <!-- <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/menonvarun/TestAutomationFramework">View On GitHub</a></li>
+		  
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div>end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Test Automation Framework (TAF)</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+<h4>Home</h4>
+<hr></hr>
+<ul>
+  
+        
+				
+            <li><a href="/index.html" >Home</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+</ul>
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/data_driven_util_in_taf.html" >Data Driven Util</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/webdriver_in_taf.html" >WebDriver Creation/Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/keyword_model_in_taf.html" >Keyword Model</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/locator_in_taf.html" >Locator Management</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/page_object_model_in_taf.html" >Page Object Model</a></li>         
+			
+        
+      
+</ul>
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+</ul>
+<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/locator_concept.html" >Locators Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        <h1 id='page_object_model'>Page Object Model</h1>
+
+<p>TAF got inspired from the implementation of Page Object Model in <a href='http://www.gebish.org'><em><strong>GEB</strong></em></a> and thought to provide the similar kind of features to the users of Java. TAF provides certain inbuild utils which will allow users to write Frameworks using Page Object Model with ease.</p>
+
+<p>Look at the following example written using the TAF Page Object Model. Following is the TAF properties file.</p>
+<pre class='brush: plain;'>
+
+base_url=http://www.google.com
+
+</pre>
+<p>Following is the class representing the Google home page.</p>
+<pre class='brush: java;'>
+public class GoogleHomePage extends PageClass{
+	
+	GoogleLocator googleLocator;
+	
+	@Override
+	public String toUrl() {
+		return "";
+	}
+	
+	@Override
+	public boolean at() {
+		return getDriver().getTitle().contentEquals("Google");		
+	}
+	public void searchForString(String searchString){
+		googleLocator.searchField.sendKeys(searchString);
+        googleLocator.submitButton.click();
+    }
+
+	@Override
+	public void init() {
+		googleLocator = new GoogleLocator().initialize(this.browser);
+	}
+}
+</pre>
+<p>Following is the class representing the Google results page.</p>
+<pre class='brush: java;'>
+public class GoogleResultsPage extends PageClass{
+	GoogleLocator googleLocator;
+	
+	@Override
+	public String toUrl() {
+		return "";
+	}
+
+	@Override
+	public boolean at() {		
+		return googleLocator.searchResult.size() > 0;
+	}
+	
+	@Override
+	public void init() {
+		googleLocator = new GoogleLocator().initialize(this.browser);
+	}
+	
+	public void clickOnResult(){
+        googleLocator.searchResult.get(0).click();
+    }
+}
+</pre>
+<p>And following is a simple test which goes to the google home page and search for a keyword and click on the result.</p>
+<pre class='brush: java;'>
+	@Test
+	public void googleTest(){
+		GoogleHomePage homePage = to(GoogleHomePage.class);
+		
+		homePage.searchForString("Testing");
+		
+		util.waitForPage(browser, GoogleResultsPage.class);		
+		
+		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
+		
+		resultsPage.clickOnResult();
+		
+		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
+		wait.until(ExpectedConditions.titleContains("Software testing"));
+	}
+</pre>
+<p>If you look at the above example you will notice that there is no manual object creation required for the Page Object classes. TAF automatically creates the Page Objects of the classes that are passed as parameter.</p>
+
+<p>It provide certain util methods like <a href=''><em><strong>to</strong></em></a> and <a href=''><em><strong>at</strong></em></a> that will help in navigating your pages and also verifying that you are on the said page. The <em><strong>to</strong></em> method automatically navigate your browser to a specific url defined in the said page class after appending it to the base url mentioned in the <strong>taf.properties</strong> file. It also verifies that the page is loaded or available based on the <em><strong>at</strong></em> method defined in the said Page class.</p>
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+</html>

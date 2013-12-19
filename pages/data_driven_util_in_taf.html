@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Testautomationframework || Data Driven Util</title>
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCore.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shThemeRDark.css">
+    <script src="http://menonvarun.github.io/TestAutomationFrameworkjavascripts/respond.js"></script>
+	
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shCore.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shAutoloader.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushGroovy.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJScript.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushPlain.js"></script>
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+      <!-- <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/menonvarun/TestAutomationFramework">View On GitHub</a></li>
+		  
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div>end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Test Automation Framework (TAF)</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+<h4>Home</h4>
+<hr></hr>
+<ul>
+  
+        
+				
+            <li><a href="/index.html" >Home</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+</ul>
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/data_driven_util_in_taf.html" >Data Driven Util</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/webdriver_in_taf.html" >WebDriver Creation/Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/keyword_model_in_taf.html" >Keyword Model</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/locator_in_taf.html" >Locator Management</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/page_object_model_in_taf.html" >Page Object Model</a></li>         
+			
+        
+      
+</ul>
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+</ul>
+<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/locator_concept.html" >Locators Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        <h1 id='data_driven_util'>Data Driven Util</h1>
+
+<p>The common problem that people face while developing a data-driven test is opening, fetching, iterating and returning back of the data from different sources. These sources can be of different types but they are mainly Excel or CSV files.</p>
+
+<p>TAF provide a utility to automaticaly fetch the said data from your files and return you with a list of Class objects that can be easily used in your data driven tests.</p>
+
+<p>Lets take an example where you need to fetch some set of data from an excel file. The common approach will be to go through each row, fetch data, store it in some variable and then return it for each iteration. In TAF you just create data file in excel or csv format with certain logical column names mentioned in the columns of the first row. Subsequent rows will contain specific data sets that needs to used for each iteration of you Data-driven test. Following is an example of my data-set.</p>
+<img src='http://menonvarun.github.io/TestAutomationFramework/images/GoogleSearchData-xls.png' />
+<p>Now to fetch the data as Class objects you just need to create a class in your code with certain variables as required by your tests with the same name as mentioned in you column name of your data file. Following is an example.</p>
+<pre class='brush: java;'>
+public class GoogleSearchData {
+	
+	public String searchtext;
+	
+	public String titleToWait;
+
+}
+</pre>
+<p>Following is a test where we will be making use of the in-build data driven util which will automatically parse the data file and return back the list or double object array of the objects of the specified data representing class created earlier. The variable in the said class object will contain value from each row of teh data file that represent and individual iteration.</p>
+<pre class='brush: java;'>
+public class GoogleSearchDataTest extends TestClass{
+	
+	@Test(dataProvider="googleSearchData")
+	public void googleTest(GoogleSearchData data){
+		GoogleHomePage homePage = to(GoogleHomePage.class);
+		
+		homePage.searchForString(data.searchtext);
+		
+		util.waitForPage(browser, GoogleResultsPage.class);		
+		
+		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
+		
+		resultsPage.clickOnResult();
+		
+		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
+		wait.until(ExpectedConditions.titleContains(data.titleToWait));
+	}
+	
+	@DataProvider(name="googleSearchData")
+	public Object[][] googleSearchData() throws ClassParserException, DataNotAvailableException{
+		ExcelDataDrive excelData = 
+				new ExcelDataDrive("src/test/resources/datadrive/GoogleSearchData.xls");
+		return excelData.getTestngData(GoogleSearchData.class);
+	}
+}
+</pre>
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+</html>

@@ -1,0 +1,344 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Testautomationframework || Keyword Model</title>
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCore.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/TestAutomationFramework/stylesheets/shThemeRDark.css">
+    <script src="http://menonvarun.github.io/TestAutomationFrameworkjavascripts/respond.js"></script>
+	
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shCore.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shAutoloader.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushGroovy.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushJScript.js"></script>
+	<script src="http://menonvarun.github.io/TestAutomationFramework/javascripts/shBrushPlain.js"></script>
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+      <!-- <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/menonvarun/TestAutomationFramework">View On GitHub</a></li>
+		  
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/menonvarun/TestAutomationFramework/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div>end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Test Automation Framework (TAF)</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+<h4>Home</h4>
+<hr></hr>
+<ul>
+  
+        
+				
+            <li><a href="/index.html" >Home</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+</ul>
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/data_driven_util_in_taf.html" >Data Driven Util</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/webdriver_in_taf.html" >WebDriver Creation/Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="/pages/keyword_model_in_taf.html" >Keyword Model</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/locator_in_taf.html" >Locator Management</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="/pages/page_object_model_in_taf.html" >Page Object Model</a></li>         
+			
+        
+      
+</ul>
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+</ul>
+<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/locator_concept.html" >Locators Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        <h1 id='plugnplay_keyword_driven_framework'>Plug-n-Play Keyword Driven Framework</h1>
+
+<p>TAF have an in-build support for keyword driven automation framework. You can easily write your keyword driven tests in csv and excel format using TAF. Just define your keyword as public methods in a class by extending the <a href=''><em><strong>KeywordBase</strong></em></a> class or the <a href=''><em><strong>IKeyword</strong></em></a> interface. Once your keyword class has been defined just add the path of the class to the <strong>&#8220;listener&#8221;</strong> property in the <strong>taf.properties</strong> file.</p>
+
+<p>TAF will automatically load the class at runtime on execution and considers all its public methods as keywrords for your test files. TAF also provides common utility to read your suite files and test files using a common format commonly used across the industry. Look at the following example of the google search page to get more idea on the same.</p>
+
+<p>Following is my Keyword definition file:</p>
+<pre class='brush: java;'>
+public class GoogleKeyword extends KeywordBase{
+	
+	private WebDriver driver;
+	private GoogleKeywordLocator googleLocator;
+	
+	public GoogleKeyword(WebDriver driver){
+		this.driver = driver;
+		googleLocator = new GoogleKeywordLocator().initialize(this.driver);		
+	}
+	/**
+	 * Navigate to a particular url
+	 * @param url
+	 */
+	public void navigateToUrl(String url){
+		this.driver.get(url);
+	}
+	
+	/**
+	 * Searches for a string on google home page
+	 * @param searchString
+	 */
+	public void searchForString(String searchString){
+		googleLocator.searchField.sendKeys(searchString);
+        googleLocator.submitButton.click();
+    }
+	
+	/**
+	 * Clicks on the first result in the google results list.
+	 */
+	public void clickOnResult(){
+        clickOnResult(0);
+    }
+	
+	/**
+	 * Clicks on a particular item number in the list.
+	 * @param index
+	 */
+	public void clickOnResult(int index){
+        googleLocator.searchResult.get(index).click();
+    }
+	
+	/**
+	 * Waits for the results to be displayed.
+	 */
+	public void waitForResultsToDisplay(){
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		wait.until(new ExpectedCondition&lt;Boolean&gt;() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				
+				return googleLocator.searchResult.size()>0;
+			}
+
+			@Override
+			public String toString() {
+				return "Condition not fullfilled";
+			}
+		} 
+		);
+	}
+	
+	/**
+	 * Wait for the said title to appear on the page.
+	 * @param title
+	 */
+	public void waitForTitle(String title){
+		WebDriverWait wait = new WebDriverWait(this.driver, 60);
+		wait.until(ExpectedConditions.titleContains("Software testing"));
+	}
+}
+</pre>
+<p>I will add the the above defined Keyword class to my list of listners inside <strong>taf.properties</strong> file as follows.</p>
+<pre class='brush: plain;'>
+listeners=com.test.automation.framework.keyword.google.GoogleKeyword
+</pre>
+<p>Following is my keyword test which is written in excel sheet.</p>
+<img src='http://menonvarun.github.io/TestAutomationFramework/images/GoogleKeywordTest-xls.png' />
+<p>And finally following is my sample test which will make use of the said keyword file.</p>
+<pre class='brush: java;'>
+public class GoogleKeywordTest {
+		
+	@Test
+	public void googleSearchKeywordTest(){
+		WebDriver driver = new FirefoxDriver();
+		File file = new File("src/test/resources/GoogleKeywordTest.xls");
+		KeywordExecutor keyExecutor = new KeywordExecutor(driver, file,(String[]) null);
+		keyExecutor.execute();
+		driver.quit();
+	}
+}
+</pre>
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+</html>

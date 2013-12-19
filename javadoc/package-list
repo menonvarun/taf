@@ -1,0 +1,14 @@
+com.test.automation.framework.config
+com.test.automation.framework.datadrive
+com.test.automation.framework.driver
+com.test.automation.framework.keywordmodel
+com.test.automation.framework.keywordmodel.executor
+com.test.automation.framework.keywordmodel.keywords
+com.test.automation.framework.keywordmodel.reader
+com.test.automation.framework.keywordmodel.suite
+com.test.automation.framework.locator
+com.test.automation.framework.locator.locatorfiles
+com.test.automation.framework.locator.pagefactory
+com.test.automation.framework.pagemodel
+com.test.automation.framework.util
+com.test.automation.framework.util.readers
