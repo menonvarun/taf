@@ -9,7 +9,12 @@ import com.test.automation.framework.config.DefaultConfig;
 import com.test.automation.framework.pagemodel.Browser;
 import com.test.automation.framework.pagemodel.PageClass;
 import com.test.automation.framework.pagemodel.PageException;
-
+/**
+ * Utility class containing mainly the util methods for the Page Class and Locator class.
+ * Not meant to be used by other classes.
+ * @author  Varun Menon
+ *
+ */
 public class CommonMethods {
 	DefaultConfig config;
 	
