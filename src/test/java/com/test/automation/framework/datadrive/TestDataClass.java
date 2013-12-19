@@ -1,4 +1,4 @@
-package com.test.automation.framework.util.datadrive;
+package com.test.automation.framework.datadrive;
 
 public class TestDataClass {
 	public String stringValue;

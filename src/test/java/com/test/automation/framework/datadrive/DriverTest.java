@@ -1,4 +1,4 @@
-package com.test.automation.framework.util.datadrive;
+package com.test.automation.framework.datadrive;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;

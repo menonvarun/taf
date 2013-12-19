@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import com.test.automation.framework.keywordmodel.executor.KeywordExecutor;
 import com.test.automation.framework.keywordmodel.suite.ISimpleTest;
-import com.test.automation.framework.keywordmodel.suite.SuiteReader;
+import com.test.automation.framework.keywordmodel.suite.TestSuite;
 
 public class DataDrivenSuiteTest {
 	
@@ -22,7 +22,7 @@ public class DataDrivenSuiteTest {
 	@DataProvider(name="Data")
 	public Object[][] getTestData(){
 		File file = new File("src/test/suite-csv.csv");
-		SuiteReader suiteReader = new SuiteReader(file, new ArrayList<String>());
+		TestSuite suiteReader = new TestSuite(file, new ArrayList<String>());
 		return suiteReader.getTestNgDataDriveTestList();
 	}
 

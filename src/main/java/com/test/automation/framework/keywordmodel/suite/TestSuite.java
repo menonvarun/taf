@@ -9,18 +9,18 @@ import java.util.List;
  * @author  Varun Menon
  *
  */
-public class SuiteReader {
+public class TestSuite {
 	
 	private List<ISuiteFileReader> suiteReaders = new ArrayList<ISuiteFileReader>();
 	private File file;
 	private List<String> arguments;
 	private ISuiteFileReader suiteReader;
 	/**
-	 * Constructor to create {@link SuiteReader} object.
+	 * Constructor to create {@link TestSuite} object.
 	 * @param file - {@link File} object of the test-suite file.
 	 * @param arguments - Any extra arguments required for reading the suite file like sheetname, sheetindex, delimiter, separator.
 	 */
-	public SuiteReader(File file, List<String> arguments){
+	public TestSuite(File file, List<String> arguments){
 		this.file = file;
 		this.arguments = arguments;
 		init();

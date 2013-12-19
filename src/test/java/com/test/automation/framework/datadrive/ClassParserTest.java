@@ -1,4 +1,4 @@
-package com.test.automation.framework.util.datadrive;
+package com.test.automation.framework.datadrive;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
