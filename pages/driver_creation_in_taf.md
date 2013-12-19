@@ -26,7 +26,7 @@ driver.name = firefox
 
 Following is the sample test where it uses the driver creation class [_**CacheDriverFactory**_]() for creation of driver.
 
-<pre class="brush: java:">
+<pre class="brush: java;">
 	@Test
 	public void inbuildDriveCreationTest(){
 		DefaultConfig config = DefaultConfig.getDefaultConfig();
@@ -50,7 +50,7 @@ Lets look at the following example:
 
 Following is the customized class:
 
-<pre class="brush: java:">
+<pre class="brush: java;">
 class UserDefinedDriverProvider implements IDriverProvider{
 	
 	DefaultConfig config = DefaultConfig.getDefaultConfig();
