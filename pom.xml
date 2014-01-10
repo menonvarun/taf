@@ -17,13 +17,7 @@
 			<artifactId>testng</artifactId> 
 			<version>6.8</version>			
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.5</version>
-		</dependency> -->
-		
+			
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
@@ -67,7 +61,7 @@
 				<version>2.9</version>
 				<configuration>
 				
-                    <skip>true</skip>
+                    <skip>false</skip>
                     <failIfNoTests>false</failIfNoTests>
                 
 				   
@@ -83,7 +77,7 @@
 					</properties>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 			    <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
                 <version>2.0.6</version>
@@ -119,14 +113,14 @@
                                 <groupId>xml-apis</groupId><artifactId>xml-apis</artifactId>
                                 <library>true</library>
                             </inclusion>
-                            <!-- <inclusion>
+                            <inclusion>
                                 <groupId>org.seleniumhq.selenium</groupId><artifactId>selenium-java</artifactId>
                                 <library>true</library>
                             </inclusion>
                             <inclusion>
                                 <groupId>org.testng</groupId><artifactId>testng</artifactId>
                                 <library>true</library> 
-                            </inclusion>-->
+                            </inclusion>
                         </inclusions>
                     </assembly>
                     <exclusions>
@@ -143,19 +137,19 @@
                     <outputDirectory>${project.build.directory}</outputDirectory>
                     <proguardInclude>${basedir}/proguard.conf</proguardInclude>
                     <libs>
-                        <!-- <lib>${java.home}/lib/rt.jar</lib> -->
+                        <lib>${java.home}/lib/rt.jar</lib>
                         <lib>${java.home}/lib/jsse.jar</lib>
                     </libs>
                     <options>
-                       <!--  <option>-keep public class TestClass*{*;}</option> -->
+                        <option>-keep public class TestClass*{*;}</option>
                         <option>-keep public @interface org.testng.annotations.AfterMethod {*;}</option>
-                        <!-- <option>-keep public class com.test.automation.framework.keywordmodel.executor.KeywordFactory {*;}</option> -->
+                        <option>-keep public class com.test.automation.framework.keywordmodel.executor.KeywordFactory {*;}</option>
                         <option>-libraryjars ${java.home}/lib/rt.jar(java/**,javax/**)</option>
                         <option>-dontwarn javax.xml.*,com.test.**,org.testng.annotations.AfterMethod,org.openqa.selenium.WebDriver</option>
                         
                     </options>
                 </configuration>
-            </plugin>
+            </plugin> -->
 		</plugins>
 		<resources>
 			<resource>
