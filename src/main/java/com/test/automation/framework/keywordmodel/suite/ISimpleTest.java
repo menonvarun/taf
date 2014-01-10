@@ -43,6 +43,18 @@ public interface ISimpleTest {
 	public void setEnabled(boolean enabled);
 	
 	/**
+	 * Gets the test file path for the test
+	 * @return Path of the file which contains the keywords for the said test.
+	 */
+	public String getTestFilePath();
+
+	/**
+	 * Sets the file path of the said test.
+	 * @param testFilePath
+	 */
+	public void setTestFilePath(String testFilePath);
+	
+	/**
 	 * Returns any extra arguments that is provided in the suite file for the specified test as List
 	 * These arguments are mainly related the path of suite file, sheetname(in case of excel), delimiters (in case of csv), separators(in case of csv).  
 	 * @return List<String> of the extra arguments provided in the suite file for the said test. 

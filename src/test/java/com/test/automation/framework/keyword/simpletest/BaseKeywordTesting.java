@@ -1,4 +1,4 @@
-package com.test.automation.framework.keyword;
+package com.test.automation.framework.keyword.simpletest;
 
 import org.openqa.selenium.WebDriver;
 

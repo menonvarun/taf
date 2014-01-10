@@ -1,4 +1,4 @@
-package com.test.automation.framework.keyword.google;
+package com.test.automation.framework.keyword.webdriverbased.google;
 
 import java.io.File;
 import java.util.List;

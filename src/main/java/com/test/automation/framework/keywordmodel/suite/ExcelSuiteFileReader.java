@@ -48,14 +48,12 @@ public class ExcelSuiteFileReader implements ISuiteFileReader{
 			boolean enabled = enabledValue.equalsIgnoreCase("Y") ? true : false;
 			String filePath = excelReader.getData(row, 3);
 			List<String> arguments = new ArrayList<String>();
-			arguments.add(filePath);
-			
 			if(noOfColumn>4){
 				for(int column = 4;column < noOfColumn;column++){
 					arguments.add(excelReader.getData(row, column));					
 				}
 			}
-			ISimpleTest simpleTest = new SimpleTest(testName, testId, enabled, arguments);
+			ISimpleTest simpleTest = new SimpleTest(testName, testId, enabled, filePath, arguments);
 			tests.add(simpleTest);
 		}
 		return tests;

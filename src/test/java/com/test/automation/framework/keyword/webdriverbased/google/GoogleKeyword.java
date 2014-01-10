@@ -1,4 +1,4 @@
-package com.test.automation.framework.keyword.google;
+package com.test.automation.framework.keyword.webdriverbased.google;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;

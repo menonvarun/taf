@@ -7,12 +7,14 @@ public class SimpleTest implements ISimpleTest{
 	private String testName;
 	private String testId;
 	private boolean enabled;
+	private String testFilePath;
 	private List<String> arguments;
 
-	public SimpleTest(String testName, String testId, boolean enabled, List<String> arguments){
+	public SimpleTest(String testName, String testId, boolean enabled,String testFilePath, List<String> arguments){
 		this.testName = testName;
 		this.testId = testId;
 		this.enabled = enabled;
+		this.testFilePath = testFilePath;
 		this.arguments = arguments;		
 	}
 	
@@ -58,12 +60,23 @@ public class SimpleTest implements ISimpleTest{
 	}
 	
 	@Override
+	public String getTestFilePath() {
+		return testFilePath;
+	}
+
+	@Override
+	public void setTestFilePath(String testFilePath) {
+		this.testFilePath = testFilePath;
+	}
+	
+	@Override
 	public String toString(){
 		String testN = "Test name: " + testName;
 		String testI = "Test ID: " + testId;
 		String enbld = "Enabled: " + enabled;
+		String filePath = "FielPath: " + testFilePath;
 		String args = "Arguments: " + arguments.toString();
-		return testN +","+testI+","+enbld+","+args;
+		return testN +","+testI+","+enbld+","+filePath+","+args;
 		
 	}
 

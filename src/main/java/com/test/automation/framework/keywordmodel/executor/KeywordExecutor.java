@@ -48,6 +48,14 @@ public class KeywordExecutor {
 		this(null,file,args);		
 	}
 	
+	public KeywordExecutor(File file, List<String> arguments) {
+		this(null, file, arguments);
+	}
+
+	public KeywordExecutor(WebDriver driver, File file, List<String> arguments) {
+		this(driver, file, (String[]) arguments.toArray());
+	}
+	
 	/**
 	 * {@link KeywordExecutor} class constructor which accepts the following params 
 	 * and sets the {@link WebDriver} object for the Keyword classes as <b>null</b>.

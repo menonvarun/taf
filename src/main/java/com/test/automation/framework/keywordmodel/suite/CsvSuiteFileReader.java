@@ -46,14 +46,13 @@ public class CsvSuiteFileReader implements ISuiteFileReader{
 			boolean enabled = enabledValue.equalsIgnoreCase("Y") ? true : false;
 			String filePath = csvReader.getData(row, 3);
 			List<String> arguments = new ArrayList<String>();
-			arguments.add(filePath);
 			
 			if(noOfColumn>4){
 				for(int column = 4;column < noOfColumn;column++){
 					arguments.add(csvReader.getData(row, column));					
 				}
 			}
-			ISimpleTest simpleTest = new SimpleTest(testName, testId, enabled, arguments);
+			ISimpleTest simpleTest = new SimpleTest(testName, testId, enabled, filePath, arguments);
 			tests.add(simpleTest);
 		}
 		return tests;

@@ -5,7 +5,12 @@ import org.testng.annotations.AfterMethod;
 
 import com.test.automation.framework.util.Utilities;
 
-
+/**
+ * Base Class to be extended by your Test classes required to be executed for using the in-built 
+ * Page Object Model supported by the framework. 
+ * @author  Varun Menon
+ *
+ */
 public class TestClass {
 	protected WebDriver driver;
 	protected Utilities util;

@@ -33,10 +33,10 @@ public class TestSuite {
 	
 	/**
 	 * This method internally identifies the supported {@link ISuiteFileReader} implementation in the framework and accordingly parses 
-	 * the suite file and return {@link ISimpleTest} objects for the tests present in the suite file. 
-	 * @return {@link List} or {@link ISimpleTest} for the tests present inside the said test-suite file.
+	 * the suite file and return {@link ISimpleTest} objects for all the tests present in the suite file. 
+	 * @return {@link List} or {@link ISimpleTest} for all the tests present inside the said test-suite file.
 	 */
-	public List<ISimpleTest> getTestList(){
+	public List<ISimpleTest> getAllTestsAsList(){
 		boolean fileSupported = false;
 		for(ISuiteFileReader suiteReader : suiteReaders){
 			if(suiteReader.isSupported(file)){
@@ -54,15 +54,39 @@ public class TestSuite {
 	
 	/**
 	 * This method internally identifies the supported {@link ISuiteFileReader} implementation in the framework and accordingly parses 
-	 * the suite file and return {@link ISimpleTest} objects for the tests present in the suite file.
+	 * the suite file and return {@link ISimpleTest} objects for all the tests present in the suite file.
 	 * This method is mainly used as a Data provider for the TestNG data driven methods. 
-	 * @return {@link Object}[][] containing object of {@link ISimpleTest} for the tests present inside the said test-suite file.
+	 * @return {@link Object}[][] containing object of {@link ISimpleTest} for all the tests present inside the said test-suite file.
 	 */
-	public Object[][] getTestNgDataDriveTestList(){
-		List<ISimpleTest> tests = this.getTestList();
+	public Object[][] getAllTestsForDataDrive(){
+		List<ISimpleTest> tests = this.getAllTestsAsList();
 		Object[][] returnData = new Object[tests.size()][1];
 		for(int i = 0; i< tests.size();i++){
 			returnData[i][0] = tests.get(i);
+		}
+		
+		return returnData;
+	}
+	
+	/**
+	 * This method internally identifies the supported {@link ISuiteFileReader} implementation in the framework and accordingly parses 
+	 * the suite file and return {@link ISimpleTest} objects of only those tests that are enabled in the suite file.
+	 * This method is mainly used as a Data provider for the TestNG data driven methods. 
+	 * @return {@link Object}[][] containing object of {@link ISimpleTest} for the enabled tests present inside the said test-suite file.
+	 */
+	public Object[][] getTobeExecutedTests(){
+		List<ISimpleTest> tests = this.getAllTestsAsList();
+		List<ISimpleTest> enabledTests = new ArrayList<ISimpleTest>();
+		
+		for(int i = 0; i< tests.size();i++){
+			ISimpleTest test = tests.get(i);
+			if(test.isEnabled())
+				enabledTests.add(test);
+		}
+		
+		Object[][] returnData = new Object[enabledTests.size()][1];
+		for(int i = 0; i< enabledTests.size();i++){
+			returnData[i][0] = enabledTests.get(i);			
 		}
 		
 		return returnData;
