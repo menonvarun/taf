@@ -1,8 +1,5 @@
 package com.test.automation.framework.pagemodel;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -11,7 +8,7 @@ import com.test.automation.framework.pagemodel.pages.GoogleHomePage;
 import com.test.automation.framework.pagemodel.pages.GoogleResultsPage;
 
 public class GoogleTest extends TestClass{
-	
+
 	@Test
 	public void googleTest(){
 		GoogleHomePage homePage = to(GoogleHomePage.class);
@@ -28,15 +25,4 @@ public class GoogleTest extends TestClass{
 		wait.until(ExpectedConditions.titleContains("Software testing"));
 	}
 	
-	@Test
-	public void googleSearchTest(){
-		WebDriver driver = new FirefoxDriver();
-		driver.get("www.google.co.in");
-		
-		driver.findElement(By.cssSelector("#gbqfq")).sendKeys("Testing");
-		driver.findElement(By.cssSelector(".gbqfb")).click();
-		
-		driver.findElement(By.cssSelector("h3.r > a")).click();
-		
-	}
 }

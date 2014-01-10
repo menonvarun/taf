@@ -16,7 +16,7 @@ public class GoogleKeywordTest {
 	@BeforeClass
 	public void setListner(){
 		DefaultConfig config = DefaultConfig.getDefaultConfig();
-		config.setConfigValue("listeners", "com.test.automation.framework.keyword.google.GoogleKeyword");
+		config.setConfigValue("listeners", "com.test.automation.framework.keyword.webdriverbased.google.GoogleKeyword");
 	}
 	
 	@Test
