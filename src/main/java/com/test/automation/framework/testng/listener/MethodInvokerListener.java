@@ -31,7 +31,4 @@ public class MethodInvokerListener implements IInvokedMethodListener{
 		ITestNGMethod customMethod = new CustomTestNGMethod(testNGMethod, testDetails);
 		((TestResult)testResult).setMethod(customMethod);		
 	}
-
-	
-
 }
