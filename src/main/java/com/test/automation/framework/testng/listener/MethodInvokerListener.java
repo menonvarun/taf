@@ -1,6 +1,8 @@
 package com.test.automation.framework.testng.listener;
 
 
+import java.lang.reflect.Field;
+
 import org.testng.IInvokedMethod;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestNGMethod;
@@ -28,7 +30,39 @@ public class MethodInvokerListener implements IInvokedMethodListener{
 				testDetails = (ISimpleTest)tempDetails;
 			
 		}
+		changeTestMethodName(testResult,testDetails);
 		ITestNGMethod customMethod = new CustomTestNGMethod(testNGMethod, testDetails);
 		((TestResult)testResult).setMethod(customMethod);		
+	}
+	
+	private void changeTestMethodName(ITestResult result,ISimpleTest testDetails){
+		String methodName="";
+		if(testDetails!=null){
+			methodName = testDetails.getTestId()+" : "+testDetails.getTestName();
+			
+			try {
+				@SuppressWarnings("rawtypes")
+				Class cls = result.getClass();
+				Field methodNameF;
+				methodNameF = cls.getDeclaredField("m_name");
+				methodNameF.setAccessible(true);
+				methodNameF.set(result, methodName);
+			} catch (NoSuchFieldException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
 	}
 }
