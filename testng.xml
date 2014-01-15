@@ -4,6 +4,16 @@
 		<packages>
 			<package name="com.test.automation.framework.*" />		
 		</packages>
+		<!-- <classes>
+       <class name="com.test.automation.framework.keyword.webdriverbased.google.GoogleKeywordTestSuite" />
+    </classes> -->
 		
 	</test>
+	<listeners>
+    <listener class-name="com.test.automation.framework.testng.listener.MethodInvokerListener" />
+    <listener class-name="org.uncommons.reportng.HTMLReporter" />
+    <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+  
+  </listeners>
+	
 </suite>
