@@ -74,7 +74,7 @@ public class SimpleTest implements ISimpleTest{
 		String testN = "Test name: " + testName;
 		String testI = "Test ID: " + testId;
 		String enbld = "Enabled: " + enabled;
-		String filePath = "FielPath: " + testFilePath;
+		String filePath = "FilePath: " + testFilePath;
 		String args = "Arguments: " + arguments.toString();
 		return testN +","+testI+","+enbld+","+filePath+","+args;
 		
