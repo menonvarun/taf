@@ -1,11 +1,14 @@
 package com.test.automation.framework.keyword.webdriverbased.google;
 
+import java.io.File;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.test.automation.framework.keywordmodel.keywords.KeywordBase;
+import com.test.automation.framework.locator.CustomPageFactory;
 
 public class GoogleKeyword extends KeywordBase{
 	
@@ -14,7 +17,8 @@ public class GoogleKeyword extends KeywordBase{
 	
 	public GoogleKeyword(WebDriver driver){
 		this.driver = driver;
-		googleLocator = new GoogleKeywordLocator().initialize(this.driver);		
+		File file = new File("src/test/resources/google.properties");
+		googleLocator = CustomPageFactory.initElements(driver, GoogleKeywordLocator.class, file);		
 	}
 	/**
 	 * Navigate to a particular url

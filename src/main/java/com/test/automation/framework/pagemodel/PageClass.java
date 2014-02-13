@@ -46,7 +46,7 @@ public abstract class PageClass {
 	 * @param pageClass - Page class extending {@link PageClass} to where the driver have to be navigated.
 	 * @return The said page class object once verification is successful.
 	 */
-	protected <T> T to(Class<PageClass> pageClass){
+	protected <T> T to(Class<? extends PageClass> pageClass){
 		T page = this.browser.to(pageClass);		
 		return page;		
 	}
@@ -56,7 +56,7 @@ public abstract class PageClass {
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return The said page class object once verification is successful.
 	 */
-	protected <T> T at(Class<PageClass> pageClass){
+	protected <T> T at(Class<? extends PageClass> pageClass){
 		T page = this.browser.at(pageClass);
 		return page;
 	}
@@ -66,7 +66,7 @@ public abstract class PageClass {
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return true or false
 	 */
-	protected boolean isAt(Class<PageClass> pageClass){
+	protected boolean isAt(Class<? extends PageClass> pageClass){
 		return this.browser.isAt(pageClass);
 	}
 	

@@ -86,7 +86,7 @@ public class Browser {
 	 * @param pageClass - Page class extending {@link PageClass} to where the driver have to be navigated.
 	 * @return The said page class object once verification is successful.
 	 */
-	public <T> T to(Class<?> pageClass){
+	public <T> T to(Class<? extends PageClass> pageClass){
 		T page = this.commonMethods.to(this, pageClass);		
 		return page;		
 	}
@@ -96,7 +96,7 @@ public class Browser {
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return The said page class object once verification is successful.
 	 */
-	public <T> T at(Class<?> pageClass){
+	public <T> T at(Class<? extends PageClass> pageClass){
 		T page = this.commonMethods.at(this,pageClass);
 		return page;
 	}
@@ -106,7 +106,7 @@ public class Browser {
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return true or false
 	 */
-	public boolean isAt(Class<?> pageClass){
+	public boolean isAt(Class<? extends PageClass> pageClass){
 		return this.commonMethods.isAt(this,pageClass);
 	}
 	
@@ -116,7 +116,7 @@ public class Browser {
 	 * @param pageClass Page class extending {@link PageClass} for which the object has to be created and returned.
 	 * @return The said page class object
 	 */
-	public <T> T getPageObject(Class<?> pageClass){
+	public <T> T getPageObject(Class<? extends PageClass> pageClass){
 		return this.commonMethods.getPageObject(this, pageClass);
 	}
 	

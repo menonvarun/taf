@@ -1,19 +1,13 @@
 package com.test.automation.framework.pagemodel.locator;
 
-import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import com.test.automation.framework.locator.Locator;
 
-public class GoogleLocator extends Locator{
-	
-	public GoogleLocator() {
-		super(new File("src/test/resources/google.properties"));
-	}
+public class GoogleLocator {
 	
 	@FindBy(how=How.CSS,using="search_box")
 	public WebElement searchField;
