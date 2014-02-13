@@ -1,24 +1,19 @@
 ---
-layout: default
-title: Data Driven Util
-permalink: /data_driven_util_in_taf.html
-heading: Data Driven Util
-basicnav: true
+layout: content
+title: Data driving utility
+permalink: /data_driven_short.html
+heading: Data driving utility
 ---
-#Data Driven Util
+#Data driving utility
 
-The common problem that people face while developing a data-driven test is opening, fetching, iterating and returning back of the data from different sources.
-These sources can be of different types but they are mainly Excel or CSV files.
-
-TAF provide a utility to automaticaly fetch the said data from your files and return you with a list of Class objects that can be easily used in your data driven tests.
-
-Lets take an example where you need to fetch some set of data from an excel file. The common approach will be to go through each row, fetch data, store it in some variable and then return it for each iteration. In TAF you just create data file in excel or csv format with certain logical column names mentioned in the columns of the first row.
+In TAF you just create data file in excel or csv format with certain logical column names mentioned in the columns of the first row.
 Subsequent rows will contain specific data sets that needs to used for each iteration of you Data-driven test.
 Following is an example of my data-set.
 
 <img src="{{site.base_url}}/images/GoogleSearchData-xls.png" />
 
-Now to fetch the data as Class objects you just need to create a class in your code with certain variables as required by your tests with the same name as mentioned in you column name of your data file. Following is an example.
+Now to fetch the data as Class objects you just need to create a class in your code with certain variables as required 
+by your tests with the same name as mentioned in the column name of your data file. Following is an example.
 
 <pre class="brush: java;">
 public class GoogleSearchData {
@@ -65,5 +60,3 @@ public class GoogleSearchDataTest extends TestClass{
 	}
 }
 </pre>
-
-

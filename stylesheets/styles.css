@@ -544,6 +544,38 @@ body {
   background: linear-gradient(#2a2a29, #1c1c1c);
 }
 
+.qtip{
+
+  max-width: 700px;
+  width: 700;
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin: 5px;
+
+}
+.qtip-default {
+  padding: 0px 0 20px 0px;
+  margin: 5px;
+  font: 14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #f0e7d5;
+  font-weight: normal;
+  background: #252525;
+  background-attachment: fixed !important;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2a2a29), color-stop(100%, #1c1c1c));
+  background: -webkit-linear-gradient(#2a2a29, #1c1c1c);
+  background: -moz-linear-gradient(#2a2a29, #1c1c1c);
+  background: -o-linear-gradient(#2a2a29, #1c1c1c);
+  background: -ms-linear-gradient(#2a2a29, #1c1c1c);
+  background: linear-gradient(#2a2a29, #1c1c1c);
+}	
+
+.overlay{
+	background: grey;
+	opacity: 0.5;
+	
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #e8e8e8;
   margin: 0 0 10px;
@@ -919,6 +951,11 @@ section #title .credits.left {
 }
 section #title .credits.right {
   float: right;
+}
+
+.myCustomClass{
+    max-width: 1000px;
+    
 }
 
 @media print, screen and (max-width: 720px) {

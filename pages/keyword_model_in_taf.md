@@ -11,7 +11,7 @@ basicnav: true
 TAF consists of an in-build plug-n-play keyword driven automation framework. You can simply define your keywords definitions and let know TAF about it. Once done you can simply write your keyword driven tests in csv and excel format and start using them with TAF.
 <ul>
 <li><a href="#example">Simple keyword based testcase</a></li>
-<li><a href="#testsuite">Test Suite report</a></li>
+<li><a href="#testsuite">Test Suite Support</a></li>
 <li><a href="#testreporting">Reporting</a></li>
 </ul>
 <a name="example"> </a>
