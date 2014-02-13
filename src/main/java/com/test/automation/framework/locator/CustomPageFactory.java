@@ -69,6 +69,45 @@ public class CustomPageFactory extends PageFactory {
 		return (T) page;
 	}
 	
+	/**
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * with the passed browser object.
+	 * 
+	 * <p><b>Note:</b> Only use this method when you are using the page object model.
+	 * If using not using the Page Object model , try to use the method 
+	 * {@link #initElements(WebDriver, Class, File)}. 
+	 * 
+	 * @param browser Browser object which should be used to initialize the Page Factory elements.
+	 * @param pageClassToProxy A class which will be initialized.
+	 * @param filePath File path of the file containing the key/value pair.
+	 * @return An instantiated instance of the class with WebElement and List<WebElement> fields proxied
+	 */
+	public static <T> T initElements(Browser browser, Class<T> pageClassToProxy,String filePath) {
+		File file = new File(filePath);
+		T page = initElements(browser, pageClassToProxy,file);
+		return (T) page;
+	}
+	
+	/**
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * with the passed driver object.
+	 * 
+	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
+	 * If using the Page Object model supported by the given framework, try to use the method 
+	 * {@link #initElements(Browser, Class, File)}. 
+	 * @param driver Driver object which should be used to initialize the Page Factory elements.
+	 * @param pageClassToProxy A class which will be initialized.
+	 * @param filePath File path of the file containing the key/value pair.
+	 * @return An instantiated instance of the class with WebElement and List<WebElement> fields proxied
+	 */
+	public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy,String filePath) {
+		File file = new File(filePath);
+		T page = initElements(driver, pageClassToProxy,file);
+		return (T) page;
+	}
+	
+	
+	
 	
 	private static <T> T instantiatePage(WebDriver driver,
 			Class<T> pageClassToProxy) {
