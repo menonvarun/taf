@@ -1,0 +1,23 @@
+<h1 id='page_object_example'>Page Object Example</h1>
+
+<p>Following is a simple test which goes to the google home page and search for a keyword and click on the result.</p>
+<pre class='brush: java;'>
+	@Test
+	public void googleTest(){
+		GoogleHomePage homePage = to(GoogleHomePage.class);
+		
+		homePage.searchForString("Testing");
+		
+		util.waitForPage(browser, GoogleResultsPage.class);		
+		
+		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
+		
+		resultsPage.clickOnResult();
+		
+		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
+		wait.until(ExpectedConditions.titleContains("Software testing"));
+	}
+</pre>
+<p>If you look at the above example you will notice that there is no manual object creation required for the Page Object classes. TAF automatically creates the Page Objects of the classes that are passed as parameter.</p>
+
+<p>It provide certain util methods like <a href=''><em><strong>to</strong></em></a> and <a href=''><em><strong>at</strong></em></a> that will help in navigating your pages and also verifying that you are on the said page. The <em><strong>to</strong></em> method automatically navigate your browser to a specific url defined in the said page class after appending it to the base url mentioned in the <strong>taf.properties</strong> file. It also verifies that the page is loaded or available based on the <em><strong>at</strong></em> method defined in the said Page class.</p>
