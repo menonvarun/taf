@@ -1,4 +1,0 @@
-Test id,Test name,Enabled,Filepath
-TC1,Test case 1,Y,src/test/resources/keyword/simpletest/test-keyword.csv
-TC2,Test case 2,Y,src/test/resources/keyword/simpletest/test-keyword-1.csv
-TC3,Test case 3,N,src/test/resources/keyword/simpletest/test-keyword-2.csv
