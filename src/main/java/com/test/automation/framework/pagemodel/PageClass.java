@@ -1,5 +1,7 @@
 package com.test.automation.framework.pagemodel;
 
+import java.io.File;
+
 import org.openqa.selenium.WebDriver;
 
 import com.test.automation.framework.util.Utilities;
@@ -13,6 +15,9 @@ public abstract class PageClass {
 	
 	protected Utilities util;
 	public Browser browser;
+	private boolean initialized = false; 
+	
+	protected File locatorFile=null;
 	
 	/**
 	 * Intialization method for the Page class
@@ -21,7 +26,17 @@ public abstract class PageClass {
 	public void init(Browser browser){
 		this.browser = browser;
 		this.util = new Utilities();	
+		initialized = true;
 		this.init();
+	}
+	
+	/**
+	 * Return true or false based on the coniditon whether the said object has been 
+	 * initialized by the TAF framework or its just an object.
+	 * @return <b>true</b> or <b>false</b>
+	 */
+	public boolean isInitialized(){
+		return this.initialized;
 	}
 	
 	/**
@@ -52,6 +67,32 @@ public abstract class PageClass {
 	}
 	
 	/**
+	 * Navigates to said page after appending the base url to Page url and initializes any 
+	 * PageFactory based WebElements in the said class using the provided locator file. 
+	 * This utility also verifies whether the driver is at the said Page by using "at" method of the Page after navigation. 
+	 * @param pageClass - Page class extending {@link PageClass} to where the driver have to be navigated.
+	 * @param file - <code>File</code> object of the file containing the key/value pair of the locators.
+	 * @return The said page class object once verification is successful.
+	 */
+	protected <T> T to(Class<? extends PageClass> pageClass,File file){
+		T page = this.browser.to(pageClass);		
+		return page;		
+	}
+	
+	/**
+	 * Navigates to said page after appending the base url to Page url. This method initializes any 
+	 * PageFactory based WebElements in the said class using the provided locator file path. 
+	 * This utility also verifies whether the driver is at the said Page by using "at" method of the Page after navigation. 
+	 * @param pageClass - Page class extending {@link PageClass} to where the driver have to be navigated.
+	 * @param filePath - File path of the file containing the key/value pair of the locators.
+	 * @return The said page class object once verification is successful.
+	 */
+	protected <T> T to(Class<? extends PageClass> pageClass,String filePath){
+		T page = this.browser.to(pageClass,filePath);		
+		return page;		
+	}
+	
+	/**
 	 * Utility to verify that the driver is at said page or not.
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return The said page class object once verification is successful.
@@ -62,12 +103,80 @@ public abstract class PageClass {
 	}
 	
 	/**
+	 * Utility to verify that the driver is at said page or not.
+	 * This method initializes any PageFactory based WebElements in the said
+	 * class using the provided locator file.
+	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
+	 * @param file - <code>File</code> object of the file containing the key/value pair of the locators.
+	 * @return The said page class object once verification is successful.
+	 */
+	protected <T> T at(Class<? extends PageClass> pageClass,File file){
+		T page = this.browser.at(pageClass);
+		return page;
+	}
+	
+	/**
+	 * Utility to verify that the driver is at said page or not.
+	 * This method initializes any PageFactory based WebElements in the said
+	 * class using the provided locator file path.
+	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
+	 * @param filePath - File path of the file containing the key/value pair of the locators.
+	 * @return The said page class object once verification is successful.
+	 */
+	protected <T> T at(Class<? extends PageClass> pageClass,String filePath){
+		T page = this.browser.at(pageClass,filePath);
+		return page;
+	}
+	
+	/**
+	 * Return the locator file which have to be used for initializing the WebElements of the current Page class.
+	 * 
+	 * @return <code>File</code>
+	 */
+	public File getLocatorFile(){
+		return this.locatorFile;
+	}
+	
+	/**
+	 * Sets the locator file which have to be used for initializing the WebElements of the current Page class.
+	 * Use this method if you want to specify some file else the default behavior of the Selenium PageFactory will be used.
+	 * @param file
+	 */
+	public void setLocatorFile(File file){
+		this.locatorFile = file;
+	}
+	
+	/**
 	 * Similar to {@link #at(Class)} method, instead it return true or false based on the at verification done.
 	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
 	 * @return true or false
 	 */
 	protected boolean isAt(Class<? extends PageClass> pageClass){
 		return this.browser.isAt(pageClass);
+	}
+	
+	/**
+	 * Similar to {@link #at(Class)} method, instead it return true or false based on the at verification done.
+	 * This method initializes any PageFactory based WebElements in the said
+	 * class using the provided locator file.
+	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
+	 * @param file - <code>File</code> object of the file containing the key/value pair of the locators. 
+	 * @return true or false
+	 */
+	protected boolean isAt(Class<? extends PageClass> pageClass,File file){
+		return this.browser.isAt(pageClass,file);
+	}
+	
+	/**
+	 * Similar to {@link #at(Class)} method, instead it return true or false based on the at verification done.
+	 * This method initializes any PageFactory based WebElements in the said
+	 * class using the provided locator file path.
+	 * @param pageClass Page class extending {@link PageClass} which have to verified to be on.
+	 * @param filePath - File path of the file containing the key/value pair of the locators.
+	 * @return true or false
+	 */
+	protected boolean isAt(Class<? extends PageClass> pageClass,String filePath){
+		return this.browser.isAt(pageClass,filePath);
 	}
 	
 	/**

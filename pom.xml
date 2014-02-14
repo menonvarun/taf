@@ -167,6 +167,30 @@
                     </options>
                 </configuration>
             </plugin> -->
+             <plugin>
+			    <artifactId>maven-resources-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <id>copy-test</id>
+			            <phase>validate</phase>
+			            <goals>
+			                <goal>copy-resources</goal>
+			            </goals>
+			            <configuration>
+			                <outputDirectory>${basedir}/src/test/resources</outputDirectory>
+			                <overwrite>true</overwrite>
+			                <resources>
+			                    <resource>
+			                        <directory>taf-test/src/test/resources</directory>
+			                        <includes>
+			                            <include>**/*.*</include>
+			                        </includes>
+			                    </resource>
+			                </resources>
+			            </configuration>
+			        </execution>
+			    </executions>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>

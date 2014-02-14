@@ -1,3 +1,4 @@
 target
 bin
 test-output
+src/test/resources

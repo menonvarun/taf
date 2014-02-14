@@ -1,11 +1,13 @@
 package com.test.automation.framework.util;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.openqa.selenium.WebDriver;
 
 import com.test.automation.framework.config.DefaultConfig;
+import com.test.automation.framework.locator.CustomPageFactory;
 import com.test.automation.framework.pagemodel.Browser;
 import com.test.automation.framework.pagemodel.PageClass;
 import com.test.automation.framework.pagemodel.PageException;
@@ -27,18 +29,33 @@ public class CommonMethods {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T getPageObject(Browser browser,Class<?> pageClass){
+	public <T> T getPageObject(Browser browser,Class<?> pageClass, File customLocatorfile){
 		validatePageClass(pageClass);
 		T page = null;
 		try {
 			page = (T) pageClass.newInstance();
 			((PageClass) page).init(browser);
+			
+			File locatorFile = ((PageClass) page).getLocatorFile();
+			
+			if(customLocatorfile!=null)
+				CustomPageFactory.initElements(browser, page, customLocatorfile);
+			else if(locatorFile!=null)
+				CustomPageFactory.initElements(browser, page, locatorFile);
+			else
+				CustomPageFactory.initElements(browser, page);
+				
 		} catch (IllegalAccessException | InstantiationException e) {
 			throw new PageException("Unable to create instance of page class \""+pageClass.getSimpleName()+"\". " +
 					"Make sure you have an empty constructor defined for the said class and it is not private.");
 		}
 		return page;
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getPageObject(Browser browser,Class<?> pageClass){
+		return getPageObject(browser, pageClass,null);		
 	}
 	
 	public String getUrl(PageClass page){
@@ -64,16 +81,34 @@ public class CommonMethods {
 	}
 	
 	public <T> T to(Browser browser, Class<?> pageClass ){
+		return to(browser,pageClass,(File)null);		
+	}
+	
+	public <T> T at(Browser browser, Class<?> pageClass){
+		return at(browser,pageClass,(File)null);
+	}
+	
+	public <T> T to(Browser browser, Class<?> pageClass,File file ){
 		validatePageClass(pageClass);
-		T page = getPageObject(browser, pageClass);
+		T page = getPageObject(browser, pageClass,file);
 		String url = getUrl((PageClass) page);
 		browser.getDriver().get(url);
 		at(page);
 		return page;		
 	}
 	
-	public <T> T at(Browser browser, Class<?> pageClass){
-		T page = getPageObject(browser, pageClass);
+	public <T> T to(Browser browser, Class<?> pageClass,String filePath){
+		File file = new File(filePath);
+		return to(browser,pageClass,file);
+	}	
+	
+	public <T> T at(Browser browser, Class<?> pageClass,String filePath){
+		File file = new File(filePath);
+		return at(browser,pageClass,file);
+	}
+	
+	public <T> T at(Browser browser, Class<?> pageClass,File file){
+		T page = getPageObject(browser, pageClass,file);
 		return at(page);
 	}
 	
@@ -90,9 +125,18 @@ public class CommonMethods {
 		return atPage;
 	}
 	
-	public <T> boolean isAt(Browser browser, Class<?> pageClass){
-		T page = getPageObject(browser, pageClass);
+	public <T> boolean isAt(Browser browser, Class<?> pageClass, File file){
+		T page = getPageObject(browser, pageClass,file);
 		return isAt(page);
+	}
+	
+	public <T> boolean isAt(Browser browser, Class<?> pageClass, String filePath){
+		File file = new File(filePath);
+		return isAt(browser,pageClass,file);
+	}
+	
+	public <T> boolean isAt(Browser browser, Class<?> pageClass){
+		return isAt(browser,pageClass,(File)null);
 	}
 	
 	private void validatePageClass(Class<?> pageClass){
