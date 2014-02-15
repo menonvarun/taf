@@ -5,7 +5,7 @@
 	<groupId>org.test.automation.framework</groupId>
 	<artifactId>testautomationframework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<!-- <properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
@@ -204,7 +204,7 @@
 			</resource>
 		</resources>
 	</build>
-	<modules>
+	<!-- <modules>
 	    <module>taf-test</module>
-  	</modules>
+  	</modules> -->
 </project>

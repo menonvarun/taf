@@ -53,7 +53,6 @@ public class CommonMethods {
 		
 	}
 	
-	@SuppressWarnings("unchecked")
 	public <T> T getPageObject(Browser browser,Class<?> pageClass){
 		return getPageObject(browser, pageClass,null);		
 	}

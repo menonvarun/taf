@@ -3,6 +3,7 @@ package com.test.automation.framework.locator;
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -52,7 +53,7 @@ public class CustomPageFactory extends PageFactory {
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
-	 * If using not using the Page Object model , try to use the method 
+	 * If you are not using the Page Object model , try to use the method 
 	 * {@link #initElements(WebDriver, Class, File)}. 
 	 * 
 	 * @param browser Browser object which should be used to initialize the Page Factory elements.
@@ -71,8 +72,8 @@ public class CustomPageFactory extends PageFactory {
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
-	 * If using not using the Page Object model , try to use the method 
-	 * {@link #initElements(WebDriver, Class, File)}. 
+	 * If you are not using the Page Object model , try to use the method 
+	 * {@link #initElements(WebDriver, Class, String)}. 
 	 * 
 	 * @param browser Browser object which should be used to initialize the Page Factory elements.
 	 * @param pageClassToProxy A class which will be initialized.
@@ -108,8 +109,8 @@ public class CustomPageFactory extends PageFactory {
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
-	 * If using not using the Page Object model , try to use the method 
-	 * {@link #initElements(WebDriver, Class, File)}. 
+	 * If you are using the Page Object model , try to use the method 
+	 * {@link #initElements(Browser, Object, File)}. 
 	 * 
 	 * @param driver Driver object which should be used to initialize the Page Factory elements.
 	 * @param pageClassObjectToProxy A class object which have to be initialized.
@@ -130,7 +131,7 @@ public class CustomPageFactory extends PageFactory {
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
 	 * If using not using the Page Object model , try to use the method 
-	 * {@link #initElements(WebDriver, Class, File)}. 
+	 * {@link #initElements(WebDriver, Object, File)}. 
 	 * 
 	 * @param browser Browser object which should be used to initialize the Page Factory elements.
 	 * @param pageClassObjectToProxy A class object which have to be initialized.
@@ -150,7 +151,7 @@ public class CustomPageFactory extends PageFactory {
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
 	 * If using the Page Object model supported by the given framework, try to use the method 
-	 * {@link #initElements(Browser, Class, File)}. 
+	 * {@link #initElements(Browser, Object, String)}. 
 	 * @param driver Driver object which should be used to initialize the Page Factory elements.
 	 * @param pageClassObjectToProxy A class object which have to be initialized.
 	 * @param filePath File path of the file containing the key/value pair.
@@ -167,8 +168,8 @@ public class CustomPageFactory extends PageFactory {
 	 * with the passed driver object.
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
-	 * If using the Page Object model supported by the given framework, try to use the method 
-	 * {@link #initElements(Browser, Class, File)}. 
+	 * If note using the Page Object model supported by the given framework, try to use the method 
+	 * {@link #initElements(WebDriver, Object, String)}. 
 	 * @param browser Browser object which should be used to initialize the Page Factory elements.
 	 * @param pageClassObjectToProxy A class object which have to be initialized.
 	 * @param filePath File path of the file containing the key/value pair.
@@ -194,6 +195,87 @@ public class CustomPageFactory extends PageFactory {
 		return pageClassObjectToProxy;		
 	}
 	
+	/**
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * with the passed driver object.
+	 * <p> This method tries to get the default locator file for a class by calling the "getLocatorFile" method if available in the said class.
+	 * <p> If the said method is available it will use the file returned by the method for getting selectors.
+	 * <p> If there is no method defined in the class it will initialize the said class as a Normal Page Factory class and will consider the Page Factory annotations "using" attribute value
+	 * as a selector for identifying the elements. 
+	 * 
+	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
+	 * If using the Page Object model supported by the given framework, try to use the method 
+	 * {@link #initElements(Browser, Class)}. 
+	 * @param driver Driver object which should be used to initialize the Page Factory elements.
+	 * @param pageClassToProxy A class which will be initialized.
+	 * @return An instantiated instance of the class with WebElement and List<WebElement> fields proxied
+	 */
+	public static <T> T initElements(WebDriver driver, Class<T> pageClassToProxy){
+		T page = instantiatePage(driver, pageClassToProxy);
+		File locatorFile = getLocatorFile(page);
+		if(locatorFile==null)
+			initElements(driver, page);
+		else
+			initElements(driver, page, locatorFile);
+		
+		return page;
+	}
+	
+	/**
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * with the passed driver object.
+	 * <p> This method tries to get the default locator file for a class by calling the "getLocatorFile" method if available in the said class.
+	 * <p> If the said method is available it will use the file returned by the method for getting selectors.
+	 * <p> If there is no method defined in the class it will initialize the said class as a Normal Page Factory class and will consider the Page Factory annotations "using" attribute value
+	 * as a selector for identifying the elements. 
+	 * 
+	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
+	 * If not using the Page Object model supported by the given framework, try to use the method 
+	 * {@link #initElements(WebDriver, Class)}. 
+	 * @parambrowser Browser object which should be used to initialize the Page Factory elements.
+	 * @param pageClassToProxy A class which will be initialized.
+	 * @return An instantiated instance of the class with WebElement and List<WebElement> fields proxied
+	 */
+	public static <T> T initElements(Browser browser, Class<T> pageClassToProxy){
+		T page = instantiatePage(browser, pageClassToProxy);
+		File locatorFile = getLocatorFile(page);
+		if(locatorFile==null)
+			initElements(browser, page);
+		else
+			initElements(browser, page, locatorFile);
+		
+		return page;
+	}
+	
+	private static <T> File getLocatorFile(T page){
+		Class<?> classToProxy = page.getClass();
+		
+		File locatorFile = null;
+		try {
+			Method method = classToProxy.getMethod("getLocatorFile");
+			if(File.class.isAssignableFrom(method.getReturnType())){
+				try {
+					Object obj = method.invoke(page);
+					locatorFile = (File)obj;
+				} catch (IllegalAccessException e) {
+					throw new PageException("The 'getLocatorFile' method present in the class" + classToProxy.getName()+
+							" may not be publically accessible object.");
+				} catch (IllegalArgumentException e) {
+					//Intentionally skipping it as this is already handled while getting the method.
+				} catch (InvocationTargetException e) {
+					//Intentionally skipping it 
+				}
+				
+			}else{
+				throw new PageException("The 'getLocatorFile' method present in the class" + classToProxy.getName()+" should return a File type object.");
+			}
+		} catch (NoSuchMethodException e) {
+			//Intentionally skipping it 
+		} catch (SecurityException e) {
+			//Intentionally skipping it 
+		}
+		return locatorFile;		
+	}
 	
 	private static <T> T instantiatePage(WebDriver driver,
 			Class<T> pageClassToProxy) {
