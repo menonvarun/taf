@@ -96,12 +96,34 @@
         {% endif %}
       {% endfor %}
 </ul>-->
+<h4>Installation</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %}
+			{% if page.installation %}	
+            <li><a href="{{site.base_url}}{{ page.url' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
 <h4>Concepts</h4>
 <hr></hr>
 <ul>
   {% for page in site.html_pages %}
         {% if page.heading %}          
 			{% if page.conceptnav %}
+            <li><a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
+			{% endif %}
+        {% endif %}
+      {% endfor %}
+</ul>
+<h4>FAQ</h4>
+<hr></hr>
+<ul>
+  {% for page in site.html_pages %}
+        {% if page.heading %} 
+			{% if page.faq %}
             <li><a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}

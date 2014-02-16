@@ -25,8 +25,8 @@ $(document).ready(function(){
 				
 			},
 			style: {
-			classes: "myCustomClass",
-				width: "auto"
+			classes: "myCustomClass"
+				
 				
 			}
 			});

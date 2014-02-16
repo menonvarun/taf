@@ -11,7 +11,7 @@ while using the <em><strong>@FindBy</strong></em> annotation of Page Object Fact
 
 Consider that the locators in your framework is added to a _properties_ file. 
 
-Following is the normal usage of webdriver where you directly used the said properties file to get your webelement selectors:</p>
+Following is the normal usage of webdriver where you directly used the said properties file to get your webelement selectors:
 
 <pre class='brush: java;'>
 String locator = poperties.getProperty("google_search_field");
@@ -20,7 +20,7 @@ driver.findElement(By.css(locator)).sendKeys("Testing");
 
 </pre>
 
-Following is a sample code where the same file will be used by TAF along the Selenium Page Object Factory
+Following is a sample code where the same file will be used by TAF along with the Selenium Page Object Factory
 
 <pre class='brush: java;'>
 
