@@ -4,14 +4,14 @@
 
 <p>Consider that the locators in your framework is added to a <em>properties</em> file.</p>
 
-<p>Following is the normal usage of webdriver where you directly used the said properties file to get your webelement selectors:&lt;/p&gt;</p>
+<p>Following is the normal usage of webdriver where you directly used the said properties file to get your webelement selectors:</p>
 <pre class='brush: java;'>
 String locator = poperties.getProperty("google_search_field");
 
 driver.findElement(By.css(locator)).sendKeys("Testing");
 
 </pre>
-<p>Following is a sample code where the same file will be used by TAF along the Selenium Page Object Factory</p>
+<p>Following is a sample code where the same file will be used by TAF along with the Selenium Page Object Factory</p>
 <pre class='brush: java;'>
 
 	@FindBy(how=How.CSS,using="search_box")

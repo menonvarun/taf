@@ -954,6 +954,8 @@ section #title .credits.right {
 }
 
 .myCustomClass{
+	width: 80%;
+	margin: 0 auto 0 5%;
     max-width: 1000px;
     
 }
