@@ -10,5 +10,6 @@ com.test.automation.framework.locator
 com.test.automation.framework.locator.locatorfiles
 com.test.automation.framework.locator.pagefactory
 com.test.automation.framework.pagemodel
+com.test.automation.framework.testng.listener
 com.test.automation.framework.util
 com.test.automation.framework.util.readers
