@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Testautomationframework || Data Driven Util</title>
+    <title>Testautomationframework || Locator Util FAQ</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -491,58 +491,91 @@
 
 </div>
 <div id='content'>
-        <h1 id='data_driven_util'>Data Driven Util</h1>
+        <h1 id='locator_util_faq'>Locator Util FAQ</h1>
 
-<p>The common problem that people face while developing a data-driven test is opening, fetching, iterating and returning back of the data from different sources. These sources can be of different types but they are mainly Excel or CSV files.</p>
+<ul>
+<li>Q: Can I mention a default file as locator file for my locator or Page class? <br /> A: Yes <br /><br /></li>
 
-<p>TAF provide a utility to automaticaly fetch the said data from your files and return you with a list of Class objects that can be easily used in your data driven tests.</p>
+<li>Q: How can I mention a default file as locator file for my locator or Page class? <br /> A: You can mention a default file containg your locators values for your Locator &amp; Page Classes by defining a method named &#8220;getLocatorFile&#8221; which returns the File object pointing to your default locator/selector containg file. See the example below:</li>
+</ul>
 
-<p>Lets take an example where you need to fetch some set of data from an excel file. The common approach will be to go through each row, fetch data, store it in some variable and then return it for each iteration. In TAF you just create data file in excel or csv format with certain logical column names mentioned in the columns of the first row. Subsequent rows will contain specific data sets that needs to used for each iteration of you Data-driven test. Following is an example of my data-set.</p>
-<img src='http://menonvarun.github.io/taf/images/GoogleSearchData-xls.png' />
-<p>Now to fetch the data as Class objects you just need to create a class in your code with certain variables as required by your tests with the same name as mentioned in you column name of your data file. Following is an example.</p>
+<p>Simple Locator Class:</p>
 <pre class='brush: java;'>
-public class GoogleSearchData {
+public class DefaultFileGoogleLocator {
 	
-	public String searchtext;
+	@FindBy(how=How.CSS,using="search_box")
+	public WebElement searchField;
 	
-	public String titleToWait;
+	@FindBy(how = How.CSS,using="submit_button")
+	public WebElement submitButton;
+	
+	@FindBy(how = How.CSS,using="search_result")
+	public List&lt;WebElement&gt; searchResult;
+	
+	@FindBy(how = How.CSS,using="search_result_text")
+	public WebElement searchResultText;
 
-}
-</pre>
-<p>Following is a test where we will be making use of the in-build data driven util which will automatically parse the data file and return back the list or double object array of the objects of the specified data representing class created earlier. The variable in the said class object will contain value from each row of teh data file that represent and individual iteration.</p>
-<pre class='brush: java;'>
-public class GoogleSearchDataTest extends TestClass{
-	
-	@Test(dataProvider="googleSearchData")
-	public void googleTest(GoogleSearchData data){
-		GoogleHomePage homePage = to(GoogleHomePage.class);
-		
-		homePage.searchForString(data.searchtext);
-		
-		util.waitForPage(browser, GoogleResultsPage.class);		
-		
-		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
-		
-		resultsPage.clickOnResult();
-		
-		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
-		wait.until(ExpectedConditions.titleContains(data.titleToWait));
-	}
-	
-	@DataProvider(name="googleSearchData")
-	public Object[][] googleSearchData() throws ClassParserException, DataNotAvailableException{
-		ExcelDataDrive excelData = 
-				new ExcelDataDrive("src/test/resources/datadrive/GoogleSearchData.xls");
-		/*
-		Following method call will parse the above mentioned Excel file and 
-		create objects of the provided "GoogleSearchData" class.
-		It will return a Object[][] containing object for each iteration. 
-		The utility also have a method to return a List object. 
-		*/
-		return excelData.getTestngData(GoogleSearchData.class);
+	public File getLocatorFile(){
+		File file = new File("src/test/resources/google.properties");
+		return file;
 	}
 }
 </pre>
+<p>A Page Class:</p>
+<pre class='brush: java;'>
+public class GoogleHomeLocatorPage extends PageClass{
+	
+	@FindBy(how=How.CSS,using="search_box")
+	public WebElement searchField;
+	
+	@FindBy(how = How.CSS,using="submit_button")
+	public WebElement submitButton;
+	
+	@FindBy(how = How.CSS,using="search_result")
+	public List&lt;WebElement&gt; searchResult;
+	
+	@FindBy(how = How.CSS,using="search_result_text")
+	public WebElement searchResultText;
+
+	@Override
+	public String toUrl() {
+		return "";
+	}
+
+	@Override
+	public boolean at() {
+		return getDriver().getTitle().contentEquals("Google");		
+	}
+	
+	@Override
+	public File getLocatorFile(){
+		File file = new File("src/test/resources/google.properties");
+		return file;
+	}
+	
+	public void searchForString(String searchString){
+		searchField.sendKeys(searchString);
+        submitButton.click();
+    }
+
+	@Override
+	public void init() {
+		
+	}
+
+}
+</pre><br />
+<ul>
+<li>Q: Can I override the default file mentioned in my Locator class and use someother file if needed? <br /> A: Yes you can do so by just passing the file or filePath as argument to the &#8220;initElements&#8221; method of CustomPageFactory or the &#8220;to&#8221; and &#8220;at&#8221; methods which using the TAF provided Page Object Model methods. <br /><br /></li>
+
+<li>Q: Can I use the default Page Object Factory provided by Selenium along with TAF locator util? <br /> A: Yes, you can use the default Page Object Factory based elelment identification strategy with TAF provided utils. TAF tries to find a file for your locators by looking for user provided file, default file provider(if any). If no file menotioned by the user TAF automatically uses the default Page Factory behavior of selenium and considers the &#8220;using&#8221; attribute value of Page Factory annotations as selelctors. <br /><br /></li>
+
+<li>Q: Can I have both keys for locators and selelctors being mentioned for locating elements while using locator util? <br /> A: No. Currently TAF do not support both Default Page Factory behavior and TAF enhanced behavior to be present in a single Locator or Page class. <br /><br /></li>
+
+<li>Q: What kind of files are currently supported for storing the locators? <br /> A: Currently only &#8220;properties&#8221; file is supported for storing the element locators/selectors. <br /><br /></li>
+
+<li>Q: Page Factory dont have a explicit wait method to wait for an element, then how can I wait for an element to be avaialble? <br /> A: TAF provides a <em><strong>Utilities</strong></em> class which contains different utilities that have different wait methods that you can use to wait for a particular elelment or a Page(when using Page Object Model). <br /><br /></li>
+</ul>
       </div>
 	  <p style="position:relative;">
 <!--
