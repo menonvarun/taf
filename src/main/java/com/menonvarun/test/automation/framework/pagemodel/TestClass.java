@@ -3,7 +3,6 @@ package com.menonvarun.test.automation.framework.pagemodel;
 import java.io.File;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
 
 import com.menonvarun.test.automation.framework.util.Utilities;
 
@@ -183,9 +182,4 @@ public class TestClass {
 		return getPageObject(pageClass,file);
 	}
 	
-	@AfterMethod
-	public void afterMethod(){
-		this.browser.getDriver().manage().deleteAllCookies();
-	}
-
 }
