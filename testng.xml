@@ -2,7 +2,7 @@
     
 	<test name="Test Automation Framework Test">
 		<packages>
-			<package name="com.test.automation.framework.*" />		
+			<package name="com.menonvarun.test.automation.framework.*" />		
 		</packages>
 		<!-- <classes>
        <class name="com.test.automation.framework.keyword.webdriverbased.google.GoogleKeywordTestSuite" />
@@ -10,7 +10,7 @@
 		
 	</test>
 	<listeners>
-    <listener class-name="com.test.automation.framework.testng.listener.MethodInvokerListener" />
+    <listener class-name="com.menonvarun.test.automation.framework.testng.listener.MethodInvokerListener" />
     <listener class-name="org.uncommons.reportng.HTMLReporter" />
     <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
   
