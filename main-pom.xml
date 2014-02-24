@@ -67,8 +67,46 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+				<executions>
+				    <execution>
+				      <id>default-testCompile</id>
+				      <phase>test-compile</phase>
+				      <configuration>
+				        <testExcludes>
+				          <exclude>**/taf-test/*.java</exclude>
+				        </testExcludes>
+				      </configuration> 
+				      <goals>
+				        <goal>testCompile</goal>
+				      </goals>
+				    </execution>                  
+				 </executions>
 			</plugin>
 			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-source-plugin</artifactId>
+			  <executions>
+			    <execution>
+			      <id>attach-sources</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-javadoc-plugin</artifactId>
+			  <executions>
+			    <execution>
+			      <id>attach-javadocs</id>
+			      <goals>
+			        <goal>jar</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.9</version>
@@ -89,7 +127,7 @@
 						
 					</properties>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<!-- <plugin>
 			    <groupId>com.github.wvengen</groupId>
                 <artifactId>proguard-maven-plugin</artifactId>
@@ -163,30 +201,7 @@
                     </options>
                 </configuration>
             </plugin> -->
-             <plugin>
-			    <artifactId>maven-resources-plugin</artifactId>
-			    <executions>
-			        <execution>
-			            <id>copy-test</id>
-			            <phase>validate</phase>
-			            <goals>
-			                <goal>copy-resources</goal>
-			            </goals>
-			            <configuration>
-			                <outputDirectory>${basedir}/src/test/resources</outputDirectory>
-			                <overwrite>true</overwrite>
-			                <resources>
-			                    <resource>
-			                        <directory>taf-test/src/test/resources</directory>
-			                        <includes>
-			                            <include>**/*.*</include>
-			                        </includes>
-			                    </resource>
-			                </resources>
-			            </configuration>
-			        </execution>
-			    </executions>
-			</plugin>
+             
 		</plugins>
 		<resources>
 			<resource>
