@@ -39,7 +39,8 @@ Following is the sample test where it uses the driver creation class [_**CacheDr
 </pre>
 
 ##Configuring Multi-threaded driver management
-TAF have an in-build driver management to allow users to manage there driver in a way that the same driver instance is available across all tests or each thread execution have its own instance of tests. object for there tests
+TAF have an in-build driver management which allow users to manage there driver in a way that the same driver instance can be available across all tests or 
+each thread execution can have its own instance of driver object for there tests. This can be done by setting the value of **thread.based.driver** to **true** in taf.properties file.
 
 
 ##User defined Driver instance

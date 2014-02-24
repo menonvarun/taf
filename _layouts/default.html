@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Testautomationframework || {{page.title}}</title>
+    <title>Test Automation Framework (TAF) || {{page.title}}</title>
 		<link rel="stylesheet" href="{{site.base_url}}/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="{{site.base_url}}/stylesheets/styles.css">
     <link rel="stylesheet" href="{{site.base_url}}/stylesheets/pygment_trac.css">
@@ -22,6 +22,7 @@
 		<script src="{{site.base_url}}/javascripts/jquery.qtip.min.js"></script>
 		<script src="{{site.base_url}}/javascripts/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="{{site.base_url}}/javascripts/custom.js"></script>
+		<script src="{{site.base_url}}/javascripts/analytics.js"></script>
 	
 	<script type="text/javascript">
 	SyntaxHighlighter.defaults['toolbar'] = false;
@@ -54,7 +55,7 @@
         <div id="title">
 		<li class="fork button"><a target="_" href="https://github.com/menonvarun/taf">View On GitHub</a></li>
 		<li class="downloads button"><a target="_" href="https://github.com/menonvarun/taf/releases/download/v0.0.1/testautomationframework-0.0.1-SNAPSHOT.jar">Download</a></li>
-          <h1>Test Automation Framework (TAF)</h1>
+          <h1><a href="/">Test Automation Framework (TAF)</a></h1>
           <p></p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
@@ -62,17 +63,16 @@
 
         <h3 class="maincontainer">
 <div id='leftnav'>
-<h4>Home</h4>
-<hr></hr>
-<ul>
-  {% for page in site.html_pages %}
+
+  <!--{% for page in site.html_pages %}
         {% if page.heading %}
 			{% if page.home %}	
-            <li><a href="{{site.base_url}}{{ page.url' }}" >{{ page.heading }}</a></li>         
+            <a href="{{site.base_url}}{{ page.url | remove:'index.html' }}" >{{ page.heading }}</a><br/><br/>
 			{% endif %}
         {% endif %}
       {% endfor %}
-</ul>
+
+<hr></hr> -->
 <h4>Features</h4>
 <hr></hr>
 <ul>
@@ -102,7 +102,7 @@
   {% for page in site.html_pages %}
         {% if page.heading %}
 			{% if page.installation %}	
-            <li><a href="{{site.base_url}}{{ page.url' }}" >{{ page.heading }}</a></li>         
+            <li><a href="{{site.base_url}}{{ page.url }}" >{{ page.heading }}</a></li>         
 			{% endif %}
         {% endif %}
       {% endfor %}

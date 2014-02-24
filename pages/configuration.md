@@ -30,6 +30,11 @@ Use this property to set the classpath of the class that implements the _**IDriv
 Classpath of only one class should be added here, you can cannot have multiple driver provider class.
 <br/>
 
+* **use.inbuilt.driver** - This property is used while using the in-built Page Object Model implementation. This property is used for enabling and disabling the 
+in-build driver provider for the Page Classes. Set this property value to "false" if you want to yourself create the driver object. Once create set the driver object to the browser object of the test-class 
+using the "setDriver" method of browser object.
+<br/>
+
 * **listeners** - This value is used by the plug-n-play keyword framework of TAF to get the keyword providing classes.
 Just define your keyword as public methods in a class by extending the KeywordBase class or the IKeyword interface. 
 Once your keyword class has been defined just add the classpath of the said class to this property.
