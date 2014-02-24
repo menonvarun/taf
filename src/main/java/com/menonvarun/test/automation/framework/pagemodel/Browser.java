@@ -29,8 +29,15 @@ public class Browser {
 	 * @return {@link WebDriver} object.
 	 */
 	public WebDriver getDriver() {
+		String inbuiltDriverRequired = getConfig().getConfigValue("use.inbuilt.driver");
+			
 		if(this.driver==null){
-			return new CacheDriverFactory(getConfig()).getDriver();
+			if(!inbuiltDriverRequired.contentEquals("false"))
+				return new CacheDriverFactory(getConfig()).getDriver();
+			else
+				throw new PageException("Inbulit driver provider feature is set to false. " +
+						"Please explicitly create the driver object and set it to the browser object using the 'setDriver' method." +
+						" Or set the value of 'use.inbuilt.driver' in taf config file to true");
 		} else{
 			return driver;
 		}		
