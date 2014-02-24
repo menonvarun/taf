@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF) || Page Object Model Concept</title>
+    <title>Test Automation Framework (TAF) || Driver Management FAQ</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -543,90 +543,17 @@
 
 </div>
 <div id='content'>
-        <h1 id='page_object_model'>Page Object Model</h1>
-
-<p>Page Object Model is a very widely used model in the field of automation and solves one of the biggest problem that any automation framework face i.e</p>
+        <h1 id='driver_management_faq'>Driver Management FAQ</h1>
 
 <ul>
-<li>Managing utils</li>
+<li>
+<p>Q: How can I have a driver object for per thread? <br /> A: Just set the value of property <strong>thread.based.driver</strong> to <strong>true</strong>. The internal driver provider will automatically return driver on per thread basis.<br /></p>
+</li>
 
-<li>Managing methods</li>
-
-<li>Reducing code duplicity etc.</li>
+<li>
+<p>Q: How I can I force the current used driver provided by the in-built driver provider to quit?<br /> A: In case you want to quit the current driver provided by the in-built driver provider just call the static method <em><strong>clearCacheAndQuitDriver</strong></em> present under the class <em><strong>CacheDriverFactory</strong></em>. <br /></p>
+</li>
 </ul>
-
-<p>It solves this by suggesting certain methodology for managing and modelling the code. Some of the main points that it suggests are:</p>
-
-<ol>
-<li>Model your application UI pages as classes in your framework. (There is no hard-and-fast rule that the whole page on the UI should be represented by one class, you can also create classes for the sections of the page if they are used in other UI pages or sections.)</li>
-
-<li>Each class will contain methods that perform the actual functionality provided on the page or section that the said class represents.</li>
-
-<li>Each method in the Page class should return the object of the same page class or another page class if the said method/functionality navigate the UI to a new page.</li>
-
-<li>Method names inside the page class should represent the actual functionality that it performs.</li>
-</ol>
-
-<p>A normal Page Object Model implementation in Java will be as follows:</p>
-
-<p>We will taking the same Google search scenario and converting it to a Page Object Model. Following is the class representing Google home page</p>
-<pre class='brush: java;'>
-public class GoogleHomePage{
-	
-	GoogleLocator googleLocator;
-	WebDriver driver;
-	
-	public GoogleHomePage(WebDriver driver){
-		this.driver=driver;
-		googleLocator = new GoogleLocator().initialize(this.driver);
-	}
-	
-	public boolean at() {
-		return this.driver.getTitle().contentEquals("Google");		
-	}
-	
-	public void searchForString(String searchString){
-		googleLocator.searchField.sendKeys(searchString);
-        googleLocator.submitButton.click();
-    }
-}
-</pre>
-<p>Following is the class representing the Google results page.</p>
-<pre class='brush: java;'>
-public class GoogleResultsPage{
-	GoogleLocator googleLocator;
-	WebDriver driver;
-	public GoogleResultsPage(WebDriver driver){
-		this.driver = driver;
-		googleLocator = new GoogleLocator().initialize(this.driver);
-	}
-	
-	public boolean at() {		
-		return googleLocator.searchResult.size() > 0;
-	}
-		
-	public void clickOnResult(){
-        googleLocator.searchResult.get(0).click();
-    }
-}
-</pre>
-<p>Following is a Page Object Model based Test which uses the above defined page classes.</p>
-<pre class='brush: java;'>
-    @Test
-	public void googleSearchTest(){
-		WebDriver driver = new FirefoxDriver();
-		driver.get("www.google.com");
-		GoogleHomePage homePage = new GoogleHomePage(driver);
-		Assert.assertTrue(homePage.at());
-		
-		homePage.searchForString("Testing");
-		
-		GoogleResultsPage resultsPage = new GoogleResultsPage(driver);
-		Assert.assertTrue(resultsPage.at());
-		resultsPage.clickOnResult();
-	}
-
-</pre>
       </div>
 	  <p style="position:relative;">
 <!--
