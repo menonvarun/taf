@@ -65,7 +65,10 @@ public class CommonMethods {
 			URI baseUri = new URI(baseUrl);
 			URI pageUri = new URI(pageUrl);
 			
-			finalUri = baseUri.resolve(pageUri);
+			if(!pageUri.isAbsolute())
+				finalUri = baseUri.resolve(pageUri);
+			else
+				finalUri = pageUri;
 		} catch (URISyntaxException e) {
 			throw new RuntimeException("Issue while getting url, make sure you had provided the correct base and page url.",e);
 		}
