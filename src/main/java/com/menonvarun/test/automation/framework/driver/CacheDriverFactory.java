@@ -90,6 +90,17 @@ public class CacheDriverFactory {
 		return driver;		
 	}
 	
+	/**
+	 * Clears the current driver from the factory and then quits the said driver object
+	 */
+	public static void clearCacheAndQuitDriver(){
+		if(CacheDriverFactory.driverFactory!=null){
+			WebDriver driver = CacheDriverFactory.driverFactory.clearCurrentDriver();
+			driver.quit();
+		}
+	}
+	
+	
 	private IDriverFactory getDriverFactory(){
 		if(CacheDriverFactory.driverFactory==null){
 			String threadBasedDriverValue = config.getConfigValue("thread.based.driver");
