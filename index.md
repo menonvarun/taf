@@ -5,10 +5,10 @@ permalink: /index.html
 heading: Home
 home: true
 ---
-##What is "Test Automation Framework ( TAF )"?
-TAF is an automation framework with some in-built features that are required by every Automation framework. 
-It supports both Page Object Model and Keyword driven model of Automation and provide some of the utilities required for both of the frameworks.
-It helps in easy maintaince of your locators and test code and also helps in making your lengthy code to more readable code.
+
+TAF is an automation framework api with some in-built features that provides solutions to some common automation problems. 
+It consists of an Enhanced Page Object Model and a Plug-n-play Keyword driven model of Automation. 
+It helps in easy maintaince of your test code and make them more readable.
 
 ##Why TAF?
 While developing web automation framework there are a lot of common problems that is faced by every automation engineer. These common problems include:
