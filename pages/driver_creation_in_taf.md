@@ -8,14 +8,15 @@ basicnav: true
 
 #WebDriver Creation/Management
 
-TAF have an inbuild driver creation and management system in place. Following are teh features available by the said API:
+TAF have an in-built driver creation and management system in place. Following are teh features available by the said API:
 - Default driver creation based on the provided driver name ex. _**firefox**_ , _**chrome**_ , _**ie**_ , etc.
 - Flexibility to define custom driver creation and easy plugging in to the framework.
 - Multi-threaded/Non-multithreaded driver management.
 
 ##Default WebDriver creation
 
-As mentioned earlier in the features TAF provide a defaut implementation for driver creation. In case you need a particular driver for your tests you can use the existing API provided by TAF for it. Just mention the type of driver you need by providing a value to the property _**driver.name**_ in side the TAF properties file.
+As mentioned earlier in the features TAF provide a default implementation for driver creation. 
+In case you need a particular driver for your tests you can use the existing API provided by TAF for it. Just mention the type of driver you need by providing a value to the property _**driver.name**_ in side the TAF properties file.
 
 Look at the following example for better understanding.
 
@@ -39,15 +40,16 @@ Following is the sample test where it uses the driver creation class [_**CacheDr
 </pre>
 
 ##Configuring Multi-threaded driver management
-TAF have an in-build driver management which allow users to manage there driver in a way that the same driver instance can be available across all tests or 
-each thread execution can have its own instance of driver object for there tests. This can be done by setting the value of **thread.based.driver** to **true** in taf.properties file.
+TAF have an in-build driver management which allow users to manage their driver in a way that the same driver instance can be available across all tests or 
+each thread execution can have its own instance of driver object for their tests. This can be done by setting the value of **thread.based.driver** to **true** in taf.properties file.
 
 
 ##User defined Driver instance
 
-It also provides the flexibility to provide your own driver creation logic by writing a class that implments the [_**IDriverProvider**_]() interface. Once implemented jsut set the path of the class to the properperty _**userdefined.driverclass**_ in the _**taf.properties**_ file.
+It also provides the flexibility to provide your own driver creation logic by writing a class that implments the [_**IDriverProvider**_]() interface.
+The path of the said class then has to be set to the property _**userdefined.driverclass**_ inside the _**taf.properties**_ file.
 
-Lets look at the following example:
+Let's look at the following example:
 
 Following is the customized class:
 

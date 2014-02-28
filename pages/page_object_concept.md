@@ -18,12 +18,12 @@ Some of the main points that it suggests are:
 
 1. Model your application UI pages as classes in your framework. (There is no hard-and-fast rule that the whole page on the UI should be represented by one class, you can also create classes for the sections of the page if they are used in other UI pages or sections.)
 2. Each class will contain methods that perform the actual functionality provided on the page or section that the said class represents.
-3. Each method in the Page class should return the object of the same page class or another page class if the said method/functionality navigate the UI to a new page.
+3. Each method in the Page class should return the object of the same page class or another page class if the said method/functionality navigates the UI to a new page.
 4. Method names inside the page class should represent the actual functionality that it performs.
 
 A normal Page Object Model implementation in Java will be as follows:
 
-We will taking the same Google search scenario and converting it to a Page Object Model. Following is the class representing Google home page
+We will take the same Google search scenario and converting it to a Page Object Model. Following is the class representing Google home page
 
 <pre class="brush: java;">
 public class GoogleHomePage{

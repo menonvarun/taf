@@ -8,8 +8,9 @@ basicnav: true
 
 #Page Object Model
 
-TAF got inspired from the implementation of Page Object Model in [_**GEB**_](http://www.gebish.org) and thought to provide the similar kind of features to the users of Java.
-TAF provides certain inbuild utils which will allow users to write Frameworks using Page Object Model with ease.
+TAF got inspired from the implementation of Page Object Model in [_**GEB**_](http://www.gebish.org) and thought 
+to provide the similar kind of features to the users of Java.
+TAF provides certain in-built utils which will allow users to write Frameworks using Page Object Model with ease.
 
 Look at the following example written using the TAF Page Object Model.
 Following is the TAF properties file.
@@ -98,5 +99,6 @@ And following is a simple test which goes to the google home page and search for
 If you look at the above example you will notice that there is no manual object creation required for the Page Object classes.
 TAF automatically creates the Page Objects of the classes that are passed as parameter. 
 
-It provide certain util methods like [_**to**_]() and [_**at**_]() that will help in navigating your pages and also verifying that you are on the said page. The _**to**_ method automatically navigate your browser to a specific url defined in the said page class after appending it to the base url mentioned in the **taf.properties** file. It also verifies that the page is loaded or available based on the _**at**_ method defined in the said Page class.
+It provides certain util methods like [_**to**_]() and [_**at**_]() that will help in navigating your pages and also verifying 
+that you are on the said page. The _**to**_ method automatically navigate your browser to a specific url defined in the said page class after appending it to the base url mentioned in the **taf.properties** file. It also verifies that the page is loaded or available based on the _**at**_ method defined in the said Page class.
 

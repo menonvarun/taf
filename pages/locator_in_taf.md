@@ -8,8 +8,8 @@ basicnav: true
 #Locators Management
 
 TAF mixes the Page Object Factory with the industry common practise. 
-It has extended the Page Object Factory of selenium to allow users a feature to provide a locator key instead of the actual locator(WebElement selector) 
-while using the different annotations provided by the Selenium Page Object Factory implmentation. 
+It has extended the Page Object Factory of selenium to allow users a feature to provide a locator key instead of the actual locator (WebElement selector) 
+while using the different annotations provided by the Selenium Page Object Factory implementation. 
 Users can initialize the said class using the extended _**CustomPageFactory**_ class of TAF by providing the file containing the said key and its respective selector as a method argument. 
 TAF fetches this locator at runtime from the said file based on the key provided to Page factory annotations.
 
@@ -17,8 +17,8 @@ TAF fetches this locator at runtime from the said file based on the key provided
 <ul>
 <li>Locators/Selectors are stored in a separate file rather than being part of the code.</li>
 <li>Code is more readable</li>
-<li>Support for runtime change in locators helps in using the same logic but with different selelctors as per requirement. 
-An example may be when there are 2 version of the same application but with different selectors and you need to support automation testing for both.</li>
+<li>Support for runtime change in locators helps in using the same logic but with different selectors as per requirement. 
+An example may be when there are 2 versions of the same application but with different selectors and you need to support automation testing for both.</li>
 </ul>
 
 Following are two of the examples where you can use the Custom Page Factory implementation:
@@ -94,9 +94,9 @@ public class GoogleSearchTest {
 
 </pre>
 
-As you can see from the above code we are using the same Page Object Factory feature but with an exception that the locators(webelement selectors) 
+As you can see from the above code we are using the same Page Object Factory feature but with an exception that the locators (webelement selectors) 
 are stored in a separate _properties_ file named _google.properties_. 
-The said file is provided as argument to the _**initElements**_ of the _**CustomPageFactory**_ implmentation of TAF.
+The said file is provided as argument to the _**initElements**_ of the _**CustomPageFactory**_ implementation of TAF.
 
 <a name="pagebased"> </a>
 
