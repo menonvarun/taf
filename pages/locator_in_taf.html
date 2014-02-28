@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF) || Locator Management</title>
+    <title>Test Automation Framework (TAF): Locator Management</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -536,14 +536,14 @@
 <div id='content'>
         <h1 id='locators_management'>Locators Management</h1>
 
-<p>TAF mixes the Page Object Factory with the industry common practise. It has extended the Page Object Factory of selenium to allow users a feature to provide a locator key instead of the actual locator(WebElement selector) while using the different annotations provided by the Selenium Page Object Factory implmentation. Users can initialize the said class using the extended <em><strong>CustomPageFactory</strong></em> class of TAF by providing the file containing the said key and its respective selector as a method argument. TAF fetches this locator at runtime from the said file based on the key provided to Page factory annotations.</p>
+<p>TAF mixes the Page Object Factory with the industry common practise. It has extended the Page Object Factory of selenium to allow users a feature to provide a locator key instead of the actual locator (WebElement selector) while using the different annotations provided by the Selenium Page Object Factory implementation. Users can initialize the said class using the extended <em><strong>CustomPageFactory</strong></em> class of TAF by providing the file containing the said key and its respective selector as a method argument. TAF fetches this locator at runtime from the said file based on the key provided to Page factory annotations.</p>
 
 <h3 id='advantages'>Advantages</h3>
 <ul>
 <li>Locators/Selectors are stored in a separate file rather than being part of the code.</li>
 <li>Code is more readable</li>
-<li>Support for runtime change in locators helps in using the same logic but with different selelctors as per requirement. 
-An example may be when there are 2 version of the same application but with different selectors and you need to support automation testing for both.</li>
+<li>Support for runtime change in locators helps in using the same logic but with different selectors as per requirement. 
+An example may be when there are 2 versions of the same application but with different selectors and you need to support automation testing for both.</li>
 </ul>
 <p>Following are two of the examples where you can use the Custom Page Factory implementation:</p>
 <ul>
@@ -609,7 +609,7 @@ public class GoogleSearchTest {
 }
 
 </pre>
-<p>As you can see from the above code we are using the same Page Object Factory feature but with an exception that the locators(webelement selectors) are stored in a separate <em>properties</em> file named <em>google.properties</em>. The said file is provided as argument to the <em><strong>initElements</strong></em> of the <em><strong>CustomPageFactory</strong></em> implmentation of TAF.</p>
+<p>As you can see from the above code we are using the same Page Object Factory feature but with an exception that the locators (webelement selectors) are stored in a separate <em>properties</em> file named <em>google.properties</em>. The said file is provided as argument to the <em><strong>initElements</strong></em> of the <em><strong>CustomPageFactory</strong></em> implementation of TAF.</p>
 <a name='pagebased'> </a><br />
 <h2 id='with_taf_page_object_implementation'>With TAF Page Object implementation</h2>
 
@@ -726,9 +726,9 @@ tag, this link will jump to the top of the page.
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-530ee4ef18d3235b"></script>
 <script type="text/javascript">
   addthis.layers({
-    'theme' : 'transparent',
+    'theme' : 'light',
     'share' : {
-      'position' : 'left',
+      'position' : 'right',
 	  'services' : 'facebook,twitter,google_plusone_share,email,more',
       //'numPreferredServices' : 5,
 	  'mobile' : true

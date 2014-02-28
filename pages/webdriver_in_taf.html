@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF) || WebDriver in TAF</title>
+    <title>Test Automation Framework (TAF): WebDriver in TAF</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -536,7 +536,7 @@
 <div id='content'>
         <h1 id='webdriver_creationmanagement'>WebDriver Creation/Management</h1>
 
-<p>TAF have an inbuild driver creation and management system in place. Following are teh features available by the said API:</p>
+<p>TAF have an in-built driver creation and management system in place. Following are teh features available by the said API:</p>
 
 <ul>
 <li>Default driver creation based on the provided driver name ex. <em><strong>firefox</strong></em> , <em><strong>chrome</strong></em> , <em><strong>ie</strong></em> , etc.</li>
@@ -548,7 +548,7 @@
 
 <h2 id='default_webdriver_creation'>Default WebDriver creation</h2>
 
-<p>As mentioned earlier in the features TAF provide a defaut implementation for driver creation. In case you need a particular driver for your tests you can use the existing API provided by TAF for it. Just mention the type of driver you need by providing a value to the property <em><strong>driver.name</strong></em> in side the TAF properties file.</p>
+<p>As mentioned earlier in the features TAF provide a default implementation for driver creation. In case you need a particular driver for your tests you can use the existing API provided by TAF for it. Just mention the type of driver you need by providing a value to the property <em><strong>driver.name</strong></em> in side the TAF properties file.</p>
 
 <p>Look at the following example for better understanding.</p>
 
@@ -570,13 +570,13 @@ driver.name = firefox
 </pre>
 <h2 id='configuring_multithreaded_driver_management'>Configuring Multi-threaded driver management</h2>
 
-<p>TAF have an in-build driver management which allow users to manage there driver in a way that the same driver instance can be available across all tests or each thread execution can have its own instance of driver object for there tests. This can be done by setting the value of <strong>thread.based.driver</strong> to <strong>true</strong> in taf.properties file.</p>
+<p>TAF have an in-build driver management which allow users to manage their driver in a way that the same driver instance can be available across all tests or each thread execution can have its own instance of driver object for their tests. This can be done by setting the value of <strong>thread.based.driver</strong> to <strong>true</strong> in taf.properties file.</p>
 
 <h2 id='user_defined_driver_instance'>User defined Driver instance</h2>
 
-<p>It also provides the flexibility to provide your own driver creation logic by writing a class that implments the <a href=''><em><strong>IDriverProvider</strong></em></a> interface. Once implemented jsut set the path of the class to the properperty <em><strong>userdefined.driverclass</strong></em> in the <em><strong>taf.properties</strong></em> file.</p>
+<p>It also provides the flexibility to provide your own driver creation logic by writing a class that implments the <a href=''><em><strong>IDriverProvider</strong></em></a> interface. The path of the said class then has to be set to the property <em><strong>userdefined.driverclass</strong></em> inside the <em><strong>taf.properties</strong></em> file.</p>
 
-<p>Lets look at the following example:</p>
+<p>Let&#8217;s look at the following example:</p>
 
 <p>Following is the customized class:</p>
 <pre class='brush: java;'>
@@ -620,9 +620,9 @@ tag, this link will jump to the top of the page.
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-530ee4ef18d3235b"></script>
 <script type="text/javascript">
   addthis.layers({
-    'theme' : 'transparent',
+    'theme' : 'light',
     'share' : {
-      'position' : 'left',
+      'position' : 'right',
 	  'services' : 'facebook,twitter,google_plusone_share,email,more',
       //'numPreferredServices' : 5,
 	  'mobile' : true

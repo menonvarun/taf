@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF) || Keyword Model</title>
+    <title>Test Automation Framework (TAF): Keyword Model</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -537,16 +537,16 @@
         <h1 id='plugnplay_keyword_driven_framework'>Plug-n-Play Keyword Driven Framework</h1>
 
 <p>TAF consists of an in-build plug-n-play keyword driven automation framework. You can simply define your keywords definitions and let know TAF about it. Once done you can simply write your keyword driven tests in csv and excel format and start using them with TAF. <ul>
-<li><a href='#example'>Simple keyword based testcase</a></li>
+<li><a href='#example'>Simple keyword based test-case</a></li>
 <li><a href='#testsuite'>Test Suite Support</a></li>
 <li><a href='#testreporting'>Reporting</a></li>
 </ul> <a name='example'> </a></p>
 
-<h2 id='simple_keyword_based_testcase'>Simple Keyword Based Testcase</h2>
+<h2 id='simple_keyword_based_testcase'>Simple Keyword Based Test-case</h2>
 
-<p>Just define your keyword as public methods in a class by extending the <a href=''><em><strong>KeywordBase</strong></em></a> class or the <a href=''><em><strong>IKeyword</strong></em></a> interface. Once your keyword class has been defined just add the path of the class to the <strong>&#8220;listener&#8221;</strong> property in the <strong>taf.properties</strong> file.</p>
+<p>Just define your keyword as public methods in a class by extending the <a href=''><em><strong>KeywordBase</strong></em></a> class or the <a href=''><em><strong>IKeyword</strong></em></a> interface. Once your keyword class has been defined just add the path of the class to the <strong>&#8220;listener&#8221;</strong> property inside the <strong>taf.properties</strong> file.</p>
 
-<p>TAF will automatically load the class at runtime on execution and considers all its public methods as keywrords for your test files. TAF also provides common utility to read your suite files and test files using a common format commonly used across the industry. Look at the following example of the google search page to get more idea on the same.</p>
+<p>TAF will automatically load the class at runtime on execution and considers all its public methods as keywords for your test files. TAF also provides common utility to read your suite files and test files using a common format commonly used across the industry. Look at the following example of the google search page to get more idea on the same.</p>
 
 <p>Following is my Keyword definition file:</p>
 <pre class='brush: java;'>
@@ -621,7 +621,7 @@ public class GoogleKeyword extends KeywordBase{
 	}
 }
 </pre>
-<p>I will add the the above defined Keyword class to my list of listners inside <strong>taf.properties</strong> file as follows.</p>
+<p>I will add the above defined Keyword class to my list of listeners inside <strong>taf.properties</strong> file as follows.</p>
 <pre class='brush: plain;'>
 listeners=com.test.automation.framework.keyword.google.GoogleKeyword
 </pre>
@@ -643,11 +643,11 @@ public class GoogleKeywordTest {
 </pre><a name='testsuite'> </a>
 <h2 id='test_suite_support'>Test Suite Support</h2>
 
-<p>As part of teh full fledged Keyword driven framework TAF supports test suite file for identification and execution of keyword based tests. The test suite is defined on the basis of commonly used test-suite format across the industry.</p>
+<p>TAF supports test suite file for identification and execution of keyword based tests. The test suite is defined on the basis of commonly used test-suite format across the industry.</p>
 
 <p>Take a look at a sample suite file as shown below:</p>
 <img src='http://menonvarun.github.io/taf/images/GoogleKeywordSuite.png' />
-<p>The above suite defines different tests with Test id, Test name, Enabled,File path and any extra arguments that may be required. The test files metioned for the test-cases are similar to those as metioned in the above example of <a href='#example'>Simple keyword based testcase</a>. To run the test suite TAF makes use of the data-driven technique provided with TestNG. TAF provides in-built utilities that will parse the suite file and data-driven test object for execution as simple keyword test. Take a look at the following test for better understanding:</p>
+<p>The above suite defines different tests with Test id, Test name, Enabled, File path and any extra arguments that may be required. The test files metioned for the test-cases are similar to those as mentioned in the above example of <a href='#example'>Simple keyword based test-case</a>. To run the test suite TAF makes use of the data-driven technique provided with TestNG. TAF provides in-built utilities that will parse the suite file and data-driven test object for execution as simple keyword test. Take a look at the following test for better understanding:</p>
 <pre class='brush: java;'>
 public class GoogleKeywordTestSuite {
 	private WebDriver driver;
@@ -685,7 +685,7 @@ public class GoogleKeywordTestSuite {
 
 }
 </pre>
-<p>The above test contains TestNG based before and after method that creates and quits WebDriver object before &amp; after each test-method execution. It also contains a DataProvider annotated test-method that parses the test-suite file &#8220;GoogleTestSuite.xls&#8221; and returns a Double Object array contaning objects of &#8220;ISimpleTest&#8221; for all the tests that are enabled inside the said suite. Each of the &#8220;ISimpleTest&#8221; object represents one test in the said suite file and contains details about the said test.</p>
+<p>The above test contains TestNG based before and after method that creates and quits WebDriver object before &amp; after each test-method execution. It also contains a DataProvider annotated test-method that parses the test-suite file &#8220;GoogleTestSuite.xls&#8221; and returns a Double Object array containing objects of &#8220;ISimpleTest&#8221; for all the tests that are enabled inside the said suite. Each of the &#8220;ISimpleTest&#8221; object represents one test in the said suite file and contains details about the said test.</p>
 
 <p>This array of Object is used by the test-method &#8220;googleSearchTestSuite&#8221; for data-driven test execution. The said method accepts the &#8220;ISimpleTest&#8221; object as argument which then used for a simple keyword executor test as shown above.</p>
 <a name='testreporting'> </a>
@@ -693,7 +693,7 @@ public class GoogleKeywordTestSuite {
 
 <p>Reporting is another challenge with keyword driven framework when used with TestNG as the default report will contain the data-driven test-method name in the report rather than the Test case detail from the suite file. Normally in the industry an custom report is generated for any of the keyword driven framework.</p>
 
-<p>TAF solves this issue of report generation by customizing the name that TestNG considers for test-report generation. The default reports that gets generated will conating the test-case name of the test-case as mentioned in the test-suite file. This customization can be enabled by just adding a in-built TestNG listener class <strong>&#8220;com.test.automation.framework.testng.listener.MethodInvokerListener&#8221;</strong> to your execution.</p>
+<p>TAF solves this issue of report generation by customizing the name that TestNG considers for test-report generation. The default reports that gets generated will containing the test-case name of the test-case as mentioned in the test-suite file. This customization can be enabled by just adding a in-built TestNG listener class <strong>&#8220;com.test.automation.framework.testng.listener.MethodInvokerListener&#8221;</strong> to your execution.</p>
 
 <p>Take a look at following screen shots to see the customization:</p>
 
@@ -705,7 +705,7 @@ public class GoogleKeywordTestSuite {
 <img src='http://menonvarun.github.io/taf/images/reportng-original-test-report.png' />
 <p><strong>Custom Report of ReportNG</strong></p>
 <img src='http://menonvarun.github.io/taf/images/reportng-custom-test-report.png' />
-<p>If you notice in the above screen shots, the original reports shows the test-method name &#8220;googleSearchTestSuite&#8221; in the reports. Whereas in the custom reports the Testcase id and the Testcase name as mentioned in the executed test-suite file is appended and displayed in the report. This helps in idetifying the exact failure in the report and also saves a lot of time in developing and integrating custom test-reports for keyword driven framework.</p>
+<p>If you notice in the above screen shots, the original report shows the test-method name &#8220;googleSearchTestSuite&#8221; in the reports. Whereas in the custom reports the Test-case id and the Test-case name as mentioned in the executed test-suite file is appended and displayed in the report. This helps in identifying the exact failure in the report and also saves a lot of time in developing and integrating custom test-reports for keyword driven framework.</p>
       </div>
 	  <p style="position:relative;">
 <!--
@@ -730,9 +730,9 @@ tag, this link will jump to the top of the page.
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-530ee4ef18d3235b"></script>
 <script type="text/javascript">
   addthis.layers({
-    'theme' : 'transparent',
+    'theme' : 'light',
     'share' : {
-      'position' : 'left',
+      'position' : 'right',
 	  'services' : 'facebook,twitter,google_plusone_share,email,more',
       //'numPreferredServices' : 5,
 	  'mobile' : true
