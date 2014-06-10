@@ -145,6 +145,18 @@ public class CustomPageFactory extends PageFactory {
 		return (T) pageClassObjectToProxy;		
 	}
 	
+	
+         /**
+	 * Initialize the elements of web element ,list<webElement> and eWeb element
+	 * @param factory
+	 * @param page
+	 */
+	  public static void initElements(ElementLocatorFactory factory, Object page) {
+		    final ElementLocatorFactory factoryRef = factory;
+		    initElements(new CustomFieldDecorator(factoryRef), page);		    
+		  }	
+	
+	
 	/**
 	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
 	 * with the passed driver object.
