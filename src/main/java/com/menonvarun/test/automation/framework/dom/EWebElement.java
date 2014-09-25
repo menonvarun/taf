@@ -5,15 +5,19 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class eWebElement {
+public class EWebElement {
 
 	List<WebElement> elements;
+	
+	public EWebElement() {
+		this.elements = new ArrayList<WebElement>();
+	}
 
-	public eWebElement(List<WebElement> list) {
+	public EWebElement(List<WebElement> list) {
 		this.elements = list;
 	}
 
-	public eWebElement(WebElement element) {
+	public EWebElement(WebElement element) {
 		this.elements = new ArrayList<WebElement>();
 		elements.add(element);
 	}
@@ -29,16 +33,13 @@ public class eWebElement {
 	 * Click on all matched web element
 	 */
 	public void clickAll() {
-
 		for (WebElement element : elements) {
-
 			element.click();
-
 		}
 	}
 
 	/**
-	 * type on input box
+	 * Type onto the said element if its an input box
 	 * 
 	 * @param value
 	 */
@@ -49,10 +50,10 @@ public class eWebElement {
 	/**
 	 * Get the first web element
 	 */
-	public WebElement firstElement() {
+	public WebElement firstElement() throws NoEWebElementException {
 		if (elements.size() > 0)
 			return elements.get(0);
-		return null;
+		throw new NoEWebElementException("No element was found in the given EWebElement");
 	}
 
 	/**
@@ -60,9 +61,9 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement firsteElement() {
+	public EWebElement firsteElement() {
 		if (elements.size() > 0)
-			return new eWebElement(elements.get(0));
+			return new EWebElement(elements.get(0));
 		return null;
 	}
 
@@ -84,9 +85,9 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement lasteElement() {
+	public EWebElement lasteElement() {
 		if (elements.size() > 0) {
-			return new eWebElement(elements.get(elements.size() - 1));
+			return new EWebElement(elements.get(elements.size() - 1));
 		}
 		return null;
 	}
@@ -109,9 +110,9 @@ public class eWebElement {
 	 * @param index
 	 * @return
 	 */
-	public eWebElement ntheWebElement(int index) {
+	public EWebElement ntheWebElement(int index) {
 		if (elements.size() >= index) {
-			return new eWebElement(elements.get(index));
+			return new EWebElement(elements.get(index));
 		}
 		return null;
 	}
@@ -131,9 +132,9 @@ public class eWebElement {
 	 * @param webelement
 	 * @return
 	 */
-	public eWebElement geteWebElement(WebElement webelement) {
-		eWebElement ewebElement = new eWebElement(webelement);
-		return ewebElement;
+	public EWebElement geteWebElement(WebElement webelement) {
+		EWebElement eWebElement = new EWebElement(webelement);
+		return eWebElement;
 	}
 
 	/**
@@ -151,9 +152,9 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement nextAll() {
+	public EWebElement nextAll() {
 
-		eWebElement eWebElements = findElements(By
+		EWebElement eWebElements = findElements(By
 				.xpath("following-sibling::*"));
 		return eWebElements;
 	}
@@ -162,9 +163,9 @@ public class eWebElement {
 	 * Get all preceding siblings of each element in the set of matched
 	 * elements. * @return
 	 */
-	public eWebElement prevAll() {
-		eWebElement ewebElement = findElements(By.xpath("preceding-sibling::*"));
-		return ewebElement;
+	public EWebElement prevAll() {
+		EWebElement eWebElement = findElements(By.xpath("preceding-sibling::*"));
+		return eWebElement;
 	}
 
 	/**
@@ -172,10 +173,10 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement prev() {
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+	public EWebElement prev() {
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("preceding-sibling::*[1]")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -183,10 +184,10 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement next() {
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+	public EWebElement next() {
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("following-sibling::*[1]")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -195,11 +196,11 @@ public class eWebElement {
 	 * @param xpathExpression
 	 * @return
 	 */
-	public eWebElement nextUntil(String xpathExpression) {
-		eWebElement ewebElement = findElements(By
+	public EWebElement nextUntil(String xpathExpression) {
+		EWebElement eWebElement = findElements(By
 				.xpath("following-sibling::*[following-sibling::"
 						+ xpathExpression + "]"));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -208,11 +209,11 @@ public class eWebElement {
 	 * @param xpathExpression
 	 * @return
 	 */
-	public eWebElement prevUntil(String xpathExpression) {
-		eWebElement ewebElement = findElements(By
+	public EWebElement prevUntil(String xpathExpression) {
+		EWebElement eWebElement = findElements(By
 				.xpath("preceding-sibling::*[preceding-sibling::"
 						+ xpathExpression + "]"));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -222,9 +223,9 @@ public class eWebElement {
 	 * @param Cssselector
 	 * @return
 	 */
-	public eWebElement find(String Cssselector) {
-		eWebElement ewebElement = findElements(By.cssSelector(Cssselector));
-		return ewebElement;
+	public EWebElement find(String Cssselector) {
+		EWebElement eWebElement = findElements(By.cssSelector(Cssselector));
+		return eWebElement;
 	}
 
 	/**
@@ -232,7 +233,7 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement siblings() {
+	public EWebElement siblings() {
 		return prevAll().nextAll();
 	}
 
@@ -241,11 +242,11 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement parent() {
+	public EWebElement parent() {
 
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("..")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -254,10 +255,10 @@ public class eWebElement {
 	 * @param Xpath
 	 * @return
 	 */
-	public eWebElement parentsUntil(String xpathExpression) {
-		eWebElement ewebElement = findElements(By
+	public EWebElement parentsUntil(String xpathExpression) {
+		EWebElement eWebElement = findElements(By
 				.xpath("ancestor-or-self::*[ancestor::" + xpathExpression + "]"));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -265,9 +266,9 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement parents() {
-		eWebElement ewebElement = findElements(By.xpath("ancestor-or-self::*"));
-		return ewebElement;
+	public EWebElement parents() {
+		EWebElement eWebElement = findElements(By.xpath("ancestor-or-self::*"));
+		return eWebElement;
 	}
 
 	/**
@@ -278,10 +279,10 @@ public class eWebElement {
 	 * @param Xpath
 	 * @return
 	 */
-	public eWebElement closet(String Xpath) {
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+	public EWebElement closet(String Xpath) {
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("ancestor-or-self::*" + Xpath + "[1]")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -289,11 +290,11 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement child() {
+	public EWebElement child() {
 
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("*[1]")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -301,10 +302,10 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement immediatechildren() {
-		eWebElement ewebElement = new eWebElement(firstElement().findElement(
+	public EWebElement immediatechildren() {
+		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("*")));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -313,12 +314,12 @@ public class eWebElement {
 	 * @param Xpath
 	 * @return
 	 */
-	public eWebElement childrenUntil(String xpathExpression) {
-		eWebElement ewebElement = findElements(By
+	public EWebElement childrenUntil(String xpathExpression) {
+		EWebElement eWebElement = findElements(By
 				.xpath("descendant-or-self::*[descendant::" + xpathExpression
 						+ "]"));
 
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -326,10 +327,10 @@ public class eWebElement {
 	 * 
 	 * @return
 	 */
-	public eWebElement children() {
-		eWebElement ewebElement = findElements(By
+	public EWebElement children() {
+		EWebElement eWebElement = findElements(By
 				.xpath("descendant-or-self::*"));
-		return ewebElement;
+		return eWebElement;
 	}
 
 	/**
@@ -338,10 +339,10 @@ public class eWebElement {
 	 * @param by
 	 * @return
 	 */
-	public eWebElement findElements(By by) {
+	public EWebElement findElements(By by) {
 
 		List<WebElement> webelements = firstElement().findElements(by);
-		return new eWebElement(webelements);
+		return new EWebElement(webelements);
 	}
 
 }

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.internal.LocatingElementListHandler;
 
-import com.menonvarun.test.automation.framework.dom.eWebElement;
+import com.menonvarun.test.automation.framework.dom.EWebElement;
 
 /**
  * Default decorator for use with PageFactory. Will decorate 1) all of the
@@ -34,7 +34,7 @@ public class CustomFieldDecorator extends DefaultFieldDecorator {
 			return decoratedField;
 
 		}
-		if (!eWebElement.class.isAssignableFrom(field.getType()))
+		if (!EWebElement.class.isAssignableFrom(field.getType()))
 			return null;
 
 		ElementLocator locator = factory.createLocator(field);
@@ -42,7 +42,7 @@ public class CustomFieldDecorator extends DefaultFieldDecorator {
 			return null;
 		}
 
-		if (eWebElement.class.isAssignableFrom(field.getType())) {
+		if (EWebElement.class.isAssignableFrom(field.getType())) {
 			return proxyForEWebElement(loader, locator);
 		} else {
 			return null;
@@ -57,43 +57,18 @@ public class CustomFieldDecorator extends DefaultFieldDecorator {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	protected eWebElement proxyForEWebElement(ClassLoader loader,
+	protected EWebElement proxyForEWebElement(ClassLoader loader,
 			ElementLocator locator) {
-		/*//For Signle web element
-		 * InvocationHandler handler = new LocatingElementHandler(locator);
-		 * 
-		 * WebElement proxy; eWebElement eproxy; proxy = (WebElement)
-		 * Proxy.newProxyInstance( loader, new Class[] {WebElement.class,
-		 * WrapsElement.class, Locatable.class}, handler);
-		 * 
-		 * eproxy=new eWebElement(proxy); return eproxy;
-		 */
-        //For multiple web element
+		
 		InvocationHandler handler = new LocatingElementListHandler(locator);
 
 		List<WebElement> proxy;
 		proxy = (List<WebElement>) Proxy.newProxyInstance(loader,
 				new Class[] { List.class }, handler);
 
-		eWebElement eweblement = new eWebElement(proxy);
-		return eweblement;
+		EWebElement eWebElement = new EWebElement(proxy);
+		return eWebElement;
 
 	}
-	/*
-	 * @SuppressWarnings("unchecked") //For future enhancement protected
-	 * List<eWebElement> proxyForListeLocator(ClassLoader loader, ElementLocator
-	 * locator) { InvocationHandler handler = new
-	 * LocatingElementListHandler(locator);
-	 * 
-	 * List<eWebElement> eproxy = new ArrayList<eWebElement>(); List<WebElement>
-	 * proxy; proxy = (List<WebElement>) Proxy.newProxyInstance( loader, new
-	 * Class[] {List.class}, handler);
-	 * 
-	 * for (WebElement webElement : proxy) {
-	 * 
-	 * eproxy.add(new eWebElement(webElement)); }
-	 * 
-	 * return eproxy; }
-	 */
 
 }
