@@ -1,5 +1,7 @@
 package com.menonvarun.test.automation.framework.util;
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -90,6 +92,15 @@ public class Utilities {
 	 */	
 	public void waitForPage(Browser browser, Class<?> pageClass){
 		this.waitForPage(browser, pageClass, DEFAULT_TIMEOUT);
+	}
+	
+
+	public File evaluateFileFromResourceDirectory(String fileName) {
+		URL fileStream = this.toString().getClass().getResource(fileName);
+		if(fileStream == null)
+			return null;
+		else
+			return new File(fileStream.getPath());
 	}
 	
 	private ExpectedCondition<Boolean> presenceOfElement(
