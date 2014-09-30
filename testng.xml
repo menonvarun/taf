@@ -10,7 +10,7 @@
 		
 	</test>
 	<listeners>
-    <listener class-name="com.menonvarun.test.automation.framework.testng.listener.MethodInvokerListener" />
+    <listener class-name="org.imaginea.test.automation.framework.testng.listener.MethodInvokerListener" />
     <listener class-name="org.uncommons.reportng.HTMLReporter" />
     <listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
   
