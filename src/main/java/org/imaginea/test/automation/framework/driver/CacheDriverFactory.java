@@ -96,7 +96,8 @@ public class CacheDriverFactory {
 	public static void clearCacheAndQuitDriver(){
 		if(CacheDriverFactory.driverFactory!=null){
 			WebDriver driver = CacheDriverFactory.driverFactory.clearCurrentDriver();
-			driver.quit();
+			if(driver != null)
+				driver.quit();
 		}
 	}
 	
