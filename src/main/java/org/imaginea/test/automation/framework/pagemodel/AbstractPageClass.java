@@ -1,7 +1,6 @@
 package org.imaginea.test.automation.framework.pagemodel;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 
 import org.imaginea.test.automation.framework.util.Utilities;
