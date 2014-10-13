@@ -3,12 +3,12 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<description>Test automation framework a geb implemntation in java.</description>
   	<url>http://menonvarun.github.io/taf/index.html</url>
-<dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId> 

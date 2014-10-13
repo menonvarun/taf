@@ -3,7 +3,7 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework-all</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>TestAutomationFramework-All</name>
 	<description>Test automation framework a geb implemntation in java. This conatins all the code</description>
@@ -15,7 +15,7 @@
 	
 	<modules>
 	    <module>main-pom.xml</module>
-	   <!--  <module>taf-test</module> -->
+	   <!-- <module>taf-test</module> -->
   	</modules>
   	<licenses>
 		<license>
