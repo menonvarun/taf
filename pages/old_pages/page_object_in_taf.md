@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Page Object Model
-permalink: /page_object_model_in_taf.html
+permalink: /page_object_model_in_taf_old.html
 heading: Page Object Model
 basicnav: true
 ---

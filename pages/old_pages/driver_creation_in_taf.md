@@ -1,17 +1,17 @@
 ---
 layout: default
 title: WebDriver in TAF
-permalink: /webdriver_in_taf.html
+permalink: /webdriver_in_taf_old.html
 heading: WebDriver Creation/Management
 basicnav: true
 ---
 
 #WebDriver Creation/Management
 
-TAF have an in-built driver creation and management system in place. Following are teh features available by the said API:
+TAF have an in-built driver creation and management system in place. Following are the features available by the said API:
 - Default driver creation based on the provided driver name ex. _**firefox**_ , _**chrome**_ , _**ie**_ , etc.
 - Flexibility to define custom driver creation and easy plugging in to the framework.
-- Multi-threaded/Non-multithreaded driver management.
+- Multi-threaded/Non multi-threaded driver management.
 
 ##Default WebDriver creation
 

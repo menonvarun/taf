@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Locator Management
-permalink: /locator_in_taf.html
+permalink: /locator_in_taf_old.html
 heading: Locator Management
 basicnav: true
 ---

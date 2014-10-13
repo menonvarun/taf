@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Keyword Model
-permalink: /keyword_model_in_taf.html
+permalink: /keyword_model_in_taf_old.html
 heading: Keyword Model
 basicnav: true
 ---
