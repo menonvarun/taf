@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF): Configuration</title>
+    <title>Test Automation Framework (TAF): Other Utilties</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -797,39 +797,7 @@
 
 </div>
 <div id='content'>
-        <h1 id='configuration'>Configuration</h1>
-
-<p>This page will give description about the default configuration file of TAF.</p>
-
-<p>By default at the start of the execution TAF will try to load the file named &#8220;taf.properties&#8221; from the location &#8220;src/test/resources&#8221; of the project folder from where the executon is being done. In case you need to configure a different configuration file you can do so by setting path of the said file as value to the property <em><strong>taf.config</strong></em> to the system properties.</p>
-
-<p>Following are the different properties currently used by TAF from the properties file:</p>
-
-<ul>
-<li>
-<p><strong>base_url</strong> - Please mention the base url of your application. This property is used when running the Page Object Model provided by TAF. The said url is appended to the url mentioned in the respective Page classes for navigation purpose.<br /></p>
-</li>
-
-<li>
-<p><strong>driver.name</strong> - This is used by the default driver manager provided by TAF. This value is used to provide the in-built driver creator and manager. Supported values &#8220;firefox&#8221;, &#8220;ie&#8221;, &#8220;chrome&#8221; and &#8220;htmlunit&#8221;. .<br /></p>
-</li>
-
-<li>
-<p><strong>thread.based.driver</strong> - Set this value to <strong>true</strong> is you want the WebDriver object provided by the TAF framework driver manager to be per thread. This will make sure that whenever you call the &#8220;getDriver&#8221; method on the &#8220;CacheDriverFactory&#8221; class you get a different WebDriver object for each thread on which the said method is called. <br /></p>
-</li>
-
-<li>
-<p><strong>userdefined.driverclass</strong> - This property is used by the in-build driver manager class to load a user defined class. Use this property to set the classpath of the class that implements the <em><strong>IDriverProvider</strong></em> interface of the TAF framework. Classpath of only one class should be added here, you can cannot have multiple driver provider class. <br /></p>
-</li>
-
-<li>
-<p><strong>use.inbuilt.driver</strong> - This property is used while using the in-built Page Object Model implementation. This property is used for enabling and disabling the in-build driver provider for the Page Classes. Set this property value to &#8220;false&#8221; if you want to yourself create the driver object. Once create set the driver object to the browser object of the test-class using the &#8220;setDriver&#8221; method of browser object. <br /></p>
-</li>
-
-<li>
-<p><strong>listeners</strong> - This value is used by the plug-n-play keyword framework of TAF to get the keyword providing classes. Just define your keyword as public methods in a class by extending the KeywordBase class or the IKeyword interface. Once your keyword class has been defined just add the classpath of the said class to this property. In case you have multiple classes defined please add the path as comma separated. TAF will load all the class files and use them for identifying and executing the keywords in your test-files. Please make sure while adding the listeners the sequence is the same as you want TAF to look for the keywords in the said files.</p>
-</li>
-</ul>
+        
       </div>
 	  <p style="position:relative;">
 <!--

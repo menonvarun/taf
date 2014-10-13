@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF): Configuration</title>
+    <title>Test Automation Framework (TAF): Page Object Model</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -797,39 +797,88 @@
 
 </div>
 <div id='content'>
-        <h1 id='configuration'>Configuration</h1>
+        <h1 id='page_object_model'>Page Object Model</h1>
 
-<p>This page will give description about the default configuration file of TAF.</p>
+<p>TAF got inspired from the implementation of Page Object Model in <a href='http://www.gebish.org'><em><strong>GEB</strong></em></a> and thought to provide the similar kind of features to the users of Java. TAF provides certain in-built utils which will allow users to write Frameworks using Page Object Model with ease.</p>
 
-<p>By default at the start of the execution TAF will try to load the file named &#8220;taf.properties&#8221; from the location &#8220;src/test/resources&#8221; of the project folder from where the executon is being done. In case you need to configure a different configuration file you can do so by setting path of the said file as value to the property <em><strong>taf.config</strong></em> to the system properties.</p>
+<p>Look at the following example written using the TAF Page Object Model. Following is the TAF properties file.</p>
+<pre class='brush: plain;'>
 
-<p>Following are the different properties currently used by TAF from the properties file:</p>
+base_url=http://www.google.com
 
-<ul>
-<li>
-<p><strong>base_url</strong> - Please mention the base url of your application. This property is used when running the Page Object Model provided by TAF. The said url is appended to the url mentioned in the respective Page classes for navigation purpose.<br /></p>
-</li>
+</pre>
+<p>Following is the class representing the Google home page.</p>
+<pre class='brush: java;'>
+public class GoogleHomePage extends PageClass{
+	
+	GoogleLocator googleLocator;
+	
+	@Override
+	public String toUrl() {
+		return "";
+	}
+	
+	@Override
+	public boolean at() {
+		return getDriver().getTitle().contentEquals("Google");		
+	}
+	public void searchForString(String searchString){
+		googleLocator.searchField.sendKeys(searchString);
+        googleLocator.submitButton.click();
+    }
 
-<li>
-<p><strong>driver.name</strong> - This is used by the default driver manager provided by TAF. This value is used to provide the in-built driver creator and manager. Supported values &#8220;firefox&#8221;, &#8220;ie&#8221;, &#8220;chrome&#8221; and &#8220;htmlunit&#8221;. .<br /></p>
-</li>
+	@Override
+	public void init() {
+		googleLocator = new GoogleLocator().initialize(this.browser);
+	}
+}
+</pre>
+<p>Following is the class representing the Google results page.</p>
+<pre class='brush: java;'>
+public class GoogleResultsPage extends PageClass{
+	GoogleLocator googleLocator;
+	
+	@Override
+	public String toUrl() {
+		return "";
+	}
 
-<li>
-<p><strong>thread.based.driver</strong> - Set this value to <strong>true</strong> is you want the WebDriver object provided by the TAF framework driver manager to be per thread. This will make sure that whenever you call the &#8220;getDriver&#8221; method on the &#8220;CacheDriverFactory&#8221; class you get a different WebDriver object for each thread on which the said method is called. <br /></p>
-</li>
+	@Override
+	public boolean at() {		
+		return googleLocator.searchResult.size() > 0;
+	}
+	
+	@Override
+	public void init() {
+		googleLocator = new GoogleLocator().initialize(this.browser);
+	}
+	
+	public void clickOnResult(){
+        googleLocator.searchResult.get(0).click();
+    }
+}
+</pre>
+<p>And following is a simple test which goes to the google home page and search for a keyword and click on the result.</p>
+<pre class='brush: java;'>
+	@Test
+	public void googleTest(){
+		GoogleHomePage homePage = to(GoogleHomePage.class);
+		
+		homePage.searchForString("Testing");
+		
+		util.waitForPage(browser, GoogleResultsPage.class);		
+		
+		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
+		
+		resultsPage.clickOnResult();
+		
+		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
+		wait.until(ExpectedConditions.titleContains("Software testing"));
+	}
+</pre>
+<p>If you look at the above example you will notice that there is no manual object creation required for the Page Object classes. TAF automatically creates the Page Objects of the classes that are passed as parameter.</p>
 
-<li>
-<p><strong>userdefined.driverclass</strong> - This property is used by the in-build driver manager class to load a user defined class. Use this property to set the classpath of the class that implements the <em><strong>IDriverProvider</strong></em> interface of the TAF framework. Classpath of only one class should be added here, you can cannot have multiple driver provider class. <br /></p>
-</li>
-
-<li>
-<p><strong>use.inbuilt.driver</strong> - This property is used while using the in-built Page Object Model implementation. This property is used for enabling and disabling the in-build driver provider for the Page Classes. Set this property value to &#8220;false&#8221; if you want to yourself create the driver object. Once create set the driver object to the browser object of the test-class using the &#8220;setDriver&#8221; method of browser object. <br /></p>
-</li>
-
-<li>
-<p><strong>listeners</strong> - This value is used by the plug-n-play keyword framework of TAF to get the keyword providing classes. Just define your keyword as public methods in a class by extending the KeywordBase class or the IKeyword interface. Once your keyword class has been defined just add the classpath of the said class to this property. In case you have multiple classes defined please add the path as comma separated. TAF will load all the class files and use them for identifying and executing the keywords in your test-files. Please make sure while adding the listeners the sequence is the same as you want TAF to look for the keywords in the said files.</p>
-</li>
-</ul>
+<p>It provides certain util methods like <a href=''><em><strong>to</strong></em></a> and <a href=''><em><strong>at</strong></em></a> that will help in navigating your pages and also verifying that you are on the said page. The <em><strong>to</strong></em> method automatically navigate your browser to a specific url defined in the said page class after appending it to the base url mentioned in the <strong>taf.properties</strong> file. It also verifies that the page is loaded or available based on the <em><strong>at</strong></em> method defined in the said Page class.</p>
       </div>
 	  <p style="position:relative;">
 <!--

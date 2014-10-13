@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF): Configuration</title>
+    <title>Test Automation Framework (TAF): Enhanced WebElement</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -797,39 +797,44 @@
 
 </div>
 <div id='content'>
-        <h1 id='configuration'>Configuration</h1>
+        <h1 id='enhanced_webelement'>Enhanced WebElement</h1>
 
-<p>This page will give description about the default configuration file of TAF.</p>
+<p>While doing automation many a times we need to do different operations on a WebElemnt object like finding siblings, finding a child, moving to the parent etc. Writing code for such operations may be very cumbersome and time consuming. To solve this TAF comes with an in-built <a href=''><em><strong>EWebElement</strong></em></a> class which contains certain <em><strong>JQuery</strong></em> like methods in it this allows user to easily do webelement related operations like <em><strong>prev, next, parent, child, siblings</strong></em> etc.</p>
 
-<p>By default at the start of the execution TAF will try to load the file named &#8220;taf.properties&#8221; from the location &#8220;src/test/resources&#8221; of the project folder from where the executon is being done. In case you need to configure a different configuration file you can do so by setting path of the said file as value to the property <em><strong>taf.config</strong></em> to the system properties.</p>
-
-<p>Following are the different properties currently used by TAF from the properties file:</p>
+<p>There are multiple ways of using the extended webelement:</p>
 
 <ul>
-<li>
-<p><strong>base_url</strong> - Please mention the base url of your application. This property is used when running the Page Object Model provided by TAF. The said url is appended to the url mentioned in the respective Page classes for navigation purpose.<br /></p>
-</li>
+<li>Using Page Object Factory</li>
 
-<li>
-<p><strong>driver.name</strong> - This is used by the default driver manager provided by TAF. This value is used to provide the in-built driver creator and manager. Supported values &#8220;firefox&#8221;, &#8220;ie&#8221;, &#8220;chrome&#8221; and &#8220;htmlunit&#8221;. .<br /></p>
-</li>
-
-<li>
-<p><strong>thread.based.driver</strong> - Set this value to <strong>true</strong> is you want the WebDriver object provided by the TAF framework driver manager to be per thread. This will make sure that whenever you call the &#8220;getDriver&#8221; method on the &#8220;CacheDriverFactory&#8221; class you get a different WebDriver object for each thread on which the said method is called. <br /></p>
-</li>
-
-<li>
-<p><strong>userdefined.driverclass</strong> - This property is used by the in-build driver manager class to load a user defined class. Use this property to set the classpath of the class that implements the <em><strong>IDriverProvider</strong></em> interface of the TAF framework. Classpath of only one class should be added here, you can cannot have multiple driver provider class. <br /></p>
-</li>
-
-<li>
-<p><strong>use.inbuilt.driver</strong> - This property is used while using the in-built Page Object Model implementation. This property is used for enabling and disabling the in-build driver provider for the Page Classes. Set this property value to &#8220;false&#8221; if you want to yourself create the driver object. Once create set the driver object to the browser object of the test-class using the &#8220;setDriver&#8221; method of browser object. <br /></p>
-</li>
-
-<li>
-<p><strong>listeners</strong> - This value is used by the plug-n-play keyword framework of TAF to get the keyword providing classes. Just define your keyword as public methods in a class by extending the KeywordBase class or the IKeyword interface. Once your keyword class has been defined just add the classpath of the said class to this property. In case you have multiple classes defined please add the path as comma separated. TAF will load all the class files and use them for identifying and executing the keywords in your test-files. Please make sure while adding the listeners the sequence is the same as you want TAF to look for the keywords in the said files.</p>
-</li>
+<li>Object initialization</li>
 </ul>
+<a name='using_page_object_factory'> </a>
+<h2 id='using_page_object_factory'>Using Page Object Factory</h2>
+
+<p>To use TAF extended webelement with Page Object Factory initialization just define your elements with type <em><strong>EWebElement</strong></em> instead of <em><strong>WebElement</strong></em>. During the usage of <em><strong>CustomPageFactory</strong></em> class page factory initialization these elements will automatically be initialized. Look at the example below.</p>
+<pre class='brush: java;'>
+public class GoogleLocator{
+	
+	@FindBy(how=How.CSS,using="#gbqfq")
+	public EWebElement searchField;
+	
+	@FindBy(how = How.CSS,using=".gbqfb")
+	public EWebElement submitButton;
+	
+	@FindBy(how = How.CSS,using="h3.r > a")
+	public EWebElement searchResult;
+}
+</pre>
+<p><em><strong>EWebElement</strong></em> class by default store all the elements identified by a give locator in its instance, its similar to doing <em>driver.findElements(By.id(&#8220;selector&#8221;))</em>. In case you need to get a particular element for the extended webelement object you can use certain given methods like <em><strong>firstElement, lastElement, nthWebElement,</strong></em> etc. You can also get the extended webelement object similar to webelement.</p>
+<a name='using_object_intialization'> </a>
+<h2 id='using_object_initialization'>Using Object Initialization</h2>
+
+<p>You can create instances of extended webelement class object by passing a single or a list of <em><strong>WebElement</strong></em> object to the constructor of <em><strong>EWebElement</strong></em> class Look at the example below:</p>
+<pre class='brush: java;'>
+EWebElement eWebElement1 = new EWebElement(driver.findElement(By.id("selector"));
+
+EWebElement eWebElement2 = new EWebElement(driver.findElements(By.id("selector"));
+</pre>
       </div>
 	  <p style="position:relative;">
 <!--

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Test Automation Framework (TAF): Configuration</title>
+    <title>Test Automation Framework (TAF): Data Driven Util</title>
 		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
     <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
@@ -797,39 +797,58 @@
 
 </div>
 <div id='content'>
-        <h1 id='configuration'>Configuration</h1>
+        <h1 id='data_driven_util'>Data Driven Util</h1>
 
-<p>This page will give description about the default configuration file of TAF.</p>
+<p>The common problem that people face while developing a data-driven test is opening, fetching, iterating and returning back of the data from different sources. These sources can be of different types but they are mainly Excel or CSV files.</p>
 
-<p>By default at the start of the execution TAF will try to load the file named &#8220;taf.properties&#8221; from the location &#8220;src/test/resources&#8221; of the project folder from where the executon is being done. In case you need to configure a different configuration file you can do so by setting path of the said file as value to the property <em><strong>taf.config</strong></em> to the system properties.</p>
+<p>TAF provide a utility to automatically fetch the said data from your files and return you with a list of Class objects that can be easily used in your data driven tests.</p>
 
-<p>Following are the different properties currently used by TAF from the properties file:</p>
+<p>Lets take an example where you need to fetch some set of data from an excel file. The common approach will be to go through each row, fetch data, store it in some variable and then return it for each iteration. In TAF you just create data file in excel or csv format with certain logical column names mentioned in the columns of the first row. Subsequent rows will contain specific data set that needs to used for each iteration of you Data-driven test. Following is an example of my data-set.</p>
+<img src='http://menonvarun.github.io/taf/images/GoogleSearchData-xls.png' />
+<p>Now to fetch the data as Class objects you just need to create a class in your code with certain variables as required by your tests with the same name as mentioned in you column name of your data file. Following is an example.</p>
+<pre class='brush: java;'>
+public class GoogleSearchData {
+	
+	public String searchtext;
+	
+	public String titleToWait;
 
-<ul>
-<li>
-<p><strong>base_url</strong> - Please mention the base url of your application. This property is used when running the Page Object Model provided by TAF. The said url is appended to the url mentioned in the respective Page classes for navigation purpose.<br /></p>
-</li>
-
-<li>
-<p><strong>driver.name</strong> - This is used by the default driver manager provided by TAF. This value is used to provide the in-built driver creator and manager. Supported values &#8220;firefox&#8221;, &#8220;ie&#8221;, &#8220;chrome&#8221; and &#8220;htmlunit&#8221;. .<br /></p>
-</li>
-
-<li>
-<p><strong>thread.based.driver</strong> - Set this value to <strong>true</strong> is you want the WebDriver object provided by the TAF framework driver manager to be per thread. This will make sure that whenever you call the &#8220;getDriver&#8221; method on the &#8220;CacheDriverFactory&#8221; class you get a different WebDriver object for each thread on which the said method is called. <br /></p>
-</li>
-
-<li>
-<p><strong>userdefined.driverclass</strong> - This property is used by the in-build driver manager class to load a user defined class. Use this property to set the classpath of the class that implements the <em><strong>IDriverProvider</strong></em> interface of the TAF framework. Classpath of only one class should be added here, you can cannot have multiple driver provider class. <br /></p>
-</li>
-
-<li>
-<p><strong>use.inbuilt.driver</strong> - This property is used while using the in-built Page Object Model implementation. This property is used for enabling and disabling the in-build driver provider for the Page Classes. Set this property value to &#8220;false&#8221; if you want to yourself create the driver object. Once create set the driver object to the browser object of the test-class using the &#8220;setDriver&#8221; method of browser object. <br /></p>
-</li>
-
-<li>
-<p><strong>listeners</strong> - This value is used by the plug-n-play keyword framework of TAF to get the keyword providing classes. Just define your keyword as public methods in a class by extending the KeywordBase class or the IKeyword interface. Once your keyword class has been defined just add the classpath of the said class to this property. In case you have multiple classes defined please add the path as comma separated. TAF will load all the class files and use them for identifying and executing the keywords in your test-files. Please make sure while adding the listeners the sequence is the same as you want TAF to look for the keywords in the said files.</p>
-</li>
-</ul>
+}
+</pre>
+<p>Following is a test where we will be making use of the in-build data driven util which will automatically parse the data file and return back the list or double object array of the objects of the specified data representing class created earlier. The variable in the said class object will contain value from each row of the data file that represent and individual iteration.</p>
+<pre class='brush: java;'>
+public class GoogleSearchDataTest extends TestClass{
+	
+	@Test(dataProvider="googleSearchData")
+	public void googleTest(GoogleSearchData data){
+		GoogleHomePage homePage = to(GoogleHomePage.class);
+		
+		homePage.searchForString(data.searchtext);
+		
+		util.waitForPage(browser, GoogleResultsPage.class);		
+		
+		GoogleResultsPage resultsPage = at(GoogleResultsPage.class);
+		
+		resultsPage.clickOnResult();
+		
+		WebDriverWait wait = new WebDriverWait(browser.getDriver(), 60);
+		wait.until(ExpectedConditions.titleContains(data.titleToWait));
+	}
+	
+	@DataProvider(name="googleSearchData")
+	public Object[][] googleSearchData() throws ClassParserException, DataNotAvailableException{
+		ExcelDataDrive excelData = 
+				new ExcelDataDrive("src/test/resources/datadrive/GoogleSearchData.xls");
+		/*
+		Following method call will parse the above mentioned Excel file and 
+		create objects of the provided "GoogleSearchData" class.
+		It will return a Object[][] containing object for each iteration. 
+		The utility also have a method to return a List object. 
+		*/
+		return excelData.getTestngData(GoogleSearchData.class);
+	}
+}
+</pre>
       </div>
 	  <p style="position:relative;">
 <!--
