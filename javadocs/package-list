@@ -1,0 +1,17 @@
+org.imaginea.test.automation.framework.config
+org.imaginea.test.automation.framework.datadrive
+org.imaginea.test.automation.framework.datastore
+org.imaginea.test.automation.framework.dom
+org.imaginea.test.automation.framework.driver
+org.imaginea.test.automation.framework.keywordmodel
+org.imaginea.test.automation.framework.keywordmodel.executor
+org.imaginea.test.automation.framework.keywordmodel.keywords
+org.imaginea.test.automation.framework.keywordmodel.reader
+org.imaginea.test.automation.framework.keywordmodel.suite
+org.imaginea.test.automation.framework.locator
+org.imaginea.test.automation.framework.locator.locatorfiles
+org.imaginea.test.automation.framework.locator.pagefactory
+org.imaginea.test.automation.framework.pagemodel
+org.imaginea.test.automation.framework.testng.listener
+org.imaginea.test.automation.framework.util
+org.imaginea.test.automation.framework.util.readers
