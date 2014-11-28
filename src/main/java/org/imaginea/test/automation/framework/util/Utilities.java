@@ -143,10 +143,10 @@ public class Utilities {
 	private ExpectedCondition<Boolean> presenceOfPage(final Browser browser,
 			final Class<?> pageClass) {
 		return new ExpectedCondition<Boolean>() {
-			CommonMethods commonMethods = new CommonMethods();
+
 			@Override
 			public Boolean apply(WebDriver driver) {
-				return (Boolean)commonMethods.isAt(browser,pageClass);				
+				return (Boolean)browser.isAt(pageClass);
 			}
 
 			@Override
