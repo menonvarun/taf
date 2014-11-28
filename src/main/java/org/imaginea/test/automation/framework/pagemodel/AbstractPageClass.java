@@ -3,7 +3,7 @@ package org.imaginea.test.automation.framework.pagemodel;
 import java.io.File;
 import java.net.URL;
 
-import org.imaginea.test.automation.framework.util.CommonMethods;
+import org.imaginea.test.automation.framework.util.PageObjectUtils;
 import org.imaginea.test.automation.framework.util.Utilities;
 import org.openqa.selenium.WebDriver;
 
@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
  * @author  Varun Menon
  *
  */
-public abstract class AbstractPageClass extends CommonMethods {
+public abstract class AbstractPageClass extends PageObjectUtils {
 	
 	protected Utilities util;
 	//public Browser browser;
@@ -28,7 +28,6 @@ public abstract class AbstractPageClass extends CommonMethods {
 	public void init(Browser browser){
 		this.browser = browser;
         config = browser.getConfig();
-		this.util = new Utilities();	
 		initialized = true;
 		this.init();
 	}
