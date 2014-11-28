@@ -41,6 +41,7 @@ class InbuiltDriverProvider implements IDriverProvider{
 		default:
 			throw new DriverNotAvailableException("Driver name: " + driverName +" set to the property 'driver.name' is not supported");			
 		}
+        driver.manage().window().maximize();
 		return driver;
 	}
 	
