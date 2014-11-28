@@ -15,9 +15,7 @@ import org.openqa.selenium.WebDriver;
  */
 public abstract class AbstractPageClass extends PageObjectUtils {
 	
-	protected Utilities util;
-	//public Browser browser;
-	private boolean initialized = false; 
+	private boolean initialized = false;
 	
 	protected File locatorFile=null;
 	

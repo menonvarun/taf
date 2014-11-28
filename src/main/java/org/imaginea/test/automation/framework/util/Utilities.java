@@ -9,6 +9,7 @@ import org.imaginea.test.automation.framework.pagemodel.PageClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -71,6 +72,33 @@ public class Utilities {
 		wait.until(presenceOfElements(elements));
 	}
 
+    /**
+     * Util method to wait for the element to be visible on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param element {@link WebElement} object that we have to wait for to be visible.
+     */
+    public void waitForElementToBeVisible(WebDriver driver, WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, DEFAULT_TIMEOUT);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * Util method to wait for the element to be visible on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param element {@link WebElement} object that we have to wait for to be visible.
+     * @param timeout  Time to wait for.
+     */
+    public void waitForElementToBeVisible(WebDriver driver, WebElement element,long timeout){
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
 	/**
 	 * Util method for waiting for the page object model page to appear or displayed. 
 	 * This verification is done on the basis of the {@link PageClass#at()} method implemented by the implementing Page Object class.
@@ -93,8 +121,13 @@ public class Utilities {
 	public void waitForPage(Browser browser, Class<?> pageClass){
 		this.waitForPage(browser, pageClass, DEFAULT_TIMEOUT);
 	}
-	
 
+
+    /**
+     * Utility to load a file from the resource directory
+     * @param fileName or fielpath of the file under resource directory
+     * @return File object of the said file
+     */
 	public File evaluateFileFromResourceDirectory(String fileName) {
 		URL fileStream = this.toString().getClass().getResource(fileName);
 		if(fileStream == null)
