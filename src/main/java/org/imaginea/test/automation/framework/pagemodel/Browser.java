@@ -1,10 +1,8 @@
 package org.imaginea.test.automation.framework.pagemodel;
 
-import java.io.File;
-
 import org.imaginea.test.automation.framework.config.DefaultConfig;
 import org.imaginea.test.automation.framework.driver.CacheDriverFactory;
-import org.imaginea.test.automation.framework.util.CommonMethods;
+import org.imaginea.test.automation.framework.util.PageObjectUtils;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -13,7 +11,7 @@ import org.openqa.selenium.WebDriver;
  * @author  Varun Menon
  *
  */
-public class Browser extends CommonMethods {
+public class Browser extends PageObjectUtils {
 	
 	private WebDriver driver;
 	private String baseUrl;

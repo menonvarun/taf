@@ -17,17 +17,9 @@ import org.openqa.selenium.WebDriver;
  * @author  Varun Menon
  *
  */
-public abstract class CommonMethods {
+public abstract class PageObjectUtils extends Utilities{
 	protected DefaultConfig config;
     protected Browser browser;
-	
-	public CommonMethods(){
-		this(DefaultConfig.getDefaultConfig());
-	}
-	
-	public CommonMethods(DefaultConfig config){
-		this.config = config;
-	}
 
     public void setBrowser(Browser browser){
         this.browser = browser;

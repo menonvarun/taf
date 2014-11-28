@@ -3,7 +3,7 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<description>Test automation framework a geb implemntation in java.</description>
@@ -59,12 +59,12 @@
 	</dependencies>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>localmvn</id>
+			<url>file:///H:/opt/github/mvn-repo/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>localmvn</id>
+			<url>file:///H:/opt/github/mvn-repo/releases</url>
 		</repository>
 	</distributionManagement>
 
