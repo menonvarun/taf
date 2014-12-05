@@ -62,11 +62,7 @@ public class DefaultConfig {
 		String path = System.getProperty("taf.config");
 		configData = new Properties();
 		if (path == null) {
-			String rootDir = new File("").getAbsolutePath();
-			path = rootDir
-					+ "/src/test/resources/taf.properties".replace("/",
-							File.separator);
-
+			path = ClassLoader.getSystemResource("taf.properties").getPath();
 		}
 		File configFile = new File(path);
 		if (configFile.exists() && configFile.isFile()) {
