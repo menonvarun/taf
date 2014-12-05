@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+
+import org.imaginea.test.automation.framework.dom.filter.Filter;
+import org.imaginea.test.automation.framework.dom.filter.FilterType;
 import org.openqa.selenium.WebElement;
 
 public class EWebElement {
@@ -30,7 +33,7 @@ public class EWebElement {
 		firstElement().click();
 	}
 
-	/**
+    /**
 	 * Click on all webelement represented by the said extended webelement
 	 */
 	public void clickAll() {
@@ -42,7 +45,7 @@ public class EWebElement {
 	/**
 	 * Type onto the first element if its an input box represented by the said extended webelement.
 	 * 
-	 * @param The value that needs to be typed.
+	 * @param value that needs to be typed.
 	 */
 	public void type(String value) {
 		firstElement().sendKeys(value);
@@ -144,8 +147,8 @@ public class EWebElement {
 	 */
 	public EWebElement nextAll() {
 
-		EWebElement eWebElements = findElements(By
-				.xpath("following-sibling::*"));
+		EWebElement eWebElements = find(By
+                .xpath("following-sibling::*"));
 		return eWebElements;
 	}
 
@@ -154,7 +157,7 @@ public class EWebElement {
 	 * elements. * @return
 	 */
 	public EWebElement prevAll() {
-		EWebElement eWebElement = findElements(By.xpath("preceding-sibling::*"));
+		EWebElement eWebElement = find(By.xpath("preceding-sibling::*"));
 		return eWebElement;
 	}
 
@@ -187,9 +190,9 @@ public class EWebElement {
 	 * @return
 	 */
 	public EWebElement nextUntil(String xpathExpression) {
-		EWebElement eWebElement = findElements(By
-				.xpath("following-sibling::*[following-sibling::"
-						+ xpathExpression + "]"));
+		EWebElement eWebElement = find(By
+                .xpath("following-sibling::*[following-sibling::"
+                        + xpathExpression + "]"));
 		return eWebElement;
 	}
 
@@ -200,9 +203,9 @@ public class EWebElement {
 	 * @return
 	 */
 	public EWebElement prevUntil(String xpathExpression) {
-		EWebElement eWebElement = findElements(By
-				.xpath("preceding-sibling::*[preceding-sibling::"
-						+ xpathExpression + "]"));
+		EWebElement eWebElement = find(By
+                .xpath("preceding-sibling::*[preceding-sibling::"
+                        + xpathExpression + "]"));
 		return eWebElement;
 	}
 
@@ -210,11 +213,11 @@ public class EWebElement {
 	 * Get the descendants of each element in the current set of matched
 	 * elements.
 	 * 
-	 * @param Cssselector
+	 * @param cssSelector
 	 * @return
 	 */
-	public EWebElement find(String Cssselector) {
-		EWebElement eWebElement = findElements(By.cssSelector(Cssselector));
+	public EWebElement find(String cssSelector) {
+		EWebElement eWebElement = find(By.cssSelector(cssSelector));
 		return eWebElement;
 	}
 
@@ -242,12 +245,12 @@ public class EWebElement {
 	/**
 	 * Get the ancestors of the current elements, up to the matched element.
 	 * 
-	 * @param Xpath
+	 * @param xpathExpression
 	 * @return
 	 */
 	public EWebElement parentsUntil(String xpathExpression) {
-		EWebElement eWebElement = findElements(By
-				.xpath("ancestor-or-self::*[ancestor::" + xpathExpression + "]"));
+		EWebElement eWebElement = find(By
+                .xpath("ancestor-or-self::*[ancestor::" + xpathExpression + "]"));
 		return eWebElement;
 	}
 
@@ -257,7 +260,7 @@ public class EWebElement {
 	 * @return
 	 */
 	public EWebElement parents() {
-		EWebElement eWebElement = findElements(By.xpath("ancestor-or-self::*"));
+		EWebElement eWebElement = find(By.xpath("ancestor-or-self::*"));
 		return eWebElement;
 	}
 
@@ -266,33 +269,32 @@ public class EWebElement {
 	 * selector by testing the element itself and traversing up through its
 	 * ancestors in the DOM tree.
 	 * 
-	 * @param Xpath
+	 * @param xpathSelector
 	 * @return
 	 */
-	public EWebElement closet(String Xpath) {
+	public EWebElement closest(String xpathSelector) {
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
-				By.xpath("ancestor-or-self::*" + Xpath + "[1]")));
+				By.xpath("ancestor-or-self::*" + xpathSelector + "[1]")));
 		return eWebElement;
 	}
 
 	/**
 	 * Get immediate child of current web element
 	 * 
-	 * @return
+	 * @return EWebElement object of the child element
 	 */
 	public EWebElement child() {
-
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("*[1]")));
 		return eWebElement;
 	}
 
 	/**
-	 * Get immediate immediate of current web element
+	 * Get immediate children of first WebElement stored in the EWebElement
 	 * 
-	 * @return
+	 * @return EWebElement object of the immediate child element
 	 */
-	public EWebElement immediatechildren() {
+	public EWebElement immediateChildren() {
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
 				By.xpath("*")));
 		return eWebElement;
@@ -301,13 +303,13 @@ public class EWebElement {
 	/**
 	 * Get the children of the current elements, up to the matched element.
 	 * 
-	 * @param Xpath
+	 * @param xpathExpression
 	 * @return
 	 */
 	public EWebElement childrenUntil(String xpathExpression) {
-		EWebElement eWebElement = findElements(By
-				.xpath("descendant-or-self::*[descendant::" + xpathExpression
-						+ "]"));
+		EWebElement eWebElement = find(By
+                .xpath("descendant-or-self::*[descendant::" + xpathExpression
+                        + "]"));
 
 		return eWebElement;
 	}
@@ -315,24 +317,161 @@ public class EWebElement {
 	/**
 	 * Get the children of current node in list .
 	 * 
-	 * @return
+	 * @return EWebElement object containing the child nodes.
 	 */
 	public EWebElement children() {
-		EWebElement eWebElement = findElements(By
-				.xpath("descendant-or-self::*"));
+		EWebElement eWebElement = find(By
+                .xpath("descendant-or-self::*"));
 		return eWebElement;
 	}
 
-	/**
-	 * get list of elements matched by .
-	 * 
-	 * @param by
-	 * @return
-	 */
-	public EWebElement findElements(By by) {
-
-		List<WebElement> webelements = firstElement().findElements(by);
-		return new EWebElement(webelements);
+    /**
+     * Get the descendants of each element in the current set of matched
+     * elements using the given By locator.
+     *
+     * @param by By locator
+     * @return
+     */
+	public EWebElement find(By by) {
+    	List<WebElement> webElements = firstElement().findElements(by);
+		return new EWebElement(webElements);
 	}
 
+    /**
+     * Executes the submit action on the first element in the elements list stored inside.
+     */
+    public void submit() {
+        firstElement().submit();
+    }
+
+    /**
+     * Executes the send keys command on the first element in the elements list stored inside.
+     * @param keysToSend
+     */
+    public void sendKeys(CharSequence... keysToSend) {
+        firstElement().sendKeys();
+    }
+
+    /**
+     * Executes the clear keys command on the first element in the elements list stored inside.
+     */
+    public void clear() {
+        firstElement().clear();
+    }
+
+    /**
+     * Returns the tag name of the first element in the elements list stored inside.
+     * @return Tag name
+     */
+    public String getTagName() {
+        return firstElement().getTagName();
+    }
+
+    /**
+     * Returns the attribute value of the first element in the elements list stored inside.
+     * @param name Name of the attribute for which the value has to be fetched.
+     * @return The said attribute value if it exists or null
+     */
+    public String getAttribute(String name) {
+        return firstElement().getAttribute(name);
+    }
+
+    /**
+     * Executes the isSelected command on the first element in the elements list stored inside.
+     * @return true if the element is selected else false.
+     */
+    public boolean isSelected() {
+        return firstElement().isSelected();
+    }
+
+    /**
+     * Executes the isEnabled command on the first element in the elements list stored inside.
+     * @return true if the element is enabled else false.
+     */
+    public boolean isEnabled() {
+        return firstElement().isEnabled();
+    }
+
+    /**
+     * Returns the text of the first element in the elements list stored inside.
+     * @return Text if it exists
+     */
+    public String getText() {
+        return firstElement().getText();
+    }
+
+    /**
+     * Executes the isDisplayed command on the first element in the elements list stored inside.
+     * @return true if the element is displayed else false.
+     */
+    public boolean isDisplayed() {
+        return firstElement().isDisplayed();
+    }
+
+    /**
+     * Executes the isDisplayed command on all the elements list stored inside.
+     * @return true if all the elements are displayed else false.
+     */
+    public boolean isAllDisplayed() {
+        boolean displayed = true;
+        for(WebElement element:elements){
+            if(!element.isDisplayed()) {
+                displayed = false;
+                break;
+            }
+        }
+        return displayed;
+    }
+
+    /**
+     * Filters the elements stored inside this EWebElement based on given filters
+     * @param filters An array filters that needs to be applied to the said list.
+     * @return The new EWebElement based on the filtered elements else an empty EWebElement object.
+     */
+    public EWebElement filter(Filter... filters){
+        List<WebElement> filteredElements = new ArrayList<>();
+        for (WebElement element:elements){
+            boolean elementMatches = true;
+            for (Filter filter:filters) {
+                FilterType filterType = filter.getFilterType();
+                switch(filterType){
+                    case ID:
+                        String idValue = element.getAttribute("id");
+                        if(idValue==null || !filter.getTextMatcher().matches(idValue)){
+                            elementMatches = false;
+                        }
+                    break;
+                    case NAME:
+                        String nameValue = element.getAttribute("name");
+                        if(nameValue==null || !filter.getTextMatcher().matches(nameValue)){
+                            elementMatches = false;
+                        }
+                        break;
+                    case CLASS:
+                        String classValue = element.getAttribute("class");
+                        if(classValue==null || !filter.getTextMatcher().matches(classValue)){
+                            elementMatches = false;
+                        }
+                        break;
+                    case ATTRIBUTE:
+                        String attributeValue = element.getAttribute(filter.getAttributeName());
+                        if(attributeValue==null || !filter.getTextMatcher().matches(attributeValue)){
+                            elementMatches = false;
+                        }
+                        break;
+                    case TEXT:
+                        String textValue = element.getText();
+                        if(textValue==null || !filter.getTextMatcher().matches(textValue)){
+                            elementMatches = false;
+                        }
+                        break;
+                }
+                if(!elementMatches)
+                    break;
+            }
+            if (elementMatches)
+                filteredElements.add(element);
+        }
+        return new EWebElement(filteredElements);
+    }
 }
