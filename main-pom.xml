@@ -3,7 +3,7 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<description>Test automation framework a geb implemntation in java.</description>
@@ -55,6 +55,11 @@
 		    <version>3.0</version>
 		    <scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.15</version>
+        </dependency>
 		
 	</dependencies>
 	<distributionManagement>
