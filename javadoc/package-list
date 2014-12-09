@@ -2,6 +2,7 @@ org.imaginea.test.automation.framework.config
 org.imaginea.test.automation.framework.datadrive
 org.imaginea.test.automation.framework.datastore
 org.imaginea.test.automation.framework.dom
+org.imaginea.test.automation.framework.dom.filter
 org.imaginea.test.automation.framework.driver
 org.imaginea.test.automation.framework.keywordmodel
 org.imaginea.test.automation.framework.keywordmodel.executor

@@ -1,0 +1,829 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Test Automation Framework (TAF): Using Build Tools</title>
+		<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/jquery.qtip.min.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/styles.css">
+    <link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/pygment_trac.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/shCore.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/shCoreRDark.css">
+	<link rel="stylesheet" href="http://menonvarun.github.io/taf/stylesheets/shThemeRDark.css">
+    <script src="http://menonvarun.github.io/taf/javascripts/respond.js"></script>
+	
+	<script src="http://menonvarun.github.io/taf/javascripts/jquery-1.10.2.min.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shCore.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shAutoloader.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushGroovy.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushXml.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushJScript.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushPlain.js"></script>
+		<script src="http://menonvarun.github.io/taf/javascripts/jquery.qtip.min.js"></script>
+		<script src="http://menonvarun.github.io/taf/javascripts/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="http://menonvarun.github.io/taf/javascripts/custom.js"></script>
+		<!--<script src="http://menonvarun.github.io/taf/javascripts/analytics.js"></script>-->
+	
+	<script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = false;
+     SyntaxHighlighter.all()
+	</script>
+	
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body id="top">
+    <div class="wrapper">
+		
+      <section>
+        <div id="title">
+		<li class="fork button"><a target="_" href="https://github.com/menonvarun/taf">View On GitHub</a></li>
+		<li class="downloads button"><a target="_" href="https://github.com/menonvarun/taf/releases">Releases</a></li>
+          <h1><a href="/taf">Test Automation Framework (TAF)</a></h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/menonvarun">menonvarun</a></span>          
+        </div>
+
+        <h3 class="maincontainer">
+<div id='leftnav'>
+
+  <!--
+        
+				
+            <a href="http://menonvarun.github.io/taf/" >Home</a><br/><br/>
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+
+<hr></hr> -->
+<!--
+<h4>Features</h4>
+<hr></hr>
+<ul>
+  
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+				
+            <li><a href="http://menonvarun.github.io/taf/pages/old_pages/data_driven_util_in_taf_old.html" >Data Driven Util</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="http://menonvarun.github.io/taf/pages/old_pages/webdriver_in_taf_old.html" >WebDriver Creation/Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="http://menonvarun.github.io/taf/pages/old_pages/keyword_model_in_taf_old.html" >Keyword Model</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="http://menonvarun.github.io/taf/pages/old_pages/locator_in_taf_old.html" >Locator Management</a></li>         
+			
+        
+      
+        
+				
+            <li><a href="http://menonvarun.github.io/taf/pages/old_pages/page_object_model_in_taf_old.html" >Page Object Model</a></li>         
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+        
+			
+        
+      
+</ul>-->
+<h4>Table Of Contents</h4>
+<hr></hr>
+<ul>
+    <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html" >Page Object Model</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html#page_classes" >Page Classes</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html#page_navigation" >Navigation</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html#page_verification" >Verification</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html#page_initialization" >Initialization</a></li>    
+		 <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_in_taf.html#test_classes" >Test Classes</a></li>  		 
+	</ul>  
+
+	<li><a href="http://menonvarun.github.io/taf/pages/keyword_model_in_taf.html" >Keyword Driven Model</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/keyword_model_in_taf.html#simple_keyword_test" >Simple Test</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/keyword_model_in_taf.html#testsuite" >Test Suite</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/keyword_model_in_taf.html#testreporting" >Test Reporting</a></li>                  
+	</ul> 
+
+	<li><a href="http://menonvarun.github.io/taf/pages/webdriver_in_taf.html" >Driver Management</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/webdriver_in_taf.html#default_driver_creation" >Default Creation</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/webdriver_in_taf.html#multi_threaded_driver_creation" >Multi-Threaded</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/webdriver_in_taf.html#user_defined_driver_creation" >User Defined</a></li>         		                
+	</ul> 
+	
+	<li><a href="http://menonvarun.github.io/taf/pages/locator_in_taf.html" >Enhanced Page Object Factory</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/locator_in_taf.html#default_file" >Providing default file</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/locator_in_taf.html#runtime_file" >Providing different file</a></li>                     
+	</ul>
+	
+	<li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html" >Enhanced WebElement</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#using_page_object_factory" >In Page Object Factory</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#using_object_intialization" >Object Initialization</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#filtering_with_enhanced_webelement" >Filtering</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#jquery_features" >Jquery features</a></li>                     
+	</ul>
+	
+	<li><a href="http://menonvarun.github.io/taf/pages/data_driven_util_in_taf.html" >Data Driving Utility</a></li> 
+	
+	<li><a href="http://menonvarun.github.io/taf/pages/global_data_store.html" >Global Data Store</a></li>    
+	<ul>
+		 <li><a href="http://menonvarun.github.io/taf/pages/global_data_store.html#across_all_tests" >Sharing Data across all tests</a></li>         
+		 <li><a href="http://menonvarun.github.io/taf/pages/global_data_store.html#across_a_thread" >Sharing Data across tests of a thread</a></li>                     
+	</ul>
+	<li><a href="http://menonvarun.github.io/taf/pages/verify_util.html" >Verify Utility</a></li>   
+</ul>
+<!--
+<h4>Advanced</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+</ul>-->
+<h4>Installation</h4>
+<hr></hr>
+<ul>
+<li><a href="http://menonvarun.github.io/taf/pages/Configuration.html" >Configuration</a></li>    
+<li><a href="http://menonvarun.github.io/taf/pages/setting_it_up.html" >Setting It Up</a></li>    
+<li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html" >Using Build Tools</a></li>    
+	<ul>     
+		 <li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html#maven" >Maven</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html#gradle" >Gradle</a></li>                     
+	</ul>
+
+</ul>
+<!--<h4>Concepts</h4>
+<hr></hr>
+<ul>
+  
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="http://menonvarun.github.io/taf/pages/locator_concept.html" >Locators Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+            <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+                  
+			
+        
+      
+</ul>-->
+<h4>FAQ</h4>
+<hr></hr>
+<ul>
+  
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+            <li><a href="http://menonvarun.github.io/taf/pages/faq/driver_management_faq.html" >Driver Management</a></li>         
+			
+        
+      
+         
+			
+            <li><a href="http://menonvarun.github.io/taf/pages/faq/locator_faq.html" >Locator Util</a></li>         
+			
+        
+      
+         
+			
+            <li><a href="http://menonvarun.github.io/taf/pages/faq/page_object_faq.html" >Enhanced Page Object</a></li>         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+         
+			
+        
+      
+	  <li><a href="https://groups.google.com/forum/#!forum/taf-users" target="_" >Have Queries ask here</li> 
+</ul>
+<h4>Examples</h4>
+<hr></hr>
+<ul>
+<li><a target="_" href="https://github.com/menonvarun/taf-test" >Browse Online</a></li>
+<li><a target="_" href="https://github.com/menonvarun/taf-test/archive/master.zip" >Download</a></li>
+</ul>
+<h4>Java Docs</h4>
+<hr></hr>
+<ul>
+<li><a target="_" href="http://menonvarun.github.io/taf/javadoc" >Browse Online</a></li>
+<li><a target="_" href="http://menonvarun.github.io/taf/downloads/javadoc.zip" >Download</a></li>
+</ul>
+<a id="backtotop" href="#top">Back To Top</a>
+
+</div>
+<div id='content'>
+        <h1 id='using_build_tools'>Using Build Tools</h1>
+
+<p>TAF can be used any of the build tools. You simple have to add the TAF jar as a dependency in your build tool. TAF is deployed on maven repository so it can be downloaded automatically by ivy, maven or gradle build tools. Following are the configurations for few tools:</p>
+
+<h2 id='maven'>Maven</h2>
+
+<p>Add TAF repository to your pom.xml file or setting.xml as shown below:</p>
+<pre class='brush: xml;'>
+    <repositories>
+        <repository>
+            <id>taf-repo</id>
+            <name>TAF repo</name>
+            <url>https://github.com/menonvarun/mvn-repo/raw/master/releases</url>
+        </repository>
+    </repositories>
+	
+</pre>
+<p>Add TAF as a dependency in your pom.xml.</p>
+<pre class='brush: xml;'>
+ 	<dependency>
+		&lt;groupId&gt;org.imaginea&lt;/groupId&gt;
+		&lt;artifactId&gt;testautomationframework&lt;/artifactId&gt;
+		<version>(taf-version)</version>
+	</dependency>
+ 	
+</pre>
+<h2 id='gradle'>Gradle</h2>
+
+<p>Add TAF repository to your builds.gradle file as shown below:</p>
+<pre class='brush: java;'>
+    reposittories {
+		mavenRepo urls: "https://github.com/menonvarun/mvn-repo/raw/master/releases"
+	}
+	
+</pre>
+<p>Add TAF as a dependency in your build.gradle.</p>
+<pre class='brush: java;'>
+ 	dependencies {
+		compile "org.imaginea:testautomationframework:0.0.4"
+	}
+ 	
+</pre>
+      </div>
+	  <p style="position:relative;">
+<!--
+This link will jump back up to the ID:top in
+the document. Since that is the ID of the body
+tag, this link will jump to the top of the page.
+-->
+
+</p>
+
+    </div>
+	
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+  <!--<script type="text/javascript">
+	$('a').attr('target', '_blank');
+	</script>-->
+	
+	<!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-530ee4ef18d3235b"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'light',
+    'share' : {
+      'position' : 'right',
+	  'services' : 'facebook,twitter,google_plusone_share,email,more',
+      //'numPreferredServices' : 5,
+	  'mobile' : true
+    }
+	/*,  
+    'whatsnext' : {
+		'recommendedTitle' : 'Recommended for you',
+        'shareMsg' : 'Share to [x]',
+        'followMsg' : 'Follow us on [x]',
+        'theme' : 'transparent',
+        'desktop' : true
+	},  
+    'recommended' : {} ,
+	*/
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+</html>

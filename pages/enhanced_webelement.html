@@ -17,6 +17,7 @@
 	<script src="http://menonvarun.github.io/taf/javascripts/shAutoloader.js"></script>
 	<script src="http://menonvarun.github.io/taf/javascripts/shBrushGroovy.js"></script>
 	<script src="http://menonvarun.github.io/taf/javascripts/shBrushJava.js"></script>
+	<script src="http://menonvarun.github.io/taf/javascripts/shBrushXml.js"></script>
 	<script src="http://menonvarun.github.io/taf/javascripts/shBrushJScript.js"></script>
 	<script src="http://menonvarun.github.io/taf/javascripts/shBrushPlain.js"></script>
 		<script src="http://menonvarun.github.io/taf/javascripts/jquery.qtip.min.js"></script>
@@ -44,7 +45,7 @@
       <section>
         <div id="title">
 		<li class="fork button"><a target="_" href="https://github.com/menonvarun/taf">View On GitHub</a></li>
-		<li class="downloads button"><a target="_" href="https://github.com/menonvarun/taf/releases/download/v0.0.2/testautomationframework-0.0.2.jar">Download</a></li>
+		<li class="downloads button"><a target="_" href="https://github.com/menonvarun/taf/releases">Releases</a></li>
           <h1><a href="/taf">Test Automation Framework (TAF)</a></h1>
           <p></p>
           <hr>
@@ -58,6 +59,14 @@
         
 				
             <a href="http://menonvarun.github.io/taf/" >Home</a><br/><br/>
+			
+        
+      
+        
+			
+        
+      
+        
 			
         
       
@@ -282,6 +291,14 @@
 			
         
       
+        
+			
+        
+      
+        
+			
+        
+      
 </ul>-->
 <h4>Table Of Contents</h4>
 <hr></hr>
@@ -319,6 +336,8 @@
 	<ul>
 		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#using_page_object_factory" >In Page Object Factory</a></li>         
 		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#using_object_intialization" >Object Initialization</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#filtering_with_enhanced_webelement" >Filtering</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/enhanced_webelement.html#jquery_features" >Jquery features</a></li>                     
 	</ul>
 	
 	<li><a href="http://menonvarun.github.io/taf/pages/data_driven_util_in_taf.html" >Data Driving Utility</a></li> 
@@ -328,6 +347,7 @@
 		 <li><a href="http://menonvarun.github.io/taf/pages/global_data_store.html#across_all_tests" >Sharing Data across all tests</a></li>         
 		 <li><a href="http://menonvarun.github.io/taf/pages/global_data_store.html#across_a_thread" >Sharing Data across tests of a thread</a></li>                     
 	</ul>
+	<li><a href="http://menonvarun.github.io/taf/pages/verify_util.html" >Verify Utility</a></li>   
 </ul>
 <!--
 <h4>Advanced</h4>
@@ -438,119 +458,26 @@
 			
         
       
+         
+			
+        
+      
+         
+			
+        
+      
 </ul>-->
 <h4>Installation</h4>
 <hr></hr>
 <ul>
-  
-        
-			
-        
-      
-        
-				
-            <li><a href="http://menonvarun.github.io/taf/pages/configuration.html" >Configuration</a></li>         
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-				
-            <li><a href="http://menonvarun.github.io/taf/pages/setting_it_up.html" >Setting it up</a></li>         
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
-        
-			
-        
-      
+<li><a href="http://menonvarun.github.io/taf/pages/Configuration.html" >Configuration</a></li>    
+<li><a href="http://menonvarun.github.io/taf/pages/setting_it_up.html" >Setting It Up</a></li>    
+<li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html" >Using Build Tools</a></li>    
+	<ul>     
+		 <li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html#maven" >Maven</a></li>                     
+		 <li><a href="http://menonvarun.github.io/taf/pages/using_build_tools.html#gradle" >Gradle</a></li>                     
+	</ul>
+
 </ul>
 <!--<h4>Concepts</h4>
 <hr></hr>
@@ -617,6 +544,14 @@
                   
 			
             <li><a href="http://menonvarun.github.io/taf/pages/page_object_model_concept.html" >Page Object Concept</a></li>         
+			
+        
+      
+                  
+			
+        
+      
+                  
 			
         
       
@@ -779,6 +714,14 @@
 			
         
       
+         
+			
+        
+      
+         
+			
+        
+      
 	  <li><a href="https://groups.google.com/forum/#!forum/taf-users" target="_" >Have Queries ask here</li> 
 </ul>
 <h4>Examples</h4>
@@ -799,9 +742,19 @@
 <div id='content'>
         <h1 id='enhanced_webelement'>Enhanced WebElement</h1>
 
-<p>While doing automation many a times we need to do different operations on a WebElemnt object like finding siblings, finding a child, moving to the parent etc. Writing code for such operations may be very cumbersome and time consuming. To solve this TAF comes with an in-built <a href=''><em><strong>EWebElement</strong></em></a> class which contains certain <em><strong>JQuery</strong></em> like methods in it this allows user to easily do webelement related operations like <em><strong>prev, next, parent, child, siblings</strong></em> etc.</p>
+<p>As the name suggests is an Enhanced form of WebElement feature provided by the WebDriver. It gives following advantages.</p>
 
-<p>There are multiple ways of using the extended webelement:</p>
+<ul>
+<li>Multiple filtering options on a particular set of WebElement&#8217;s</li>
+
+<li>Support dynamic element identification in Page Object Factory implementation.</li>
+
+<li>Support for Jquery like features. For ex. parent, child, siblings etc.</li>
+</ul>
+
+<h1 id='creatingusing_enhanced_webelement'>Creating/Using Enhanced WebElement</h1>
+
+<p>There are multiple ways of using the enhanced webelement:</p>
 
 <ul>
 <li>Using Page Object Factory</li>
@@ -811,7 +764,7 @@
 <a name='using_page_object_factory'> </a>
 <h2 id='using_page_object_factory'>Using Page Object Factory</h2>
 
-<p>To use TAF extended webelement with Page Object Factory initialization just define your elements with type <em><strong>EWebElement</strong></em> instead of <em><strong>WebElement</strong></em>. During the usage of <em><strong>CustomPageFactory</strong></em> class page factory initialization these elements will automatically be initialized. Look at the example below.</p>
+<p>To use TAF enhanced webelement with Page Object Factory initialization just define your elements with type <em><strong>EWebElement</strong></em> instead of <em><strong>WebElement</strong></em>. During the usage of <em><strong>CustomPageFactory</strong></em> class page factory initialization these elements will automatically be initialized. Look at the example below.</p>
 <pre class='brush: java;'>
 public class GoogleLocator{
 	
@@ -825,16 +778,60 @@ public class GoogleLocator{
 	public EWebElement searchResult;
 }
 </pre>
-<p><em><strong>EWebElement</strong></em> class by default store all the elements identified by a give locator in its instance, its similar to doing <em>driver.findElements(By.id(&#8220;selector&#8221;))</em>. In case you need to get a particular element for the extended webelement object you can use certain given methods like <em><strong>firstElement, lastElement, nthWebElement,</strong></em> etc. You can also get the extended webelement object similar to webelement.</p>
+<p><em><strong>EWebElement</strong></em> class by default store all the elements identified by a give locator in its instance, its similar to doing <em>driver.findElements(By.id(&#8220;selector&#8221;))</em>. In case you need to get a particular element for the enhanced webelement object you can use certain given methods like <em><strong>firstElement, lastElement, nthWebElement,</strong></em> etc. You can also get the enhanced webelement object similar to webelement.</p>
 <a name='using_object_intialization'> </a>
 <h2 id='using_object_initialization'>Using Object Initialization</h2>
 
-<p>You can create instances of extended webelement class object by passing a single or a list of <em><strong>WebElement</strong></em> object to the constructor of <em><strong>EWebElement</strong></em> class Look at the example below:</p>
+<p>You can create instances of enhanced webelement class object by passing a single or a list of <em><strong>WebElement</strong></em> object to the constructor of <em><strong>EWebElement</strong></em> class Look at the example below:</p>
 <pre class='brush: java;'>
 EWebElement eWebElement1 = new EWebElement(driver.findElement(By.id("selector"));
 
 EWebElement eWebElement2 = new EWebElement(driver.findElements(By.id("selector"));
+</pre><a name='filtering_with_enhanced_webelement'> </a>
+<h1 id='filtering_with_enhanced_webelement'>Filtering with Enhanced WebElement</h1>
+
+<p>We all know that while using Page Object Factory we wont be able to identify WebElements with dynamic values as the annotations only accepts static values. Also in case we want to select only a set of elements based on certain criteria we have to write our own logic to do so. To overcome these issues the enhanced webelement comes with a filtering option. This allows users to filter a set of webelements using multiple filter criteria. For ex.</p>
+
+<p>Consider I have a page with following html content:</p>
+<pre class='brush: xml;'>
+ 
+<span id='location'>Pharmacy</span>
+<span class='small' id='id' name='name'>Small 1</span>
+<span class='large' id='id2' name='exact_name_value'>Small 2</span>
+<span class='small' id='id3' name='ends_with_name'>Small 3</span>
+<span class='large' id='id4' name='name_starts_with'>Small 4</span>
+ 
 </pre>
+<p>If I want to select an element having tag <em>&#8220;span&#8221;</em> and which starts-with value <em>&#8220;name&#8221;</em> and have a class value <em>&#8220;large&#8221;</em>, I can simple do that as follows:</p>
+<pre class='brush: java;'>
+@FindBy(tagName = "span")
+EWebElement elements;
+
+EWebElement filteredElements = elements.filter( whereClass(equalsValue("large")), 
+													whereName(startsWith("name")));
+
+  
+</pre>
+<p>There are lot of options available for Filtering and text-matching for available methods just take a look at the Java documentation of following.</p>
+
+<ul>
+<li><a href='http://menonvarun.github.io/taf/javadoc/org/imaginea/test/automation/framework/dom/filter/Filter.html'>Filter Options</a></li>
+
+<li><a href='http://menonvarun.github.io/taf/javadoc/org/imaginea/test/automation/framework/dom/filter/TextMatching.html'>Test Matching Options</a></li>
+</ul>
+
+<p>For simplicity all the util methods under Filter and TextMatching class are static methods, so in case you need better readability you can simply do a static import of these classes in your Util classes as mentioned below:</p>
+<pre class='brush: java;'>
+
+import static org.imaginea.test.automation.framework.dom.filter.Filter.*;
+import static org.imaginea.test.automation.framework.dom.filter.TextMatching.*;
+ 
+</pre><a name='jquery_features'> </a>
+<h2 id='jquery_features'>Jquery Features</h2>
+
+<p>While doing automation many a times we need to do different operations on a WebElemnt object like finding siblings, finding a child, moving to the parent etc. Writing code for such operations may be very cumbersome and time consuming. To solve this enhanced webelement contains certain <em><strong>JQuery</strong></em> like methods in it which allows user to easily do webelement related operations like <em><strong>prev, next, parent, child, siblings</strong></em> etc.</p>
+
+<p>To get the list of all the methods available just look at the <a href='http://menonvarun.github.io/taf/javadoc/org/imaginea/test/automation/framework/dom/EWebElement.html'>EWebElement documentation</a></p>
       </div>
 	  <p style="position:relative;">
 <!--
