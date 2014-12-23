@@ -13,17 +13,12 @@ public class DeafultConfigTest {
 		Assert.assertEquals(configA, configB);
 	}
 
-	@Test(description="Verify that the default file gets loaded from src/test/resources when not mentioned")
-	public void testDefaultLocationForPropFile(){
-		
-	}
-	
 	@Test(description="Verify that the stored value in properties file is returned")
 	public void verifyStoredConfigValue(){
 		DefaultConfig config = DefaultConfig.getDefaultConfig();
 		String value = config.getConfigValue("driver.name");
 		 
-		Assert.assertEquals(value, "firefox");		
+		Assert.assertEquals(value, "htmlunit");
 	}
 	
 	@Test(description="Verify the stored config value can be modified")
