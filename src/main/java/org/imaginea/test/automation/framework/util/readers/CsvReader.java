@@ -1,9 +1,6 @@
 package org.imaginea.test.automation.framework.util.readers;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -47,6 +44,10 @@ public class CsvReader {
 	    public CsvReader(File inpFile , String separator, String quotechar) throws IOException{
 	        this(new FileReader(inpFile),separator.charAt(0),quotechar.charAt(0));
 	    }
+
+        public CsvReader(InputStream fileStream , String separator, String quotechar) throws IOException{
+            this(new InputStreamReader(fileStream),separator.charAt(0),quotechar.charAt(0));
+        }
 	    
 	    public CsvReader(String filePath) throws IOException{
 	        this(new FileReader(filePath),',','"');
@@ -54,6 +55,10 @@ public class CsvReader {
 	    
 	    public CsvReader(File inpFile) throws IOException{
 	        this(new FileReader(inpFile),',','"');
+	    }
+
+        public CsvReader(InputStream fileStream) throws IOException {
+            this(new InputStreamReader(fileStream), ',', '"');
 	    }
 
 	    /**

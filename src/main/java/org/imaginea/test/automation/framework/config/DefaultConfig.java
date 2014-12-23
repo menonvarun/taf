@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -60,30 +61,25 @@ public class DefaultConfig {
 	
 	private void loadConfig() {
 		String path = System.getProperty("taf.config");
+        InputStream configFile;
 		configData = new Properties();
-		if (path == null) {
-			path = ClassLoader.getSystemResource("taf.properties").getPath();
+        try {
+            if (path == null) {
+                configFile = this.getClass().getClassLoader().getResourceAsStream("taf.properties");
+            } else {
+                configFile = new FileInputStream(path);
+            }
+            configData.load(configFile);
+        } catch (IOException e) {
+            throw new ConfigException(
+                    "Unable to load default properties file from path: " + path +
+                            ".Please make sure that the propertis taf.properties is deifned under src/test/resources folder of your project.\n " +
+                            "Or the path to the properties is set to the property 'taf.config'.", e);
+        } catch (Exception e) {
+            throw new ConfigException("Unable to load file because of: "
+                    + e.getMessage());
 		}
-		File configFile = new File(path);
-		if (configFile.exists() && configFile.isFile()) {
-			try {
-				configData.load(new FileInputStream(configFile));
-			} catch (IOException e) {
-				throw new ConfigException(
-						"Unable to load default properties file." +
-						"Please make sure that the propertis taf.properties is deifned under src/test/resources folder of your project.\n " +
-						"Or the path to the properties is set to the property 'taf.config'.");
-			} catch (Exception e) {
-				throw new ConfigException("Unable to load file because of: "
-						+ e.getMessage());
-			}
-		}else{
-			throw new ConfigException(
-					"Unable to load default properties file." +
-					"Please make sure that the propertis taf.properties is deifned under src/test/resources folder of your project.\n " +
-					"Or the path to the properties is set to the property 'taf.config'.");
-		}
-	}	
+	}
 	
 
 }

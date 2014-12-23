@@ -197,6 +197,14 @@ public class CacheDriverFactory {
 		return CacheDriverFactory.driverProvider;
 		
 	}
+
+    /**
+     * Sets the Driver Provider
+     * @param driverProvider A IDriverProvider implementation object
+     */
+    public void setDriverProvider(IDriverProvider driverProvider){
+        CacheDriverFactory.driverProvider = driverProvider;
+    }
 	
 	private synchronized static void addShutdownHookToDriver(WebDriver driver){
 		CacheDriverFactory driverfactory = new CacheDriverFactory();

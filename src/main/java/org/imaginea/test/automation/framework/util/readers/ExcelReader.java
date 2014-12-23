@@ -1,7 +1,6 @@
 package org.imaginea.test.automation.framework.util.readers;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,10 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.text.SimpleDateFormat;
 
-import org.apache.poi.hssf.usermodel.*;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.imaginea.test.automation.framework.exceptions.TafRuntimeException;
 
 /**
  * Utility to read Excel files. This file makes use of apache poi for reading excel files.
@@ -39,7 +38,7 @@ public class ExcelReader {
 	 * @throws IOException
 	 */
 	public ExcelReader(String filePath) throws FileNotFoundException,
-			IOException {
+			IOException  {
 		this(new File(filePath));
 	}
 
@@ -49,9 +48,13 @@ public class ExcelReader {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public ExcelReader(File file) throws IOException, FileNotFoundException {
+	public ExcelReader(File file) throws IOException, FileNotFoundException  {
 		this.openFile(file, 0);
 	}
+
+    public ExcelReader(InputStream fileStream) throws IOException, FileNotFoundException  {
+        this.openFile(fileStream, 0);
+    }
 	
 	/**
 	 * 
@@ -60,9 +63,13 @@ public class ExcelReader {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public ExcelReader(String filePath, int sheetNo) throws IOException, FileNotFoundException {
+	public ExcelReader(String filePath, int sheetNo) throws IOException, FileNotFoundException  {
 		this.openFile(filePath, sheetNo);
 	}
+
+    public ExcelReader(InputStream fileStream, int sheetNo) throws IOException, FileNotFoundException  {
+        this.openFile(fileStream, sheetNo);
+    }
 	
 	/**
 	 * 
@@ -74,6 +81,10 @@ public class ExcelReader {
 	public ExcelReader(String filePath, String sheetName) throws IOException, FileNotFoundException {
 		this.openFile(filePath, sheetName);
 	}
+
+    public ExcelReader(InputStream fileStream, String sheetName) throws IOException, FileNotFoundException {
+        this.openFile(fileStream, sheetName);
+    }
 	
 	/**
 	 * 
@@ -85,7 +96,7 @@ public class ExcelReader {
 	public ExcelReader(File file, int sheetNo) throws IOException, FileNotFoundException {
 		this.openFile(file, sheetNo);
 	}
-	
+
 	/**
 	 * 
 	 * @param file
@@ -111,13 +122,17 @@ public class ExcelReader {
 	 * @throws IOException
 	 * @throws FileNotFoundException
 	 */
-	public void openFile(File file, int sheetNo) throws IOException,
-			FileNotFoundException {
+    public void openFile(File file, int sheetNo) throws IOException,
+            FileNotFoundException {
+        this.openWorkbook(file);
+        openSheet = openWorkbook.getSheetAt(sheetNo);
+    }
 
-		this.openWorkbook(file);
-		openSheet = openWorkbook.getSheetAt(sheetNo);
-
-	}
+    public void openFile(InputStream fileStream, int sheetNo) throws IOException,
+            FileNotFoundException {
+        this.openWorkbook(fileStream);
+        openSheet = openWorkbook.getSheetAt(sheetNo);
+    }
 
 	/**
 	 * 
@@ -143,30 +158,36 @@ public class ExcelReader {
 		openSheet = openWorkbook.getSheet(sheetName);
 	}
 
+    public void openFile(InputStream fileStream, String sheetName)
+            throws FileNotFoundException, IOException {
+        this.openWorkbook(fileStream);
+        openSheet = openWorkbook.getSheet(sheetName);
+    }
+
 	private void openWorkbook(String filePath) throws FileNotFoundException,
 			IOException {
 		this.openWorkbook(new File(filePath));
 	}
 
-	private void openWorkbook(File file) throws FileNotFoundException,
-			IOException {
-		InputStream inp;
-		try {
-			inp = new FileInputStream(file);
+    private void openWorkbook(File file) throws FileNotFoundException,
+            IOException {
+        try{
+            openWorkbook = WorkbookFactory.create(file);
+        } catch (InvalidFormatException e ){
+            throw new TafRuntimeException(e);
+        }
+    }
 
-			if (isXlsx(file))
-				openWorkbook = new XSSFWorkbook(inp);
-			else
-				openWorkbook = new HSSFWorkbook(inp);
+    private void openWorkbook(InputStream fileStream) throws FileNotFoundException,
+            IOException {
+        try {
+            openWorkbook = WorkbookFactory.create(fileStream);
+        } catch (InvalidFormatException e ){
+            throw new TafRuntimeException(e);
+        }
+    }
 
-		} catch (FileNotFoundException e) {
-			throw e;
-		} catch (IOException e) {
-			throw e;
-		}
-	}
-	
-	public void openSheet(int sheetNo){
+    public void openSheet(int sheetNo){
 		openSheet = openWorkbook.getSheetAt(sheetNo);
 	}
 	
@@ -283,7 +304,6 @@ public class ExcelReader {
 				valueList.add(data);
 			}
 		}
-
 	}
 
 	public Map<String, List<String>> getStoredData() {
@@ -292,12 +312,4 @@ public class ExcelReader {
 		}
 		return storedData;
 	}
-
-	private boolean isXlsx(File fl) {
-		String fileName = fl.getName();
-		if (fileName.endsWith("xlsx"))
-			return true;
-		return false;
-	}
-
 }
