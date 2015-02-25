@@ -2,3 +2,8 @@ target
 bin
 test-output
 src/test/resources
+.idea
+.settings
+doc/
+javadoc/
+surefire-reports/
