@@ -73,22 +73,26 @@ public abstract class PageObjectUtils extends Utilities{
 	}
 	
 	public String getUrl(PageClass page){
-		String baseUrl = config.getConfigValue("base_url");
 		String pageUrl = page.toUrl();
-		URI finalUri = null;
-		try {
-			URI baseUri = new URI(baseUrl);
-			URI pageUri = new URI(pageUrl);
-			
-			if(!pageUri.isAbsolute())
-				finalUri = baseUri.resolve(pageUri);
-			else
-				finalUri = pageUri;
-		} catch (URISyntaxException e) {
-			throw new RuntimeException("Issue while getting url, make sure you had provided the correct base and page url.",e);
-		}
-		return finalUri.toString();		
+        return getUrl(pageUrl);
 	}
+
+    public String getUrl(String url) {
+        String baseUrl = config.getConfigValue("base_url");
+        URI finalUri = null;
+        try {
+            URI baseUri = new URI(baseUrl);
+            URI pageUri = new URI(url);
+
+            if(!pageUri.isAbsolute())
+                finalUri = baseUri.resolve(pageUri);
+            else
+                finalUri = pageUri;
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Issue while getting url, make sure you had provided the correct base and page url.",e);
+        }
+        return finalUri.toString();
+    }
 	
 	public <T> T to(WebDriver driver, T page){
 		String url = getUrl((PageClass) page);
@@ -325,6 +329,17 @@ public abstract class PageObjectUtils extends Utilities{
     public <T> boolean isAt( T page, String filePath){
         File file = new File(filePath);
         return isAt(page, file);
+    }
+
+    /**
+     * Navigates the browser to the given url.
+     * If the provided url argument is not absolute it will get appended to the baseUrl.
+     * Else the browser will directly get navigated to the given url
+     * @param url The url to which the browser have to be navigated to, can be a extended url to the base url or an absolute url.
+     */
+    public void navigateTo(String url){
+        String navigateUrl = getUrl(url);
+        browser.getDriver().get(navigateUrl);
     }
 
     private void validatePageClass(Class<?> pageClass){
