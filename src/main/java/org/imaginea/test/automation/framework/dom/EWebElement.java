@@ -99,7 +99,7 @@ public class EWebElement {
 	 * Get nth element
 	 * 
 	 * @param index
-	 * @return
+	 * @return WebElement object at the said index
 	 */
 	public WebElement nthWebElement(int index) {
 		if (elements.size() >= index)
@@ -154,7 +154,8 @@ public class EWebElement {
 
 	/**
 	 * Get all preceding siblings of each element in the set of matched
-	 * elements. * @return
+	 * elements.
+     * @return EWebElement object containing all the previous elements
 	 */
 	public EWebElement prevAll() {
 		EWebElement eWebElement = find(By.xpath("preceding-sibling::*"));
@@ -164,7 +165,7 @@ public class EWebElement {
 	/**
 	 * Get the immediately preceding sibling.
 	 * 
-	 * @return
+	 * @return EWebElement object containing the previous element
 	 */
 	public EWebElement prev() {
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
@@ -175,7 +176,7 @@ public class EWebElement {
 	/**
 	 * Get the immediately following sibling.
 	 * 
-	 * @return
+	 * @return EWebElement object containing the next element
 	 */
 	public EWebElement next() {
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
@@ -187,7 +188,7 @@ public class EWebElement {
 	 * Get all following siblings of each element up to .
 	 * 
 	 * @param xpathExpression
-	 * @return
+	 * @return EWebElement object containing next elements based on the xpathExpression criteria
 	 */
 	public EWebElement nextUntil(String xpathExpression) {
 		EWebElement eWebElement = find(By
@@ -200,7 +201,7 @@ public class EWebElement {
 	 * Get all preceding siblings of each element up to .
 	 * 
 	 * @param xpathExpression
-	 * @return
+	 * @return EWebElement object containing previous elements based on the xpathExpression criteria
 	 */
 	public EWebElement prevUntil(String xpathExpression) {
 		EWebElement eWebElement = find(By
@@ -214,7 +215,7 @@ public class EWebElement {
 	 * elements.
 	 * 
 	 * @param cssSelector
-	 * @return
+	 * @return EWebElement object containing under the said set of elements that matches the given css criteria
 	 */
 	public EWebElement find(String cssSelector) {
 		EWebElement eWebElement = find(By.cssSelector(cssSelector));
@@ -224,7 +225,7 @@ public class EWebElement {
 	/**
 	 * Get all sibling of current element .
 	 * 
-	 * @return
+	 * @return EWebElement object containing all the siblings
 	 */
 	public EWebElement siblings() {
 		return prevAll().nextAll();
@@ -233,7 +234,7 @@ public class EWebElement {
 	/**
 	 * Get immediate parent of current web element
 	 * 
-	 * @return
+	 * @return EWebElement object containing the parent element
 	 */
 	public EWebElement parent() {
 
@@ -246,7 +247,7 @@ public class EWebElement {
 	 * Get the ancestors of the current elements, up to the matched element.
 	 * 
 	 * @param xpathExpression
-	 * @return
+	 * @return EWebElement object containing all parents until the given xpathExpression
 	 */
 	public EWebElement parentsUntil(String xpathExpression) {
 		EWebElement eWebElement = find(By
@@ -257,7 +258,7 @@ public class EWebElement {
 	/**
 	 * Get the all parents of current node in list .
 	 * 
-	 * @return
+	 * @return EWebElement object containing parents of all the elements in represented byt this object
 	 */
 	public EWebElement parents() {
 		EWebElement eWebElement = find(By.xpath("ancestor-or-self::*"));
@@ -270,7 +271,7 @@ public class EWebElement {
 	 * ancestors in the DOM tree.
 	 * 
 	 * @param xpathSelector
-	 * @return
+	 * @return EWebElement object containing elements closest to the given xpathExpression
 	 */
 	public EWebElement closest(String xpathSelector) {
 		EWebElement eWebElement = new EWebElement(firstElement().findElement(
@@ -304,7 +305,7 @@ public class EWebElement {
 	 * Get the children of the current elements, up to the matched element.
 	 * 
 	 * @param xpathExpression
-	 * @return
+	 * @return EWebElement object containing all the child elements until the give xpathExpression
 	 */
 	public EWebElement childrenUntil(String xpathExpression) {
 		EWebElement eWebElement = find(By
@@ -330,7 +331,7 @@ public class EWebElement {
      * elements using the given By locator.
      *
      * @param by By locator
-     * @return
+     * @return EWebElement object
      */
 	public EWebElement find(By by) {
     	List<WebElement> webElements = firstElement().findElements(by);
@@ -346,7 +347,7 @@ public class EWebElement {
 
     /**
      * Executes the send keys command on the first element in the elements list stored inside.
-     * @param keysToSend
+     * @param keysToSend The text that needs to be entered
      */
     public void sendKeys(CharSequence... keysToSend) {
         firstElement().sendKeys();

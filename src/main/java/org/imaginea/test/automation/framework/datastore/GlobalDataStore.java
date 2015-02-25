@@ -66,7 +66,8 @@ public class GlobalDataStore {
 	
 	/**
 	 * Use this method to retrieve the data that has been stored for a particular thread.
-	 * @param key The key which was used to store the data 
+	 * @param key The key which was used to store the data
+     * @param <T> The type of data object to be returned
 	 * @return The value stored for the said key or <code>null</code> in case no key was found.
 	 */
 	@SuppressWarnings("unchecked")
@@ -83,7 +84,8 @@ public class GlobalDataStore {
 	
 	/**
 	 * Use this method to retrieve the data that has been stored to be available across the whole execution.
-	 * @param key The key which was used to store the data 
+	 * @param key The key which was used to store the data
+     * @param <T> The type of data object to be returned
 	 * @return The value stored for the said key or <code>null</code> in case no key was found.
 	 */
 	@SuppressWarnings("unchecked")
@@ -98,8 +100,9 @@ public class GlobalDataStore {
 	/**
 	 * Use this method to retrieve the data that has been stored for a particular thread.
 	 * @param key The key which was used to store the data 
-	 * @param defaultValue The default value that needs to be returned in case the key is not found.
-	 * 
+     * @param defaultValue The default value that needs to be returned in case the key is not found.
+     * @param <T> The type of data object to be returned
+     *
 	 * @return The value stored for the said key or the given <code><i>defaultValue</i></code> in case no key was found.
 	 */
 	@SuppressWarnings("unchecked")
@@ -114,7 +117,8 @@ public class GlobalDataStore {
 	 * Use this method to retrieve the data that has been stored to be available across the whole execution.
 	 * @param key The key which was used to store the data 
 	 * @param defaultValue The default value that needs to be returned in case the key is not found.
-	 * 
+	 * @param <T> The type of data object to be returned
+     *
 	 * @return The value stored for the said key or the given <code><i>defaultValue</i></code> in case no key was found.
 	 */
 	@SuppressWarnings("unchecked")
