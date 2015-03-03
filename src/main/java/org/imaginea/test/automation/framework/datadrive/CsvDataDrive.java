@@ -21,8 +21,7 @@ public class CsvDataDrive extends BaseDataDrive{
 		try {
 			csvReader = new CsvReader(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new DataDriveException(e);
 		}		
 	}
 	
@@ -34,8 +33,7 @@ public class CsvDataDrive extends BaseDataDrive{
 		try {
 			csvReader = new CsvReader(file, separator, quotecharacter);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            throw new DataDriveException(e);
 		}
 		
 	}

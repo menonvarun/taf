@@ -21,8 +21,7 @@ public class ExcelDataDrive extends BaseDataDrive{
 		try {
 			excelReader = new ExcelReader(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            throw new DataDriveException(e);
 		}		
 	}
 	
@@ -34,8 +33,7 @@ public class ExcelDataDrive extends BaseDataDrive{
 		try {
 			excelReader = new ExcelReader(file, sheetNo);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+            throw new DataDriveException(e);
 		}
 		
 	}
