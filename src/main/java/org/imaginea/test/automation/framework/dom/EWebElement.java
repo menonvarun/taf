@@ -54,7 +54,7 @@ public class EWebElement {
 	/**
 	 * Get the first web element
 	 */
-	public WebElement firstElement() throws NoEWebElementException {
+	public WebElement firstElement(){
 		if (elements.size() > 0)
 			return elements.get(0);
 		throw new NoSuchElementException("No element was found in the given EWebElement");
@@ -68,7 +68,7 @@ public class EWebElement {
 	public EWebElement firstEWebElement() {
 		if (elements.size() > 0)
 			return new EWebElement(elements.get(0));
-		throw new NoSuchElementException("No element was found in the given EWebElement");
+		throw new NoEWebElementException("No element was found in the given EWebElement");
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class EWebElement {
 		if (elements.size() >= index) {
 			return new EWebElement(elements.get(index));
 		}
-		return null;
+        throw new NoEWebElementException("No element was found at index "+ index +"in the given EWebElement");
 	}
 
 	/**

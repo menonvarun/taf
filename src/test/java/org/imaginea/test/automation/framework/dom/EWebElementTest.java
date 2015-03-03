@@ -1,6 +1,7 @@
 package org.imaginea.test.automation.framework.dom;
 
 import org.imaginea.test.automation.framework.TafTestClass;
+import org.mockito.Mockito;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,10 @@ import org.testng.annotations.Test;
 
 import static org.imaginea.test.automation.framework.dom.filter.Filter.*;
 import static org.imaginea.test.automation.framework.dom.filter.TextMatching.*;
+
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Created by menonvarun on 04-12-2014.
@@ -176,5 +180,28 @@ public class EWebElementTest extends TafTestClass{
         List<WebElement> elements = driver.findElements(By.cssSelector("input"));
         EWebElement eWebElement = new EWebElement(elements).filter(whereAttribute("value", contains("test")));
         Assert.assertEquals(eWebElement.size(), 0);
+    }
+
+    @Test
+    public void testEWebElementCreationUsingASingleWebElement(){
+        WebElement element = driver.findElement(By.cssSelector("input"));
+        EWebElement eWebElement = new EWebElement(element);
+        Assert.assertEquals(eWebElement.size(),1);
+        Assert.assertEquals(eWebElement.firstElement(), element);
+    }
+
+    @Test
+    public void testClickFunction(){
+        List<WebElement> elements = new ArrayList<>();
+        WebElement element1 = Mockito.mock(WebElement.class);
+        WebElement element2 = Mockito.mock(WebElement.class);
+
+        elements.add(element1);
+        elements.add(element2);
+
+        EWebElement eWebElement = new EWebElement(elements);
+        eWebElement.click();
+        Mockito.verify(element1).click();
+
     }
 }
