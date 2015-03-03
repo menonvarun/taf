@@ -6,6 +6,7 @@ import org.imaginea.test.automation.framework.util.Utilities;
 import static org.mockito.Mockito.*;
 
 
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -23,9 +24,9 @@ public class UtilitiesTest extends TafTestClass {
 
     Utilities utilities = new Utilities();
 
-    @MockitoAnnotations.Mock private WebElement element;
-    @MockitoAnnotations.Mock private PageClass page;
-    @MockitoAnnotations.Mock private List<WebElement> elements;
+    @Mock private WebElement element;
+    @Mock private PageClass page;
+    @Mock private List<WebElement> elements;
 
     @BeforeMethod
     public void setup(){
