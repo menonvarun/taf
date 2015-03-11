@@ -1,5 +1,12 @@
 package org.imaginea.test.automation.framework.dom;
 
+import org.imaginea.test.automation.framework.exceptions.UnexpectedPageException;
+import org.imaginea.test.automation.framework.pagemodel.Browser;
+import org.imaginea.test.automation.framework.pagemodel.PageClass;
+import org.imaginea.test.automation.framework.testclasses.FailingPageClassA;
+import org.imaginea.test.automation.framework.testclasses.FailingPageClassB;
+import org.imaginea.test.automation.framework.testclasses.PassingPageClassA;
+import org.imaginea.test.automation.framework.testclasses.PassingPageClassB;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
@@ -38,6 +45,51 @@ public class EWebElementActionsTest {
         EWebElement eWebElement = new EWebElement(elements);
         eWebElement.click();
         verify(element1).click();
+    }
+
+    @Test
+    public void testClickFunctionReturnFirstSuccessfulPageValidation(){
+        EWebElement eWebElement = new EWebElement(new Browser(), elements);
+        List<Class<? extends PageClass>> navigablePageClassesA = new ArrayList<>();
+        navigablePageClassesA.add(PassingPageClassA.class);
+        navigablePageClassesA.add(PassingPageClassB.class);
+
+        eWebElement.setNavigablePageClasses(navigablePageClassesA);
+        PageClass pageA = eWebElement.click();
+        Assert.assertTrue(pageA instanceof PassingPageClassA);
+
+
+        List<Class<? extends PageClass>> navigablePageClassesB = new ArrayList<>();
+        navigablePageClassesB.add(FailingPageClassA.class);
+        navigablePageClassesB.add(PassingPageClassB.class);
+
+        eWebElement.setNavigablePageClasses(navigablePageClassesB);
+        PageClass pageB = eWebElement.click();
+        Assert.assertTrue(pageB instanceof PassingPageClassB);
+    }
+
+    @Test(expectedExceptions = {UnexpectedPageException.class}, expectedExceptionsMessageRegExp = "Browser is not on any of the specified pages.*" )
+    public void testClickFunctionThrowsExceptionIfPageValidationFails(){
+        EWebElement eWebElement = new EWebElement(new Browser(), elements);
+        List<Class<? extends PageClass>> navigablePageClasses = new ArrayList<>();
+        navigablePageClasses.add(FailingPageClassA.class);
+        navigablePageClasses.add(FailingPageClassB.class);
+
+        eWebElement.setNavigablePageClasses(navigablePageClasses);
+        eWebElement.click();
+    }
+
+    @Test
+    public void testClickFunctionPageValidationCanBeDisabledWhileUsingClick(){
+        EWebElement eWebElement = new EWebElement(new Browser(), elements);
+        List<Class<? extends PageClass>> navigablePageClasses = new ArrayList<>();
+        navigablePageClasses.add(PassingPageClassA.class);
+        navigablePageClasses.add(PassingPageClassB.class);
+
+        eWebElement.setNavigablePageClasses(navigablePageClasses);
+        PageClass page = eWebElement.click(false);
+        Assert.assertNull(page, "Expected page object to be null when page navigation validation is disabled but found "
+                + page + " object.");
     }
 
     @Test
