@@ -1,6 +1,7 @@
 package org.imaginea.test.automation.framework.util.selenium.ui;
 
 
+import org.imaginea.test.automation.framework.dom.EWebElement;
 import org.imaginea.test.automation.framework.pagemodel.Browser;
 import org.imaginea.test.automation.framework.pagemodel.PageClass;
 import org.openqa.selenium.NoSuchElementException;
@@ -35,6 +36,26 @@ public class TafExpectedConditions {
         };
     }
 
+    public static ExpectedCondition<Boolean> presenceOfElement(
+            final EWebElement eWebElement) {
+        return new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                try{
+                    eWebElement.getTagName();
+                }catch(NoSuchElementException e){
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public String toString() {
+                return "presence of element located by: " + eWebElement;
+            }
+        };
+    }
+
     public static ExpectedCondition<Boolean> presenceOfElements(
             final List<WebElement> elements) {
         return new ExpectedCondition<Boolean>() {
@@ -48,6 +69,30 @@ public class TafExpectedConditions {
             @Override
             public String toString() {
                 return "presence of element located by: " + elements;
+            }
+        };
+    }
+
+    public static ExpectedCondition<EWebElement> visibilityOf(
+            final EWebElement eWebElement) {
+        return new ExpectedCondition<EWebElement>() {
+            @Override
+            public EWebElement apply(WebDriver driver) {
+                boolean isVisible = false;
+                try{
+                    isVisible = eWebElement.isDisplayed();
+                }catch(NoSuchElementException e){
+                    /*Intentionally skipping as there is a possibility that element may not be available on the page.*/
+                }
+                if(isVisible)
+                    return eWebElement;
+                else
+                    return null;
+            }
+
+            @Override
+            public String toString() {
+                return "visibility of " + eWebElement;
             }
         };
     }

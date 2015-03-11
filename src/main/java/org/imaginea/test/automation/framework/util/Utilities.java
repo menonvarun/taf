@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
+import org.imaginea.test.automation.framework.dom.EWebElement;
 import org.imaginea.test.automation.framework.pagemodel.Browser;
 import org.imaginea.test.automation.framework.pagemodel.PageClass;
 import org.imaginea.test.automation.framework.util.selenium.ui.TafExpectedConditions;
@@ -64,7 +65,46 @@ public class Utilities {
     public void waitForElementPresent(WebDriver driver, WebElement element, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions){
         waitFor(driver, timeout, sleepInterval, TafExpectedConditions.presenceOfElement(element), ignoreExceptions);
     }
-	
+
+    /**
+     * Util method to wait for the element to be present on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement  {@link EWebElement} object of the element that we have to wait for to be present.
+     */
+    public void waitForElementPresent(WebDriver driver, EWebElement eWebElement){
+        waitForElementPresent(driver, eWebElement, DEFAULT_TIMEOUT);
+    }
+
+    /**
+     * Util method to wait for the element to be present on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement  {@link EWebElement} object of the element that we have to wait for to be present.
+     * @param timeout  Time to wait for.
+     * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
+     */
+    public void waitForElementPresent(WebDriver driver, EWebElement eWebElement, long timeout, Class<? extends Throwable>... ignoreExceptions){
+        waitForElementPresent(driver, eWebElement, timeout, DEFAULT_SLEEP_INTERVAL, ignoreExceptions);
+    }
+
+    /**
+     * Util method to wait for the element to be present on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement  {@link EWebElement} object of the element that we have to wait for to be present.
+     * @param timeout  Time to wait for.
+     * @param sleepInterval The duration in milliseconds to sleep between polls.
+     * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
+     */
+    public void waitForElementPresent(WebDriver driver, EWebElement eWebElement, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions){
+        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.presenceOfElement(eWebElement), ignoreExceptions);
+    }
+
 	/**
 	 * Util method to wait for the List of elements to be present on the page.
 	 * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
@@ -144,6 +184,47 @@ public class Utilities {
      */
     public void waitForElementToBeVisible(WebDriver driver, WebElement element, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions){
         waitFor(driver, timeout, sleepInterval, ExpectedConditions.visibilityOf(element), addExceptions(ignoreExceptions, NoSuchElementException.class));
+    }
+
+    /**
+     * Util method to wait for the element to be visible on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement {@link EWebElement} object that we have to wait for to be visible.
+     * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
+     */
+    public void waitForElementToBeVisible(WebDriver driver, EWebElement eWebElement, Class<? extends Throwable>... ignoreExceptions){
+        waitForElementToBeVisible(driver, eWebElement, DEFAULT_TIMEOUT, ignoreExceptions);
+    }
+
+    /**
+     * Util method to wait for the element to be visible on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement {@link EWebElement} object that we have to wait for to be visible.
+     * @param timeout  Time to wait for.
+     */
+    public void waitForElementToBeVisible(WebDriver driver, EWebElement eWebElement, long timeout, Class<? extends Throwable>... ignoreExceptions){
+        waitForElementToBeVisible(driver, eWebElement, timeout, DEFAULT_SLEEP_INTERVAL, ignoreExceptions);
+    }
+
+    /**
+     * Util method to wait for the element to be visible on the page.
+     * This method should be used while using Page Object Factory model of locating strategy provided by the framework.
+     * This method will wait for the default timeout of 60sec
+     * @param driver  {@link WebDriver} object. This object is not used by the method but as {@link WebDriverWait} class
+     * needs it, it have to be provided.
+     * @param eWebElement {@link EWebElement} object that we have to wait for to be visible.
+     * @param timeout  Time to wait for.
+     * @param sleepInterval The duration in milliseconds to sleep between polls.
+     * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
+     */
+    public void waitForElementToBeVisible(WebDriver driver, EWebElement eWebElement, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions){
+        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.visibilityOf(eWebElement), addExceptions(ignoreExceptions, NoSuchElementException.class));
     }
 
     /**
@@ -263,7 +344,7 @@ public class Utilities {
 
     /**
      * Utility to load a file from the resource directory
-     * @param fileName or fielpath of the file under resource directory
+     * @param fileName or filepath of the file under resource directory
      * @return File object of the said file
      */
 	public File evaluateFileFromResourceDirectory(String fileName) {
@@ -282,5 +363,4 @@ public class Utilities {
         System.arraycopy(addExceptions, 0, totalExceptions, ignoredExceptionsLength, addExceptionsLength);
         return totalExceptions;
     }
-
 }
