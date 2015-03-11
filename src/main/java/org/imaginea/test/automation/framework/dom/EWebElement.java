@@ -2,6 +2,10 @@ package org.imaginea.test.automation.framework.dom;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.imaginea.test.automation.framework.exceptions.UnexpectedPageException;
+import org.imaginea.test.automation.framework.pagemodel.Browser;
+import org.imaginea.test.automation.framework.pagemodel.PageClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
@@ -10,8 +14,11 @@ import org.imaginea.test.automation.framework.dom.filter.FilterType;
 import org.openqa.selenium.WebElement;
 
 public class EWebElement {
-
-	List<WebElement> elements;
+    private String name = "Extended WebElement";
+    private Browser browser;
+	private List<WebElement> elements;
+    private List<Class<? extends PageClass>> navigablePageClasses = new ArrayList<>();
+    boolean required = true;
 	
 	public EWebElement() {
 		this.elements = new ArrayList<WebElement>();
@@ -26,12 +33,66 @@ public class EWebElement {
 		elements.add(element);
 	}
 
+    public EWebElement(Browser browser, List<WebElement> list) {
+        this.browser = browser;
+        this.elements = list;
+    }
+
+    public EWebElement(Browser browser, WebElement element) {
+        this.elements = new ArrayList<WebElement>();
+        elements.add(element);
+        this.browser = browser;
+    }
+
+        public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public List<Class<? extends PageClass>> getNavigablePageClasses() {
+        return navigablePageClasses;
+    }
+
+    public void setNavigablePageClasses(List<Class<? extends PageClass>> navigablePageClasses) {
+        this.navigablePageClasses = navigablePageClasses;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
+    }
+
 	/**
-	 * Click on first web element represented by the said extended webelement
+	 * Click on first web element represented by the said extended webelement and validates whether
+     * Page gets navigated to any of the expected navigable page classes mentioned as part of the ElementOptions 
+     * Annotation or set explicitly using the setNavigablePageClasses() method.
+     *
+     * @return The page class object for which the validation was successful else null if no navigable page classes were defined.
 	 */
-	public void click() {
-		firstElement().click();
+	public <T extends PageClass> T click() {
+		return click(true);
 	}
+
+    /**
+     * Click on first web element represented by the said extended webelement and validates whether
+     * Page gets navigated to any of the expected navigable page classes mentioned as part of the ElementOptions
+     * Annotation or set explicitly using the setNavigablePageClasses() method.
+     *
+     * @param doPageValidation set it to false in case you dont want any navigable page validation to be done.
+     * @return The page class object for which the validation was successful else null if no navigable page classes were defined.
+     */
+    public <T extends PageClass> T click(boolean doPageValidation) {
+        firstElement().click();
+        if(doPageValidation)
+            return validatePageNavigation(navigablePageClasses);
+        return null;
+    }
 
     /**
 	 * Click on all webelement represented by the said extended webelement
@@ -474,5 +535,18 @@ public class EWebElement {
                 filteredElements.add(element);
         }
         return new EWebElement(filteredElements);
+    }
+
+    private <T extends PageClass> T validatePageNavigation(List<Class<? extends PageClass>> pageClassesToValidate){
+        if(this.browser != null) {
+            for (Class<? extends PageClass> pageClass : pageClassesToValidate) {
+                if (browser.isAt(pageClass))
+                    return browser.getPageObject(pageClass);
+            }
+            if(!pageClassesToValidate.isEmpty()){
+                throw new UnexpectedPageException("Browser is not on any of the specified pages: " + pageClassesToValidate);
+            }
+        }
+        return null;
     }
 }

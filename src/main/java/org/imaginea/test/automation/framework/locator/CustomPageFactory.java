@@ -13,6 +13,7 @@ import org.imaginea.test.automation.framework.pagemodel.Browser;
 import org.imaginea.test.automation.framework.pagemodel.PageException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 
@@ -29,7 +30,7 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 public class CustomPageFactory extends PageFactory {
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
@@ -49,7 +50,7 @@ public class CustomPageFactory extends PageFactory {
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
@@ -68,7 +69,7 @@ public class CustomPageFactory extends PageFactory {
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
@@ -85,9 +86,22 @@ public class CustomPageFactory extends PageFactory {
 		T page = initElements(browser, pageClassToProxy,file);
 		return (T) page;
 	}
+
+    /**
+     * As
+     * {@link org.openqa.selenium.support.PageFactory#initElements(org.openqa.selenium.WebDriver, Class)}
+     * but will only replace the fields of an already instantiated Page Object.
+     *
+     * @param driver The driver that will be used to look up the elements
+     * @param page The object with WebElement and List<WebElement> fields that should be proxied.
+     */
+    public static void initElements(WebDriver driver, Object page) {
+        final WebDriver driverRef = driver;
+        initElements(driver, new DefaultElementLocatorFactory(driverRef), page);
+    }
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
@@ -105,7 +119,7 @@ public class CustomPageFactory extends PageFactory {
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
@@ -120,13 +134,13 @@ public class CustomPageFactory extends PageFactory {
 	public static <T> T initElements(WebDriver driver, T pageClassObjectToProxy,File file){
 		ILocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(file);
 		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, driver);
-		PageFactory.initElements(locatorFactory, pageClassObjectToProxy);
+		initElements(driver, locatorFactory, pageClassObjectToProxy);
 		return (T) pageClassObjectToProxy;
 		
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed browser object.
 	 * 
 	 * <p><b>Note:</b> Only use this method when you are using the page object model.
@@ -141,24 +155,34 @@ public class CustomPageFactory extends PageFactory {
 	public static <T> T initElements(Browser browser, T pageClassObjectToProxy,File file){
 		ILocatorFile locatorFile = new LocatorFileFactory().getLocatorFile(file);
 		ElementLocatorFactory locatorFactory = new KeywordBasedLocatorFactory(locatorFile, browser);
-		PageFactory.initElements(locatorFactory, pageClassObjectToProxy);
+		initElements(browser, locatorFactory, pageClassObjectToProxy);
 		return (T) pageClassObjectToProxy;		
 	}
-	
-	
-         /**
-	 * Initialize the elements of web element ,list<webElement> and eWeb element
-	 * @param factory
-	 * @param page
-	 */
-	  public static void initElements(ElementLocatorFactory factory, Object page) {
-		    final ElementLocatorFactory factoryRef = factory;
-		    initElements(new CustomFieldDecorator(factoryRef), page);		    
-		  }	
-	
-	
-	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+
+
+    /**
+     * Initialize the elements of web element ,list<webElement> and eWeb element
+     *
+     * @param factory
+     * @param page
+     */
+    public static void initElements(ElementLocatorFactory factory, Object page) {
+        final ElementLocatorFactory factoryRef = factory;
+        initElements(new CustomFieldDecorator(factoryRef), page);
+    }
+
+    public static void initElements(Browser browser, ElementLocatorFactory factory, Object page) {
+        final ElementLocatorFactory factoryRef = factory;
+        initElements(new CustomFieldDecorator(browser, factoryRef), page);
+    }
+
+    public static void initElements(WebDriver driver, ElementLocatorFactory factory, Object page) {
+        final ElementLocatorFactory factoryRef = factory;
+        initElements(new CustomFieldDecorator(driver, factoryRef), page);
+    }
+
+    /**
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
@@ -176,7 +200,7 @@ public class CustomPageFactory extends PageFactory {
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * 
 	 * <p><b>Note:</b> Use this method when you are not using the page object model.\n
@@ -199,16 +223,16 @@ public class CustomPageFactory extends PageFactory {
 	   * but will use the TAF Browser class object for getting the driver.
 	   * 
 	   * @param browser Browser object which should be used to initialize the Page Factory elements.
-	   * @param page The object with WebElement and List<WebElement> fields that should be proxied.
+	   * @param pageClassObjectToProxy The object of the class with WebElement, EWebElement and List<WebElement> fields that should be proxied.
 	   */
 	public static <T> T initElements(Browser browser, T pageClassObjectToProxy) {
 		ElementLocatorFactory locatorFactory = new SimpleLocatorFactory(browser);
-		initElements(locatorFactory, pageClassObjectToProxy);
+		initElements(browser, locatorFactory, pageClassObjectToProxy);
 		return pageClassObjectToProxy;		
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * <p> This method tries to get the default locator file for a class by calling the "getLocatorFile" method if available in the said class.
 	 * <p> If the said method is available it will use the file returned by the method for getting selectors.
@@ -234,7 +258,7 @@ public class CustomPageFactory extends PageFactory {
 	}
 	
 	/**
-	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.PageFactory PageFactory} 
+	 * Custom Page Factory method that initializes the Selenium PageFactory based element locators {@link org.openqa.selenium.support.PageFactory PageFactory}
 	 * with the passed driver object.
 	 * <p> This method tries to get the default locator file for a class by calling the "getLocatorFile" method if available in the said class.
 	 * <p> If the said method is available it will use the file returned by the method for getting selectors.
@@ -271,7 +295,7 @@ public class CustomPageFactory extends PageFactory {
 					locatorFile = (File)obj;
 				} catch (IllegalAccessException e) {
 					throw new PageException("The 'getLocatorFile' method present in the class" + classToProxy.getName()+
-							" may not be publically accessible object.");
+							" may not be publicly accessible object.");
 				} catch (IllegalArgumentException e) {
 					//Intentionally skipping it as this is already handled while getting the method.
 				} catch (InvocationTargetException e) {
