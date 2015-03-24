@@ -3,7 +3,7 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.5.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<description>Test automation framework a geb implementation in java. This contains all the code</description>

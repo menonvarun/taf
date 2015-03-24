@@ -19,6 +19,7 @@ public class VerifyUtil {
 
     private final String ASSERT_LEFT = "expected " + OPENING_CHARACTER;
     private final String ASSERT_LEFT2 = "expected not same " + OPENING_CHARACTER;
+    private final String ASSERT_LEFT3 = "expected not equals " + OPENING_CHARACTER;
     private final String ASSERT_MIDDLE = CLOSING_CHARACTER + " but found " + OPENING_CHARACTER;
     private final String ASSERT_RIGHT = Character.toString(CLOSING_CHARACTER);
 
@@ -60,7 +61,7 @@ public class VerifyUtil {
      * Asserts that a condition is true. If it isn't,
      * an AssertionError, with the given message, is thrown.
      * @param condition the condition to evaluate
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyTrue(boolean condition, String message) {
         if(!condition) {
@@ -81,7 +82,7 @@ public class VerifyUtil {
      * Asserts that a condition is false. If it isn't,
      * an AssertionError, with the given message, is thrown.
      * @param condition the condition to evaluate
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyFalse(boolean condition, String message) {
         if(condition) {
@@ -101,19 +102,17 @@ public class VerifyUtil {
     /**
      * Fails a test with the given message and wrapping the original exception.
      *
-     * @param message the assertion error message
+     * @param message the verification error message
      * @param realCause the original exception
      */
     public void fail(String message, Throwable realCause) {
-        AssertionError ae = new AssertionError(message);
-        ae.initCause(realCause);
-
-        throw ae;
+        message += " : " + realCause.getMessage();
+        fail(message);
     }
 
     /**
      * Fails a test with the given message.
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void fail(String message) {
         results.add(message);
@@ -131,21 +130,17 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(Object actual, Object expected, String message) {
-        if((expected == null) && (actual == null)) {
-            return;
+        Result result = isEqual(actual, expected, message);
+
+        if(!result.passed){
+            if(result.failureMessage.contentEquals(""))
+                failNotEquals(actual, expected, message);
+            else
+                fail(result.failureMessage);
         }
-        if(expected != null) {
-            if (expected.getClass().isArray()) {
-                verifyArrayEquals(actual, expected, message);
-                return;
-            } else if (expected.equals(actual)) {
-                return;
-            }
-        }
-        failNotEquals(actual, expected, message);
     }
 
     /**
@@ -153,31 +148,36 @@ public class VerifyUtil {
      * with given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value (should be an non-null array value)
-     * @param message the assertion error message
+     * @param message the verification error message
      */
-    private void verifyArrayEquals(Object actual, Object expected, String message) {
+    private Result verifyArrayEquals(Object actual, Object expected, String message) {
         //is called only when expected is an array
+        Result result = new Result();
         if (actual.getClass().isArray()) {
             int expectedLength = Array.getLength(expected);
             if (expectedLength == Array.getLength(actual)) {
                 for (int i = 0 ; i < expectedLength ; i++) {
                     Object _actual = Array.get(actual, i);
                     Object _expected = Array.get(expected, i);
-                    try {
-                        verifyEquals(_actual, _expected);
-                    } catch (AssertionError ae) {
-                        failNotEquals(actual, expected, message == null ? "" : message
+                    Result objectResult = isEqual(_actual, _expected);
+                    if(!objectResult.passed){
+                        result.passed = false;
+                        result.failureMessage = format(actual, expected, message == null ? "" : message
                                 + " (values as index " + i + " are not the same)");
                     }
                 }
                 //array values matched
-                return;
+                return result;
             } else {
-                failNotEquals(Array.getLength(actual), expectedLength, message == null ? "" : message
+                result.passed = false;
+                result.failureMessage = format(Array.getLength(actual), expectedLength, message == null ? "" : message
                         + " (Array lengths are not the same)");
+                return result;
             }
         }
-        failNotEquals(actual, expected, message);
+        result.passed = false;
+        result.failureMessage = format(actual, expected, message);
+        return result;
     }
 
     /**
@@ -195,7 +195,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(String actual, String expected, String message) {
         verifyEquals((Object) actual, (Object) expected, message);
@@ -218,19 +218,11 @@ public class VerifyUtil {
      * @param actual the actual value
      * @param expected the expected value
      * @param delta the absolute tolerate value value between the actual and expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(double actual, double expected, double delta, String message) {
-        // handle infinity specially since subtracting to infinite values gives NaN and the
-        // the following test fails
-        if(Double.isInfinite(expected)) {
-            if(!(expected == actual)) {
-                failNotEquals(new Double(actual), new Double(expected), message);
-            }
-        }
-        else if(!(Math.abs(expected - actual) <= delta)) { // Because comparison with NaN always returns false
+        if(!isEqual(actual, expected, delta))
             failNotEquals(new Double(actual), new Double(expected), message);
-        }
     }
 
     /**
@@ -252,19 +244,11 @@ public class VerifyUtil {
      * @param actual the actual value
      * @param expected the expected value
      * @param delta the absolute tolerate value value between the actual and expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(float actual, float expected, float delta, String message) {
-        // handle infinity specially since subtracting to infinite values gives NaN and the
-        // the following test fails
-        if(Float.isInfinite(expected)) {
-            if(!(expected == actual)) {
-                failNotEquals(new Float(actual), new Float(expected), message);
-            }
-        }
-        else if(!(Math.abs(expected - actual) <= delta)) {
+        if(!isEqual(actual, expected, delta))
             failNotEquals(new Float(actual), new Float(expected), message);
-        }
     }
 
     /**
@@ -284,7 +268,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(long actual, long expected, String message) {
         verifyEquals(Long.valueOf(actual), Long.valueOf(expected), message);
@@ -305,7 +289,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(boolean actual, boolean expected, String message) {
         verifyEquals(Boolean.valueOf(actual), Boolean.valueOf(expected), message);
@@ -326,7 +310,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(byte actual, byte expected, String message) {
         verifyEquals(Byte.valueOf(actual), Byte.valueOf(expected), message);
@@ -347,7 +331,7 @@ public class VerifyUtil {
      * an AssertionFailedError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(char actual, char expected, String message) {
         verifyEquals(Character.valueOf(actual), Character.valueOf(expected), message);
@@ -368,7 +352,7 @@ public class VerifyUtil {
      * an AssertionFailedError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(short actual, short expected, String message) {
         verifyEquals(Short.valueOf(actual), Short.valueOf(expected), message);
@@ -389,7 +373,7 @@ public class VerifyUtil {
      * an AssertionFailedError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(int actual,  int expected, String message) {
         verifyEquals(Integer.valueOf(actual), Integer.valueOf(expected), message);
@@ -408,7 +392,7 @@ public class VerifyUtil {
     /**
      * Asserts that an object isn't null. If it is,
      * an AssertionError is thrown.
-     * @param object the assertion object
+     * @param object the verification object
      */
     public void verifyNotNull(Object object) {
         verifyNotNull(object, null);
@@ -417,8 +401,8 @@ public class VerifyUtil {
     /**
      * Asserts that an object isn't null. If it is,
      * an AssertionFailedError, with the given message, is thrown.
-     * @param object the assertion object
-     * @param message the assertion error message
+     * @param object the verification object
+     * @param message the verification error message
      */
     public void verifyNotNull(Object object, String message) {
         if (object == null) {
@@ -434,7 +418,7 @@ public class VerifyUtil {
     /**
      * Asserts that an object is null. If it is not,
      * an AssertionError, with the given message, is thrown.
-     * @param object the assertion object
+     * @param object the verification object
      */
     public void verifyNull(Object object) {
         verifyNull(object, null);
@@ -443,8 +427,8 @@ public class VerifyUtil {
     /**
      * Asserts that an object is null. If it is not,
      * an AssertionFailedError, with the given message, is thrown.
-     * @param object the assertion object
-     * @param message the assertion error message
+     * @param object the verification object
+     * @param message the verification error message
      */
     public void verifyNull(Object object, String message) {
         if (object != null) {
@@ -457,7 +441,7 @@ public class VerifyUtil {
      * an AssertionFailedError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifySame(Object actual, Object expected, String message) {
         if(expected == actual) {
@@ -481,7 +465,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyNotSame(Object actual, Object expected, String message) {
         if(expected == actual) {
@@ -519,6 +503,14 @@ public class VerifyUtil {
         fail(format(actual, expected, message));
     }
 
+    private void failEquals(Object actual , Object expected, String message ) {
+        String formatted = "";
+        if(message != null) {
+            formatted = message + " ";
+        }
+        fail(formatted + ASSERT_LEFT3+ expected + ASSERT_MIDDLE + actual + ASSERT_RIGHT);
+    }
+
     String format(Object actual, Object expected, String message) {
         String formatted = "";
         if (null != message) {
@@ -544,7 +536,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(Collection actual, Collection expected, String message) {
         if(actual == expected) {
@@ -557,9 +549,13 @@ public class VerifyUtil {
             } else {
                 fail("Collections not equal: expected: " + expected + " and actual: " + actual);
             }
+            return;
         }
 
-        verifyEquals(actual.size(), expected.size(), message + ": lists don't have the same size");
+        if(!isEqual(Integer.valueOf(actual.size()), Integer.valueOf(expected.size())).passed) {
+            verifyEquals(actual.size(), expected.size(), message + ": lists don't have the same size");
+            return;
+        }
 
         Iterator actIt = actual.iterator();
         Iterator expIt = expected.iterator();
@@ -570,8 +566,11 @@ public class VerifyUtil {
             Object a = actIt.next();
             String explanation = "Lists differ at element [" + i + "]: " + e + " != " + a;
             String errorMessage = message == null ? explanation : message + ": " + explanation;
-
-            verifyEquals(a, e, errorMessage);
+            Result objectResult = isEqual(a, e, errorMessage);
+            if(!objectResult.passed) {
+                fail(objectResult.failureMessage);
+                return;
+            }
         }
     }
 
@@ -580,7 +579,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(Object[] actual, Object[] expected, String message) {
         if(actual == expected) {
@@ -593,6 +592,7 @@ public class VerifyUtil {
             } else {
                 fail("Arrays not equal: " + Arrays.toString(expected) + " and " + Arrays.toString(actual));
             }
+            return;
         }
         verifyEquals(Arrays.asList(actual), Arrays.asList(expected), message);
     }
@@ -602,7 +602,7 @@ public class VerifyUtil {
      * an AssertionError, with the given message, is thrown.
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEqualsNoOrder(Object[] actual, Object[] expected, String message) {
         if(actual == expected) {
@@ -681,7 +681,7 @@ public class VerifyUtil {
      *
      * @param actual the actual value
      * @param expected the expected value
-     * @param message the assertion error message
+     * @param message the verification error message
      */
     public void verifyEquals(final byte[] actual, final byte[] expected, final String message) {
         if(expected == actual) {
@@ -689,12 +689,19 @@ public class VerifyUtil {
         }
         if(null == expected) {
             fail("expected a null array, but not null found. " + message);
+            return;
         }
         if(null == actual) {
             fail("expected not null array, but null found. " + message);
+            return;
         }
 
-        verifyEquals(actual.length, expected.length, "arrays don't have the same size. " + message);
+        Result result = isEqual(actual.length, expected.length, "arrays don't have the same size. " + message);
+        if(!result.passed) {
+            fail(result.failureMessage);
+            return;
+        }
+
 
         for(int i= 0; i < expected.length; i++) {
             if(expected[i] != actual[i]) {
@@ -702,6 +709,7 @@ public class VerifyUtil {
                         + "expected value is <" + expected[i] +"> but was <"
                         + actual[i] + ">. "
                         + message);
+                return;
             }
         }
     }
@@ -725,16 +733,20 @@ public class VerifyUtil {
             // Keep the back compatible
             if (message == null) {
                 fail("Sets not equal: expected: " + expected + " and actual: " + actual);
+                return;
             } else {
                 failNotEquals(actual, expected, message);
+                return;
             }
         }
 
         if (!actual.equals(expected)) {
             if (message == null) {
                 fail("Sets differ: expected " + expected + " but got " + actual);
+                return;
             } else {
                 failNotEquals(actual, expected, message);
+                return;
             }
         }
     }
@@ -749,10 +761,12 @@ public class VerifyUtil {
 
         if (actual == null || expected == null) {
             fail("Maps not equal: expected: " + expected + " and actual: " + actual);
+            return;
         }
 
         if (actual.size() != expected.size()) {
             fail("Maps do not have the same size:" + actual.size() + " != " + expected.size());
+            return;
         }
 
         Set<?> entrySet = actual.entrySet();
@@ -761,8 +775,12 @@ public class VerifyUtil {
             Object key = entry.getKey();
             Object value = entry.getValue();
             Object expectedValue = expected.get(key);
-            verifyEquals(value, expectedValue, "Maps do not match for key:" + key + " actual:" + value
+            Result result = isEqual(value, expectedValue, "Maps do not match for key:" + key + " actual:" + value
                     + " expected:" + expectedValue);
+            if(!result.passed) {
+                fail(result.failureMessage);
+                return;
+            }
         }
 
     }
@@ -772,15 +790,10 @@ public class VerifyUtil {
     //
 
     public void verifyNotEquals(Object actual1, Object actual2, String message) {
-        boolean fail = false;
-        try {
-            verifyEquals(actual1, actual2);
-            fail = true;
-        } catch (AssertionError e) {
-        }
+        boolean fail = isEqual(actual1, actual2, message).passed;
 
         if (fail) {
-            fail(message);
+            failEquals(actual1, actual2, message);
         }
     }
 
@@ -845,16 +858,10 @@ public class VerifyUtil {
     }
 
     public void verifyNotEquals(float actual1, float actual2, float delta, String message) {
-        boolean fail = false;
-        try {
-            verifyEquals(actual1, actual2, delta, message);
-            fail = true;
-        } catch (AssertionError e) {
-
-        }
+        boolean fail = isEqual(actual1, actual2, delta);
 
         if (fail) {
-            fail(message);
+            failEquals(actual1, actual2, message);
         }
     }
 
@@ -863,20 +870,89 @@ public class VerifyUtil {
     }
 
     public void verifyNotEquals(double actual1, double actual2, double delta, String message) {
-        boolean fail = false;
-        try {
-            verifyEquals(actual1, actual2, delta, message);
-            fail = true;
-        } catch (AssertionError e) {
-
-        }
+        boolean fail = isEqual(actual1, actual2, delta);
 
         if (fail) {
-            fail(message);
+            failEquals(actual1, actual2, message);
         }
     }
 
     public void verifyNotEquals(double actual1, double actual2, double delta) {
         verifyNotEquals(actual1, actual2, delta, null);
     }
+
+    public void assertVerify(String message) {
+        if (results.size() > 0) {
+            String errorMessage = "";
+            if (message != null && !"".contentEquals(message)) {
+                errorMessage += message + " : ";
+            }
+            errorMessage += getFailureMessage();
+            throw new AssertionError(errorMessage);
+        }
+    }
+
+    public void assertVerify() {
+        assertVerify(null);
+    }
+
+    private boolean isEqual(float actual, float expected, float delta) {
+        boolean match = true;
+        // handle infinity specially since subtracting to infinite values gives NaN and the
+        // the following test fails
+        if(Float.isInfinite(expected)) {
+            if(!(expected == actual)) {
+                match = false;
+            }
+        }
+        else if(!(Math.abs(expected - actual) <= delta)) {
+            match = false;
+        }
+        return match;
+    }
+
+    private boolean isEqual(double actual, double expected, double delta) {
+        boolean match = true;
+        // handle infinity specially since subtracting to infinite values gives NaN and the
+        // the following test fails
+        if(Double.isInfinite(expected)) {
+            if(!(expected == actual)) {
+                match = false;
+            }
+        }
+        else if(!(Math.abs(expected - actual) <= delta)) { // Because comparison with NaN always returns false
+            match = false;
+        }
+        return match;
+    }
+
+    private Result isEqual(Object actual, Object expected, String message){
+        Result result = new Result();
+        if((expected == null) && (actual == null)) {
+            return result;
+        }
+        if(expected != null) {
+            if (expected.getClass().isArray()) {
+                result = verifyArrayEquals(actual, expected, message);
+                return result;
+            } else if (expected.equals(actual)) {
+                return result;
+            }
+        }
+        result.passed = false;
+        result.failureMessage = format(actual, expected, message);
+        return result;
+    }
+
+    private Result isEqual(Object actual, Object expected){
+        return isEqual(actual, expected, null);
+    }
+
+    private class Result {
+        boolean passed = true;
+        String failureMessage = "";
+    }
+
+
+
 }
