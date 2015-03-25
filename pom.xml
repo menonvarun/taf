@@ -3,20 +3,12 @@
 
 	<groupId>org.imaginea</groupId>
 	<artifactId>testautomationframework</artifactId>
-	<version>0.0.5.1-SNAPSHOT</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 	<name>TestAutomationFramework</name>
 	<description>Test automation framework a geb implementation in java. This contains all the code</description>
   	<url>http://menonvarun.github.io/taf/index.html</url>
-	<!-- <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
-	</properties> -->
- 	
-	
-	<!--<modules>
-	    <module>main-pom.xml</module>
-	   &lt;!&ndash;	<module>taf-test</module>&ndash;&gt;
-  	</modules>-->
+
   	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
