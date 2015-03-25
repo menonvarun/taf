@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by varunm on 24-02-2015.
  */
-public class TafExpectedConditions {
+public class CustomExpectedConditions {
 
     public static ExpectedCondition<Boolean> presenceOfElement(
             final WebElement element) {

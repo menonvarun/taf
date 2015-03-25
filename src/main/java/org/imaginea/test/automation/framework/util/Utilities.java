@@ -8,15 +8,13 @@ import java.util.List;
 import org.imaginea.test.automation.framework.dom.EWebElement;
 import org.imaginea.test.automation.framework.pagemodel.Browser;
 import org.imaginea.test.automation.framework.pagemodel.PageClass;
-import org.imaginea.test.automation.framework.util.selenium.ui.TafExpectedConditions;
+import org.imaginea.test.automation.framework.util.selenium.ui.CustomExpectedConditions;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 
 /**
  * Util class containing some util methods to be used while automation.
@@ -51,7 +49,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
      */
     public void waitForElementPresent(WebDriver driver, WebElement element, long timeout, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(driver, timeout, TafExpectedConditions.presenceOfElement(element), ignoreExceptions);
+        waitFor(driver, timeout, CustomExpectedConditions.presenceOfElement(element), ignoreExceptions);
     }
 
     /**
@@ -66,7 +64,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
      */
     public void waitForElementPresent(WebDriver driver, WebElement element, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.presenceOfElement(element), ignoreExceptions);
+        waitFor(driver, timeout, sleepInterval, CustomExpectedConditions.presenceOfElement(element), ignoreExceptions);
     }
 
     /**
@@ -108,7 +106,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
      */
     public void waitForElementPresent(WebDriver driver, EWebElement eWebElement, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.presenceOfElement(eWebElement), ignoreExceptions);
+        waitFor(driver, timeout, sleepInterval, CustomExpectedConditions.presenceOfElement(eWebElement), ignoreExceptions);
     }
 
     /**
@@ -151,7 +149,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
      */
     public void waitForElementPresent(WebDriver driver, List<WebElement> elements, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.presenceOfElements(elements), ignoreExceptions);
+        waitFor(driver, timeout, sleepInterval, CustomExpectedConditions.presenceOfElements(elements), ignoreExceptions);
     }
 
     /**
@@ -239,7 +237,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method.
      */
     public void waitForElementToBeVisible(WebDriver driver, EWebElement eWebElement, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(driver, timeout, sleepInterval, TafExpectedConditions.visibilityOf(eWebElement), addExceptions(ignoreExceptions, NoSuchElementException.class));
+        waitFor(driver, timeout, sleepInterval, CustomExpectedConditions.visibilityOf(eWebElement), addExceptions(ignoreExceptions, NoSuchElementException.class));
     }
 
     /**
@@ -309,7 +307,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method
      */
     public void waitForPage(Browser browser, Class<?> pageClass, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(browser.getDriver(), timeout, sleepInterval, TafExpectedConditions.presenceOfPage(browser, pageClass), addExceptions(ignoreExceptions, NoSuchElementException.class));
+        waitFor(browser.getDriver(), timeout, sleepInterval, CustomExpectedConditions.presenceOfPage(browser, pageClass), addExceptions(ignoreExceptions, NoSuchElementException.class));
     }
 
     /**
@@ -349,7 +347,7 @@ public class Utilities {
      * @param ignoreExceptions Array of exceptions that has be ignored. By default NoSuchElementException is ignored for this method
      */
     public void waitForPage(Browser browser, PageClass pageObject, long timeout, long sleepInterval, Class<? extends Throwable>... ignoreExceptions) {
-        waitFor(browser.getDriver(), timeout, sleepInterval, TafExpectedConditions.presenceOfPage(browser, pageObject), addExceptions(ignoreExceptions, NoSuchElementException.class));
+        waitFor(browser.getDriver(), timeout, sleepInterval, CustomExpectedConditions.presenceOfPage(browser, pageObject), addExceptions(ignoreExceptions, NoSuchElementException.class));
     }
 
     /**
